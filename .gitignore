@@ -1,0 +1,14 @@
+*.png
+*.h5
+.nfs*
+*.gif
+*.csv
+__pycache__
+evaluation/MTF/plot_mtf_cutoffs_compare.py
+launch.json
+.vscode/launch.json
+*.m~
+*.html
+*-checkpoint.ipynb
+results
+evaluation/LCD/.ipynb_checkpoints/plot_LCD_v2-checkpoint.py
