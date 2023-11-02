@@ -6,6 +6,8 @@ Please visit our Zenodo page to download the full dataset:
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10064036.svg)](https://doi.org/10.5281/zenodo.10064036)
 
+![pediatricIQphantoms summary image](ped_dl_eval_tool.png)
+
 The set of Digital Phantoms for Pediatric CT Performance Assessment consists of analytical quality assurance phantom models and interfaces to CT simulation frameworks to generate simulated CT images representing different diameters of each phantom.
 
 The phantoms incude:
