@@ -21,4 +21,4 @@ In addition, this repo contains examples of measurements using these digital ima
 1. phantom creation and simulation, including different scanner configurations and acquisition protocols
 2. noise and noise texture measurements
 3. sharpness measurements
-4. low contrast detectability measurements using [LCD-CT](www.github.com/didsr/lcd_ct)
+4. low contrast detectability measurements using [lcd-ct](https://github.com/DIDSR/LCD_CT)
