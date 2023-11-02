@@ -9,6 +9,10 @@ Please visit our Zenodo page to download the full dataset:
 
 The set of Digital Phantoms for Pediatric CT Performance Assessment consists of analytical quality assurance phantom models and interfaces to CT simulation frameworks to generate simulated CT images representing different diameters of each phantom.
 
+.. image:: ped_dl_eval_tool.png
+        :width: 800
+        :align: center
+
 The phantoms incude:
 
 1. The CTP404 contrast module phantom for assessing CT number accuracy and contrast-dependent spatial resolution
@@ -20,18 +24,13 @@ In addition, this repo contains examples of measurements using these digital ima
 1. phantom creation and simulation, including different scanner configurations and acquisition protocols
 2. noise and noise texture measurements
 3. sharpness measurements
-4. low contrast detectability measurements using [lcd-ct](https://github.com/DIDSR/LCD_CT)
-
-.. image:: ped_dl_eval_tool.png
-        :width: 800
-        :align: center
+4. low contrast detectability measurements using https://github.com/DIDSR/LCD_CT
 
 Contribute
 ----------
 
-- Issue Tracker: https://github.com/DIDSR/LCD_CT/issues
-- Source Code: https://github.com/DIDSR/LCD_CT
-- Contributing Guide: https://lcd-ct.readthedocs.io/en/latest/contributing.html
+- Issue Tracker: https://github.com/bnel1201/pediatricIQphantoms/issues
+- Source Code: https://github.com/bnel1201/pediatricIQphantoms
 
 Support
 -------
