@@ -34,20 +34,18 @@ if ~exist('reference_diameter', 'var')
     reference_diameter = 200; % in mm, from /home/rxz4/ct_deeplearning/make_phantom/make_CCT189_wD45_B30.m line 81
 end
 if ~any(patient_diameters == reference_diameter)
-    patient_diameters = [reference_diameter patient_diameters]
+    patient_diameters = [reference_diameter patient_diameters];
 end
 if ~exist('reference_fov', 'var')
     reference_fov = 340
 end
 
 aec_factors = exp(mu_water*patient_diameters)./exp(mu_water*reference_diameter);
-ndiams = length(patient_diameters); 
+ndiams = length(patient_diameters);
 for diam_idx=1:ndiams
     patient_diameter = patient_diameters(diam_idx);
-
     if patient_diameter == reference_diameter
         fov = reference_fov;
-        % patient_folder = [physics_type_folder '/reference_diameter' num2str(patient_diameter) 'mm/']
     else
         fov = 1.1*patient_diameter;
     end
@@ -66,8 +64,8 @@ for diam_idx=1:ndiams
     saveas(gca, fullfile(patient_folder, 'image_geometry.png'))
 
     for I0=I0_vector
-        I0_string = ['I0_' sprintf('%07d', I0)];
-
+        I0_string = ['I0_' sprintf('%07d', I0)]
+        I0_string
         files_disk = [patient_folder I0_string '/disk/'];
         if(~exist(files_disk,'dir'))
             mkdir(files_disk);
@@ -88,16 +86,18 @@ for diam_idx=1:ndiams
         bkg_true = ellipse_im(ig, bkg_ell, 'oversample', 4, 'rot', 0);
         bkg_true_hu = 1000*(bkg_true - mu_water)/mu_water + offset;
 
-        filename = [patient_folder  '/' 'true_disk.raw'];
+        filename = string(fullfile(patient_folder, 'true_disk.raw'));
         write_phantom_info([patient_folder filesep 'phantom_info_mm.csv'], disk_ell);
         write_phantom_info([patient_folder filesep 'phantom_info_pix_idx.csv'], ellipse_mm_to_pix(disk_ell, fov, nx));
         ii.offset = offset;
         write_image_info([patient_folder filesep 'image_info.csv'], ii);
         write_geometry_info([patient_folder filesep 'geometry_info.csv'], ig);
     
-        my_write_rawfile(filename, disk_true_hu, 'int16');
-        filename = [patient_folder  '/' 'true_bkg.raw'];
-        my_write_rawfile(filename, bkg_true_hu, 'int16');
+        spacing = repmat(1, [1 ndims(disk_true_hu)]);
+        writemha(filename, disk_true_hu,offset,spacing, 'short', 'slice');
+
+        filename = string(fullfile(patient_folder, 'true_bkg.raw'));
+        writemha(filename, bkg_true_hu, offset, spacing, 'short', 'slice');
 
         disk_sino = ellipse_sino(sg, disk_ell, 'oversample', 4);
         bkg_sino = ellipse_sino(sg, bkg_ell, 'oversample', 4);
@@ -117,6 +117,14 @@ for diam_idx=1:ndiams
 
         disk_proj_noisefree = I0_afterbowtie .* exp(-disk_sino);
         bkg_proj_noisefree = I0_afterbowtie .* exp(-bkg_sino);
+
+        total_sim = ndiams*nsims;
+        ny = nx;
+        sp_vol = zeros(nx, ny, nsims);
+        sa_vol = zeros(size(sp_vol));
+        spacing = repmat(1, [1 ndims(sp_vol)]);
+        filename_disk_fbp = fullfile(files_disk, 'fbp_sharp.raw');
+        filename_bkg_fbp = fullfile(files_bkg, 'fbp_sharp.raw');
 
         for sim_idx = batch
             total_idx = sim_idx+(diam_idx-1)*nsims;
@@ -138,19 +146,14 @@ for diam_idx=1:ndiams
 
             disk_fbp = fbp2(disk_sino_log, fg, 'window', 'hann205');
             disk_fbp_hu = 1000*(disk_fbp - mu_water)/mu_water + offset;
+            sp_vol(:,:,sim_idx) = disk_fbp_hu;
 
             bkg_fbp = fbp2(bkg_sino_log, fg, 'window', 'hann205');
             bkg_fbp_hu = 1000*(bkg_fbp - mu_water)/mu_water + offset;
-
-            file_prefix = [files_disk 'fbp_sharp_'];
-            file_num = sim_idx;
-            filename_disk_fbp = [file_prefix 'v' sprintf('%03d', file_num) '.raw'];
-            my_write_rawfile(filename_disk_fbp, disk_fbp_hu, 'int16');
-
-            file_prefix = [files_bkg 'fbp_sharp_'];
-            file_num = sim_idx;
-            filename_bkg_fbp = [file_prefix 'v' sprintf('%03d', file_num) '.raw'];
-            my_write_rawfile(filename_bkg_fbp, bkg_fbp_hu, 'int16');
+            sa_vol(:,:,sim_idx) = bkg_fbp_hu;
         end
+        writemha(filename_disk_fbp, sp_vol, offset, spacing, 'short', 'slice');
+        writemha(filename_bkg_fbp, sa_vol, offset, spacing, 'short', 'slice');
+
     end
 end

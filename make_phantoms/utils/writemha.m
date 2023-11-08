@@ -78,11 +78,15 @@ end
 
 function write_header(fn, Asz, offset, spacing, type)
     if length(fn) > 1
+        for i = 2:length(fn)
+            [fpath, fname, ext] = fileparts(fn(i));
+            fn(i) = strcat(fname, ext);
+        end
         [fpath, fname, ext] = fileparts(fn(1));
     else
         [fpath, fname, ext] = fileparts(fn);
+        fn = strcat(fname, ".raw");
     end
-
     header_filename = fullfile(fpath, strcat(fname, ".mhd")); 
 
     fh = fopen(header_filename,'w');

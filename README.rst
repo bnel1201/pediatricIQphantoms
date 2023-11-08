@@ -21,10 +21,10 @@ The phantoms incude:
 
 In addition, this repo contains examples of measurements using these digital image quality phantoms
 
-1. phantom creation and simulation, including different scanner configurations and acquisition protocols
-2. noise and noise texture measurements
-3. sharpness measurements
-4. low contrast detectability measurements using https://github.com/DIDSR/LCD_CT
+1. `phantom creation and simulation<demo_01_phantom_creation.sh>`_, including different scanner configurations and acquisition protocols
+2. `noise and noise texture measurements <demo_02_noise_measurements.sh>`_ 
+3. `sharpness measurements <demo_03_sharpness_measurements.sh>`_
+4. `low contrast detectability measurements <demo_04_low_contrast_measurements.sh>`_ using https://github.com/DIDSR/LCD_CT
 
 Contribute
 ----------

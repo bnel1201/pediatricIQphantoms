@@ -1,5 +1,5 @@
 # PHANTOM PARAMETERS
-phantom=anthropomorphic # <-- current options include [CCT189, CTP404, anthropomorphic]
+phantom='anthropomorphic' # <-- current options include [CCT189, CTP404, anthropomorphic]
 patient_diameters=200
 reference_diameter=200 # <-- diameter in mm of the real physcial phantom for comparison
 reference_fov=340 # <-- FOV in mm of adult protocol used in scanning real physical phantom for comparison
@@ -16,4 +16,6 @@ reference_dose_level='3e5*[10 25 40 55 70 85 100]/100' # <-- units of photons, t
 offset=0 # <-- CT number of water. Note: some DLIR models were trained with offset=0 or 1000, so this parameter should match the model training conditions
 
 # -----------------------
-
+outputdir=test #unnecesarry
+mkdir -p $outputdir
+bash make_phantoms/run_make_phantoms.sh $(realpath $outputdir) $(realpath experiments/test)

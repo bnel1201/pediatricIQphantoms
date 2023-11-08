@@ -19,20 +19,20 @@ do
     if [ $phantom == anthropomorphic ]; then
     python ./anthropomorphic/make_anthro_phantom.py $BASE_DIR $XCAT_PATIENTS_CSV
     fi
-
-    matlab -nodesktop -nodisplay -r "basedataFolder='${BASE_DIR}';\
-                                     nsims=${nsims};\
-                                     image_matrix_size=${image_matrix_size};\
-                                     nangles=${nangles};\
-                                     patient_diameters=${patient_diameters};\
-                                     aec_on=${aec_on};\
-                                     add_noise=${add_noise};\
-                                     reference_dose_level=${reference_dose_level};\
-                                     reference_diameter=${reference_diameter};\
-                                     reference_fov=${reference_fov};\
-                                     offset=${offset};\
-                                     run('./${phantom}/make_${phantom}.m');\
-                                     exit;"
+# octave -qf --eval 
+    matlab -r "basedataFolder='${BASE_DIR}';\
+            nsims=${nsims};\
+            image_matrix_size=${image_matrix_size};\
+            nangles=${nangles};\
+            patient_diameters=${patient_diameters};\
+            aec_on=${aec_on};\
+            add_noise=${add_noise};\
+            reference_dose_level=${reference_dose_level};\
+            reference_diameter=${reference_diameter};\
+            reference_fov=${reference_fov};\
+            offset=${offset};\
+            run('./${phantom}/make_${phantom}.m');\
+            exit;"
 done
 
 cd $orginal_dir
