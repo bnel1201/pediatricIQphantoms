@@ -1,8 +1,7 @@
 orginal_dir=$(pwd)
 cd $(dirname $0)
 
-BASE_DIR=${1-/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/}
-experiment_dir=${2-../experiments/main}
+experiment_dir=${1-../experiments/test}
 
 XCAT_PATIENTS_CSV=anthropomorphic/selected_xcat_patients.csv # <-- patients to be simulated
 

@@ -20,7 +20,7 @@ sg = sino_geom('fan', 'units', 'mm', ...
     'dsd', sdd, 'dod', dod, 'offset_s', offset_s, ...
     'down', down);
 
-sampleFolder = fullfile(basedataFolder, 'geometric', 'CTP404/');
+sampleFolder = fullfile(basedataFolder, 'CTP404/');
 if ~exist(sampleFolder, 'dir')
     mkdir(sampleFolder)
 end
@@ -46,7 +46,6 @@ for diam_idx=1:ndiams
 
     if patient_diameter == reference_diameter
         fov = reference_fov;
-        % patient_folder = [physics_type_folder '/reference_diameter' num2str(patient_diameter) 'mm/']
     else
         fov = 1.1*patient_diameter;
     end
@@ -79,14 +78,16 @@ for diam_idx=1:ndiams
         ell = CTP404(patient_diameter, mu_water, relative_lesion_diameter, relative_lesion_location);
         x_true = ellipse_im(ig, ell, 'oversample', 4, 'rot', 0);
         x_true_hu = 1000*(x_true - mu_water)/mu_water + offset;
-        filename = [patient_folder  filesep 'true.raw'];
+        filename = string(fullfile(patient_folder, 'true.raw'));
         write_phantom_info([patient_folder filesep 'phantom_info_mm.csv'], ell);
         write_phantom_info([patient_folder filesep 'phantom_info_pix_idx.csv'], ellipse_mm_to_pix(ell, fov, nx));
         ii.offset = offset;
         write_image_info([patient_folder filesep 'image_info.csv'], ii);
         write_geometry_info([patient_folder filesep 'geometry_info.csv'], ig);
 
-        my_write_rawfile(filename, x_true_hu, 'int16');
+        spacing = repmat(1, [1 ndims(x_true_hu)]);
+        writemha(filename, x_true_hu, offset, spacing, 'short', 'slice');
+        % my_write_rawfile(filename, x_true_hu, 'int16');
 
         % Get sinogram
         sino = ellipse_sino(sg, ell, 'oversample', 4);
@@ -104,9 +105,13 @@ for diam_idx=1:ndiams
             I0_afterbowtie=I0;            
         end        
         proj_noisefree = I0_afterbowtie .* exp(-sino);
+        total_sim = ndiams*nsims;
+        ny = nx;
+        vol = zeros(nx, ny, nsims);
+        spacing = repmat(1, [1 ndims(vol)]);
+        filename_fbp = string(fullfile(files_sharp, 'fbp_sharp.raw'));
         for sim_idx = batch
             total_idx = sim_idx+(diam_idx-1)*nsims;
-            total_sim = ndiams*nsims;
             disp(sprintf('%s, diameter: %dmm (FOV: %dmm) [%d/%d], simulation: [%d/%d], Total: %3.2f%% [%d/%d]', mfilename, patient_diameter, round(fov), diam_idx, ndiams, sim_idx, nsims, total_idx/total_sim*100, total_idx, total_sim))
             if add_noise     
                 proj = poisson(proj_noisefree); %This poisson generator respond to the seed number setby rand('sate',x');
@@ -120,10 +125,12 @@ for diam_idx=1:ndiams
 
             x_fbp_sharp = fbp2(sino_log, fg, 'window', 'hann205');
             x_fbp_sharp_hu = 1000*(x_fbp_sharp - mu_water)/mu_water + offset;
-            file_prefix = [files_sharp 'fbp_sharp_'];
-            file_num = sim_idx;
-            filename_fbp_sharp = [file_prefix 'v' sprintf('%03d', file_num) '.raw'];
-            my_write_rawfile(filename_fbp_sharp, x_fbp_sharp_hu, 'int16');
+            vol(:,:,sim_idx) = x_fbp_sharp_hu;
+            % file_prefix = [files_sharp 'fbp_sharp_'];
+            % file_num = sim_idx;
+            % filename_fbp_sharp = [file_prefix 'v' sprintf('%03d', file_num) '.raw'];
+            % my_write_rawfile(filename_fbp_sharp, x_fbp_sharp_hu, 'int16');
         end
+        writemha(filename_fbp, vol, offset, spacing, 'short', 'slice');
     end
 end

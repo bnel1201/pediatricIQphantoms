@@ -20,7 +20,7 @@ sg = sino_geom('fan', 'units', 'mm', ...
     'dsd', sdd, 'dod', dod, 'offset_s', offset_s, ...
     'down', down);
 
-sampleFolder = fullfile(basedataFolder, 'geometric', 'CCT189/')
+sampleFolder = fullfile(basedataFolder, 'CCT189/')
 if ~exist(sampleFolder, 'dir')
     mkdir(sampleFolder)
 end
@@ -49,7 +49,7 @@ for diam_idx=1:ndiams
     else
         fov = 1.1*patient_diameter;
     end
-    patient_folder = [physics_type_folder '/diameter' num2str(patient_diameter) 'mm/']
+    patient_folder = [physics_type_folder '/diameter' num2str(patient_diameter) 'mm/'];
     aec_factor = aec_factors(diam_idx);
 
     ig = image_geom('nx', nx, 'fov', fov, 'down', down);
@@ -154,6 +154,5 @@ for diam_idx=1:ndiams
         end
         writemha(filename_disk_fbp, sp_vol, offset, spacing, 'short', 'slice');
         writemha(filename_bkg_fbp, sa_vol, offset, spacing, 'short', 'slice');
-
     end
 end

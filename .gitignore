@@ -4,8 +4,7 @@
 *.csv
 __pycache__
 evaluation/MTF/plot_mtf_cutoffs_compare.py
-launch.json
-.vscode/launch.json
+.vscode
 *.m~
 *.html
 *-checkpoint.ipynb

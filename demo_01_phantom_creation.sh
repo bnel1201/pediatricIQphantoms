@@ -15,7 +15,7 @@ add_noise=true # <-- if true adds Poisson noise, noise magnitude set by `referen
 reference_dose_level='3e5*[10 25 40 55 70 85 100]/100' # <-- units of photons, this expression is evaluated by matlab, so keep in this format '[xx, yy, zz]'
 offset=0 # <-- CT number of water. Note: some DLIR models were trained with offset=0 or 1000, so this parameter should match the model training conditions
 
+
 # -----------------------
-outputdir=test #unnecesarry
-mkdir -p $outputdir
-bash make_phantoms/run_make_phantoms.sh $(realpath $outputdir) $(realpath experiments/test)
+EXPERIMENT=experiments/test
+bash make_phantoms/run_make_phantoms.sh $(realpath $EXPERIMENT)
