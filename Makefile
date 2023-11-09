@@ -2,7 +2,7 @@ include experiments/main/protocol
 
 .PHONY : results
 results : 
-	bash evaluation/run_all_evaluations.sh $(BASE_DIR) $(RESULTS_DIR)
+	bash evaluation/run_all_evaluations.sh $(OUTPUT_DIR) $(RESULTS_DIR)
 
 .PHONY : phantoms
 phantoms : $(BASEDIR)/diameter112mm/I0_3000000/fbp_sharp/fbp_sharp_v001.raw
@@ -10,7 +10,7 @@ phantoms : $(BASEDIR)/diameter112mm/I0_3000000/fbp_sharp/fbp_sharp_v001.raw
 
 .PHONY : denoise
 denoise :
-	bash denoising/run_denoising.sh $(BASE_DIR) $(MODEL_FOLDER)
+	bash denoising/run_denoising.sh $(OUTPUT_DIR) $(MODEL_FOLDER)
 
 .PHONY : all
 all : 

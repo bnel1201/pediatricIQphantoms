@@ -15,8 +15,8 @@ run('/home/brandon.nelson/Dev/DLIR_Ped_Generalizability/geometric_phantom_studie
 
 run('/home/brandon.nelson/Dev/DLIR_Ped_Generalizability/geometric_phantom_studies/make_phantoms/utils/setup.m') % need to double check that this isn't overwriting anything from the base config
 
-% base_dir = '/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/anthropomorphic_phantom_studies/main';
-% phantom_dir = fullfile(base_dir, 'phantoms', 'adaptive_fov')
+% OUTPUT_DIR = '/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/anthropomorphic_phantom_studies/main';
+% phantom_dir = fullfile(OUTPUT_DIR, 'phantoms', 'adaptive_fov')
 % infant = 'male_infant_ref_atn_1';
 % large_adult = 'male_pt148_atn_1';
 % patient= 'female_pt71_atn_1'
@@ -40,7 +40,7 @@ sg = sino_geom('fan', 'units', 'mm', ...
     'dsd', sdd, 'dod', dod, 'offset_s', offset_s, ...
     'down', down);
 
-% basedataFolder = fullfile(base_dir, 'simulations');
+% basedataFolder = fullfile(OUTPUT_DIR, 'simulations');
 sampleFolder = fullfile(basedataFolder, 'anthropomorphic', 'simulations', patient);
 if ~exist(sampleFolder, 'dir')
     mkdir(sampleFolder)

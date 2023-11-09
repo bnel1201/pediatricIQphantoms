@@ -16,10 +16,10 @@ do
     echo [$phantom] Simulation series $sim_num/$n_experiments
 
     if [ $phantom == anthropomorphic ]; then
-    python ./anthropomorphic/make_anthro_phantom.py $BASE_DIR $XCAT_PATIENTS_CSV
+    python ./anthropomorphic/make_anthro_phantom.py $OUTPUT_DIR $XCAT_PATIENTS_CSV
     fi
 # octave -qf --eval 
-    matlab -r "basedataFolder='${BASE_DIR}';\
+    matlab -r "basedataFolder='${OUTPUT_DIR}';\
             nsims=${nsims};\
             image_matrix_size=${image_matrix_size};\
             nangles=${nangles};\

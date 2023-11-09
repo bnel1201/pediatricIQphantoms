@@ -4,13 +4,13 @@
 # 2. join a node manually: `ssh -X nodexyz` where `xyz` is one of the nodes available see `clusterTop`
 #    to see available nodes
 
-BASE_DIR=${1-/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/test/geometric}
+OUTPUT_DIR=${1-/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/test/geometric}
 RESULTS_DIR=${2-../../test/results}
 
 orginal_dir=$(pwd)
 cd $(dirname $0)
 
-matlab -nodesktop -nodisplay -r "basedir='${BASE_DIR}';\
+matlab -nodesktop -nodisplay -r "basedir='${OUTPUT_DIR}';\
                                  resultsdir='${RESULTS_DIR}';\
                                  run('./main_lcd_catphanSim.m');\
                                  exit"

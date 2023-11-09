@@ -24,10 +24,10 @@ def get_diameter_summary_df(diam_dirs, relative_series_dir):
     return pd.DataFrame({'Patient Diameter [mm]': diameters, 'mean CT number [HU]': mean_vals, 'mean noise (ROI std) [HU]': noise_vals})
 
 
-def get_1D_NPS_for_all_diams(base_dir, relative_series_dir):
+def get_1D_NPS_for_all_diams(OUTPUT_DIR, relative_series_dir):
     diams = []
     mags = []
-    diam_dirs = sorted(list(base_dir.glob('diameter*')))
+    diam_dirs = sorted(list(OUTPUT_DIR.glob('diameter*')))
     for patient_dir in diam_dirs:
         nps_df = pd.read_csv(patient_dir / relative_series_dir / 'NPS' / '1D_nps.csv')
         freq = nps_df['spatial frequency [cyc/pix]']
@@ -39,8 +39,8 @@ def get_1D_NPS_for_all_diams(base_dir, relative_series_dir):
     return nps_df
 
 
-def write_results_to_csv(base_dir, output_fname, DOSELEVEL):
-    diam_dirs = sorted(list(base_dir.glob('diameter*')))
+def write_results_to_csv(OUTPUT_DIR, output_fname, DOSELEVEL):
+    diam_dirs = sorted(list(OUTPUT_DIR.glob('diameter*')))
     fbp_summary_df = get_diameter_summary_df(diam_dirs, DOSELEVEL)
     proc_summary_df = get_diameter_summary_df(diam_dirs, DOSELEVEL + '_processed')
     fbp_summary_df['Series'] = 'FBP'
@@ -49,9 +49,9 @@ def write_results_to_csv(base_dir, output_fname, DOSELEVEL):
     return output_fname
 
 
-def write_1D_nps_results_to_csv(base_dir, output_fname, DOSELEVEL):
-    fbp_nps_df = get_1D_NPS_for_all_diams(base_dir, DOSELEVEL)
-    proc_nps_df = get_1D_NPS_for_all_diams(base_dir, DOSELEVEL+'_processed')
+def write_1D_nps_results_to_csv(OUTPUT_DIR, output_fname, DOSELEVEL):
+    fbp_nps_df = get_1D_NPS_for_all_diams(OUTPUT_DIR, DOSELEVEL)
+    proc_nps_df = get_1D_NPS_for_all_diams(OUTPUT_DIR, DOSELEVEL+'_processed')
     fbp_nps_df['Series'] = 'FBP'
     proc_nps_df['Series'] = 'REDCNN'
     pd.concat((fbp_nps_df, proc_nps_df), axis=0).to_csv(output_fname)

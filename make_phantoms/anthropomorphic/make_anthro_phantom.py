@@ -145,9 +145,9 @@ def main(phantoms_dir, xcat_patients_csv='selected_xcat_patients.csv'):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Make Anthropomorphic Phantoms using XCAT')
-    parser.add_argument('base_dir',
+    parser.add_argument('OUTPUT_DIR',
                         help="output directory to save XCAT phantom bin files")
     parser.add_argument('patient_info_csv_file',
                         help="csv file containing virtual patient info in XCAT format")
     args = parser.parse_args()
-    main(phantoms_dir=Path(args.base_dir) / 'anthropomorphic' / 'phantoms', xcat_patients_csv=args.patient_info_csv_file)
+    main(phantoms_dir=Path(args.OUTPUT_DIR) / 'anthropomorphic' / 'phantoms', xcat_patients_csv=args.patient_info_csv_file)
