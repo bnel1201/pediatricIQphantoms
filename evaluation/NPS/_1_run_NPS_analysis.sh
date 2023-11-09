@@ -3,12 +3,11 @@
 # 1. join a random node: `../ssh_node.sh` see script for more details including how to run with arguments
 # 2. join a node manually: `ssh -X nodexyz` where `xyz` is one of the nodes available see `clusterTop`
 #    to see available nodes
-
-OUTPUT_DIR=${1-/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/}
+EXPERIMENT=$1
+source $EXPERIMENT/protocol
 
 orginal_dir=$(pwd)
 cd $(dirname $0)
-
 matlab -nodesktop -nodisplay -r "basedir='${OUTPUT_DIR}';\
                                  resultsdir='${RESULTS_DIR}';\
                                  run('./main_nps_catphanSim.m');exit"

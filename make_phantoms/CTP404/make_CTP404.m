@@ -85,7 +85,8 @@ for diam_idx=1:ndiams
         write_image_info([patient_folder filesep 'image_info.csv'], image_info);
         write_geometry_info([patient_folder filesep 'geometry_info.csv'], ig);
 
-        spacing = repmat(1, [1 ndims(x_true_hu)]);
+        dx = fov/nx;
+        spacing = repmat(dx, [1 ndims(x_true_hu)]);
         writemha(filename, x_true_hu, offset, spacing, 'short', 'slice');
         % my_write_rawfile(filename, x_true_hu, 'int16');
 
@@ -108,7 +109,7 @@ for diam_idx=1:ndiams
         total_sim = ndiams*nsims;
         ny = nx;
         vol = zeros(nx, ny, nsims);
-        spacing = repmat(1, [1 ndims(vol)]);
+        spacing = repmat(dx, [1 ndims(vol)]);
         filename_fbp = string(fullfile(files_sharp, 'fbp_sharp.raw'));
         for sim_idx = batch
             total_idx = sim_idx+(diam_idx-1)*nsims;

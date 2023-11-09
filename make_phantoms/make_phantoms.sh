@@ -1,3 +1,4 @@
+# convert this script to python so I can do toml or json files to get the config as one file
 orginal_dir=$(pwd)
 cd $(dirname $0)
 

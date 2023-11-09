@@ -93,7 +93,8 @@ for diam_idx=1:ndiams
         write_image_info([patient_folder filesep 'image_info.csv'], image_info);
         write_geometry_info([patient_folder filesep 'geometry_info.csv'], ig);
     
-        spacing = repmat(1, [1 ndims(disk_true_hu)]);
+        dx = fov/nx;
+        spacing = repmat(dx, [1 ndims(disk_true_hu)]);
         writemha(filename, disk_true_hu,offset,spacing, 'short', 'slice');
 
         filename = string(fullfile(patient_folder, 'true_bkg.raw'));
@@ -122,7 +123,8 @@ for diam_idx=1:ndiams
         ny = nx;
         sp_vol = zeros(nx, ny, nsims);
         sa_vol = zeros(size(sp_vol));
-        spacing = repmat(1, [1 ndims(sp_vol)]);
+        dx = fov/nx;
+        spacing = repmat(dx, [1 ndims(disk_true_hu)]);
         filename_disk_fbp = fullfile(files_disk, 'fbp_sharp.raw');
         filename_bkg_fbp = fullfile(files_bkg, 'fbp_sharp.raw');
 

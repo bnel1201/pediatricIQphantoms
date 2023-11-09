@@ -2,12 +2,9 @@
 % Purpose: calculate NPS from water phantom scans
 
 % clear all;
-addpath('/home/brandon.nelson/Dev/PhantomSimulations/CT_simulator')
-if ~exist('homedir', 'var') %checks if setpath has been run
-    setpath
-end
 % addpath('utils')
 addpath([dirname(fileparts(mfilename('fullpath')), 2) '/utils'])
+% addpath('../../make_phantoms/utils/mirt-main')
 
 % if ~exist('folder_path', 'var')
 %     folder_path = '/home/brandon.nelson/Data/temp/CCT189/monochromatic/';
@@ -50,26 +47,28 @@ for diam_idx = 1:length(diams)
                 mkdir(results_path)
             end
 
-            fileinfo = dir(folder_path);
-            nfile = length(fileinfo)-2;
+            fileinfo = dir(fullfile(folder_path, '*.raw'));
+            nfile = length(fileinfo);
             nsim = nfile;
 
             % image information
             parentfolder = dirname(folder_path, 2);
 
-            ig = read_geometry_info([parentfolder '/geometry_info.csv']);
-            nx = ig.nx;
-            dx = ig.dx; %in mm
-            fov = ig.fov; %in mm
+            % ig = read_geometry_info([parentfolder '/geometry_info.csv']);
+            info = read_mhd(fullfile(parentfolder, 'true_bkg.mhd'));
+            nx = info.Dimensions(1);
+            dx = info.PixelDimensions(1);
+            % dx = %ig.dx; %in mm
+            fov =  dx*nx; %in mm
 
             relative_roisize = 1/3;
-            half_roisize = nx*relative_roisize/2;
+            half_roisize = ceil(nx*relative_roisize/2);
             % half_roisize = 32;
             roi_xfov = nx/2+[-half_roisize:half_roisize-1];
             roi_yfov = roi_xfov;
             nx_roi = length(roi_xfov);
             
-            fid = fopen(fullfile(parentfolder, 'true_bkg.raw'));
+            fid = fopen(fullfile(parentfolder, info.DataFile));
             xtrue = fread(fid, [nx nx], 'int16');
             fclose(fid);
             
@@ -77,7 +76,7 @@ for diam_idx = 1:length(diams)
             img = zeros(nx,nx,nsim);
 
             for i=1:nsim
-                filename = fileinfo(i+2).name;
+                filename = fileinfo(i).name;
                 filepath = fullfile(folder_path, filename);
                 fnames{i} = filepath;
                 fid = fopen(filepath);
@@ -116,8 +115,10 @@ for diam_idx = 1:length(diams)
 
             parts = regexp(parentfolder, '/', 'split');
 
-            nps_raw_fname = fullfile(results_path, sprintf('%d_2D_nps_float32_%d.raw', dose_level, nx_roi));
-            my_write_rawfile(nps_raw_fname, single(nps), 'single');
+            nps_raw_fname = string(fullfile(results_path, sprintf('%d_2D_nps_float32_%d.raw', dose_level, nx_roi)));
+            % my_write_rawfile(nps_raw_fname, single(nps), 'single');
+            spacing = repmat(1, [1 ndims(single(nps))])
+            writemha(nps_raw_fname, single(nps), 0, spacing, 'float', 'brick');
             %check mean HU variations in the set of images
             tiny_roi = round(nx/10/2);
             t=(img(nx/2+[-tiny_roi:tiny_roi],nx/2+[-tiny_roi:tiny_roi],:));
