@@ -11,3 +11,5 @@ evaluation/MTF/plot_mtf_cutoffs_compare.py
 results
 evaluation/LCD/.ipynb_checkpoints/plot_LCD_v2-checkpoint.py
 test
+mirt-main
+.venv

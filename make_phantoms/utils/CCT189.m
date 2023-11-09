@@ -27,7 +27,7 @@ function ell = CCT189(patient_diameter, attenuation_coefficient, relative_lesion
     if relative_lesion_diameter
         r = relative_lesion_diameter * patient_diameter/2 * standard_radii;
     else
-        r = standard_radii
+        r = standard_radii;
     end
     d = relative_lesion_location * patient_diameter / 2;
 

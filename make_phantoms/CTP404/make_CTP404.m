@@ -5,15 +5,15 @@
 % Purpose: To simulate traditional IQ phantom similar to the CTP404 
 % layer in the Catphan 600. Match the reconstruction kernel D45 
 % and B30in the Siemens CT scanner, which have MTF50% of 5.6 lp/cm and 3.5 lp/cm, 
-% MTF10% of 9.4 and 5.9 lp/cm, with Hann205 and Hann85. My measurement show that
-% Hann205 and Hann85 has mtf50% of 5.6 lp/cm and 3.5 lp/cm, mtf10% of 10.4 lp/cm and
+% MTF10% of 9.4 and 5.9 lp/cm, with hanning, 2.05 and Hann85. My measurement show that
+% hanning, 2.05 and Hann85 has mtf50% of 5.6 lp/cm and 3.5 lp/cm, mtf10% of 10.4 lp/cm and
 % 6.2 lp/cm. They matches pretty well the commercial filters.
 
 % Derived from </home/rxz4/ct_deeplearning/make_phantom/make_CTP189_wD45_B30.m>
 %% Set parameters
 run('../configs/SiemensSomatomDefinitionAS.m')
 
-run('../utils/setup.m')
+run('../utils/CT_setup.m') % need to double check that this isn't overwriting anything from the base config
 
 sg = sino_geom('fan', 'units', 'mm', ...
     'nb', nb, 'na', na, 'ds', ds, ...
@@ -81,8 +81,8 @@ for diam_idx=1:ndiams
         filename = string(fullfile(patient_folder, 'true.raw'));
         write_phantom_info([patient_folder filesep 'phantom_info_mm.csv'], ell);
         write_phantom_info([patient_folder filesep 'phantom_info_pix_idx.csv'], ellipse_mm_to_pix(ell, fov, nx));
-        ii.offset = offset;
-        write_image_info([patient_folder filesep 'image_info.csv'], ii);
+        image_info.offset = offset;
+        write_image_info([patient_folder filesep 'image_info.csv'], image_info);
         write_geometry_info([patient_folder filesep 'geometry_info.csv'], ig);
 
         spacing = repmat(1, [1 ndims(x_true_hu)]);
@@ -123,7 +123,7 @@ for diam_idx=1:ndiams
 
             sino_log = -log(proj ./ I0_afterbowtie);            % noisy fan-beam sinogram
 
-            x_fbp_sharp = fbp2(sino_log, fg, 'window', 'hann205');
+            x_fbp_sharp = fbp2(sino_log, fg, 'window', fbp_kernel);
             x_fbp_sharp_hu = 1000*(x_fbp_sharp - mu_water)/mu_water + offset;
             vol(:,:,sim_idx) = x_fbp_sharp_hu;
             % file_prefix = [files_sharp 'fbp_sharp_'];

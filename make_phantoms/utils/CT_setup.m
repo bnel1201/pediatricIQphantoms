@@ -1,9 +1,15 @@
 % A set of defaults for quick testing, to specify user defined variables define them BEFORE calling this script or AFTER
 addpath(fileparts(mfilename('fullpath')))
-addpath('/home/brandon.nelson/Dev/PhantomSimulations/CT_simulator')
-if exist('homedir', 'var') == false %checks if setpath has been run
-    setpath
+%Download MIRT and include the MIRT path in the MATLAB workspace. 
+if ~exist('mirt-main', 'dir')
+    unzip('https://github.com/JeffFessler/mirt/archive/refs/heads/main.zip', '.');
 end
+irtdir = 'mirt-main';
+addpath(irtdir)
+if(exist('setup.m'))
+    setup
+end
+    
 % addpath('./configs')
 if exist('reference_dose_level', 'var') == false
     reference_dose_level = 3e5
@@ -45,3 +51,8 @@ end
 if exist('nangles', 'var')
     na = nangles;
 end
+
+fbp_kernel = 'hanning,2.05'; % 'hanning,xxx', xxx = the cutoff frequency, see fbp2_window.m in MIRT for details.
+                        %'hanning,2.05' approximate a sharp kernel D45 in Siemens Force.
+                        %'hanning, 0.85' approximate a smooth kernel B30 in
+                        %Siemens Force.

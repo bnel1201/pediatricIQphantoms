@@ -1,2 +1,10 @@
-BASE_DIR=../test
+# paths are relative to the main directory
+my_dir=$0
+echo $my_dir
+BASE_DIR=test
+RESULTS_DIR=test/results
 
+# Do not edit below
+mkdir -p $BASE_DIR $RESULTS_DIR
+RESULTS_DIR=$(realpath $RESULTS_DIR)
+BASE_DIR=$(realpath $BASE_DIR)

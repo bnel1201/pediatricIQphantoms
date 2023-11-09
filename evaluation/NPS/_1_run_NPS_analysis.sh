@@ -9,6 +9,8 @@ BASE_DIR=${1-/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_p
 orginal_dir=$(pwd)
 cd $(dirname $0)
 
-matlab -nodesktop -nodisplay -r "basedir='${BASE_DIR}';run('./main_nps_catphanSim.m');exit"
+matlab -nodesktop -nodisplay -r "basedir='${BASE_DIR}';\
+                                 resultsdir='${RESULTS_DIR}';\
+                                 run('./main_nps_catphanSim.m');exit"
 
 cd $orginal_dir

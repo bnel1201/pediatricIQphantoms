@@ -13,7 +13,7 @@
 % Run path setup
 run('../configs/SiemensSomatomDefinitionAS.m')
 
-run('../utils/setup.m') % need to double check that this isn't overwriting anything from the base config
+run('../utils/CT_setup.m') % need to double check that this isn't overwriting anything from the base config
 
 sg = sino_geom('fan', 'units', 'mm', ...
     'nb', nb, 'na', na, 'ds', ds, ...
@@ -89,8 +89,8 @@ for diam_idx=1:ndiams
         filename = string(fullfile(patient_folder, 'true_disk.raw'));
         write_phantom_info([patient_folder filesep 'phantom_info_mm.csv'], disk_ell);
         write_phantom_info([patient_folder filesep 'phantom_info_pix_idx.csv'], ellipse_mm_to_pix(disk_ell, fov, nx));
-        ii.offset = offset;
-        write_image_info([patient_folder filesep 'image_info.csv'], ii);
+        image_info.offset = offset;
+        write_image_info([patient_folder filesep 'image_info.csv'], image_info);
         write_geometry_info([patient_folder filesep 'geometry_info.csv'], ig);
     
         spacing = repmat(1, [1 ndims(disk_true_hu)]);
@@ -144,11 +144,11 @@ for diam_idx=1:ndiams
             disk_sino_log = -log(disk_proj ./ I0_afterbowtie);            % noisy fan-beam sinogram
             bkg_sino_log = -log(bkg_proj ./ I0_afterbowtie);            % noisy fan-beam sinogram
 
-            disk_fbp = fbp2(disk_sino_log, fg, 'window', 'hann205');
+            disk_fbp = fbp2(disk_sino_log, fg, 'window', fbp_kernel);
             disk_fbp_hu = 1000*(disk_fbp - mu_water)/mu_water + offset;
             sp_vol(:,:,sim_idx) = disk_fbp_hu;
 
-            bkg_fbp = fbp2(bkg_sino_log, fg, 'window', 'hann205');
+            bkg_fbp = fbp2(bkg_sino_log, fg, 'window', fbp_kernel);
             bkg_fbp_hu = 1000*(bkg_fbp - mu_water)/mu_water + offset;
             sa_vol(:,:,sim_idx) = bkg_fbp_hu;
         end

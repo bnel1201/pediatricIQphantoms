@@ -107,7 +107,7 @@ for diam_idx=1:ndiams
         fbp_hu_true = 1000*(atten_true - mu_water)/mu_water + offset;
         my_write_rawfile(fullfile(patient_folder, 'true.raw'), fbp_hu_true, 'int16');
 
-        atten_fbp = fbp2(sino, fg, 'window', 'hann205');
+        atten_fbp = fbp2(sino, fg, 'window', fbp_kernel);
         fbp_hu_noise_free = 1000*(atten_fbp - mu_water)/mu_water + offset;
         my_write_rawfile(fullfile(patient_folder, 'noise_free.raw'), fbp_hu_noise_free, 'int16');
         ii.offset = offset;
@@ -128,7 +128,7 @@ for diam_idx=1:ndiams
             proj = replace_zeros(proj);
             sino_log = -log(proj ./ I0_afterbowtie);            % noisy fan-beam sinogram
 
-            atten_fbp = fbp2(sino_log, fg, 'window', 'hann205');
+            atten_fbp = fbp2(sino_log, fg, 'window', fbp_kernel);
             fbp_hu = 1000*(atten_fbp - mu_water)/mu_water + offset;
 
             file_prefix = [files_disk 'fbp_sharp_'];
