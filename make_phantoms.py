@@ -18,7 +18,7 @@ def main(config):
     for phantom_idx, phantom in enumerate(phantoms):
         print(f'{phantom} Simulation series {phantom_idx}/{len(phantoms)}')
 
-        interpretor = 'matlab -r'
+        interpretor = 'matlab -batch -noFigureWindows -nosplash'
         cmd = f"""
         {interpretor} "basedataFolder='{image_directory}';\
         nsims={config['acquisition']['nsims']};\
