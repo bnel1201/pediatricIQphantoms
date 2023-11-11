@@ -12,12 +12,12 @@ if ~exist('homedir', 'var') %checks if setpath has been run
     setpath
 end
 if ~exist('folder_path', 'var')
-    folder_path = '/home/brandon.nelson/Data/temp/CTP404/monochromatic/diameter112mm/I0_3000000/fbp_sharp/';
+    folder_path = '/home/brandon.nelson/Data/temp/CTP404/fbp/diameter112mm/I0_3000000/fbp_sharp/';
 end
 
 addpath([dirname(fileparts(mfilename('fullpath')), 2) '/utils'])
 
-datadir = fullfile(basedir, 'CTP404/monochromatic/');
+datadir = fullfile(basedir, 'CTP404/fbp/');
 dose_level = 'I0_3000000_processed';
 kernel = 'fbp_sharp';
 dir_contents = dir(datadir);

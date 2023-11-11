@@ -1,4 +1,4 @@
-datadir=${1-'/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/main/CCT189/monochromatic'}
+datadir=${1-'/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/main/CCT189/fbp'}
 results_dir=${2-'results/LCD'}
 
 results_dir=$(realpath $results_dir)

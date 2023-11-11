@@ -6,7 +6,7 @@ if ~exist('basedir', 'var')
     basedir = '/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/main/geometric'; %see ../../make_phantoms/make_phantoms.m
 end
 
-datadir = fullfile(basedir, 'CTP404/monochromatic/');
+datadir = fullfile(basedir, 'CTP404/fbp/');
 
 if ~exist('resultsdir', 'var')
     disp('resultsdir not spceified, using defaults')

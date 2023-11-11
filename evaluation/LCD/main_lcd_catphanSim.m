@@ -11,7 +11,7 @@ if ~exist('resultsdir', 'var')
     resultsdir = '/home/brandon.nelson/Dev/DLIR_Ped_Generalizability/geometric_phantom_studies/test/results'; %see ../../make_phantoms/make_phantoms.m
 end
 
-base_data_folder = fullfile(basedir, 'CCT189/monochromatic/');
+base_data_folder = fullfile(basedir, 'CCT189/fbp/');
 outfolder = resultsdir;
 if ~exist(outfolder, 'dir')
     mkdir(outfolder)

@@ -1,7 +1,7 @@
 orginal_dir=$(pwd)
 cd $(dirname $0)
 
-base_datadir=/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/CTP404/monochromatic
+base_datadir=/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/CTP404/fbp
 
 mkdir -p geometries
 

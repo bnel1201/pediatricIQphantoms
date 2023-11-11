@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from utils.esf_plot import plot_patient_diameter_esf, load_esf_dataframe
 import seaborn as sns
 
-basedir =  Path('/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/CTP404/monochromatic')
+basedir =  Path('/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/CTP404/fbp')
 
 def get_bias_df(basedir, doselevel='I0_3000000'):
     for idx, patient_dir in enumerate(basedir.glob('diameter*mm')):

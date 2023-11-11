@@ -45,7 +45,7 @@ sampleFolder = fullfile(basedataFolder, 'anthropomorphic', 'simulations', patien
 if ~exist(sampleFolder, 'dir')
     mkdir(sampleFolder)
 end
-physics_type_folder = fullfile(sampleFolder, 'monochromatic/');
+physics_type_folder = fullfile(sampleFolder, 'fbp/');
 if ~exist(physics_type_folder, 'dir')
     mkdir(physics_type_folder)
 end

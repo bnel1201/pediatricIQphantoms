@@ -35,7 +35,7 @@ def imshow_true_image(patient, output_dir=None):
 
 
 def main(h5file, datadir=None, n_avg=20, output_dir=None):
-    datadir = datadir or '/home/brandon.nelson/Data/temp/CCT189/monochromatic'
+    datadir = datadir or '/home/brandon.nelson/Data/temp/CCT189/fbp'
     patient_dirs = sorted(list(Path(datadir).glob('diameter*')))
 
     output_dir = Path(output_dir) if output_dir else None

@@ -19,7 +19,7 @@ def plot_sample_curves(datadir, diameter, contrast, cutoff_val=None, ax=None):
     fbp_color='tab:blue'
     redcnn_color='tab:red'
 
-    # datadir = Path('/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/CTP404/monochromatic/')
+    # datadir = Path('/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/CTP404/fbp/')
     fbp_mtf_df = pd.read_csv(datadir / f'diameter{diameter}mm' / 'I0_3000000' / 'fbp_sharp_v001_mtf.csv')
     fbp_mtf_df['frequencies [lp/cm]'] = fbp_mtf_df['frequencies [1/mm]'] * 10
     fbp_mtf_df.pop('frequencies [1/mm]')
@@ -63,7 +63,7 @@ def plot_sample_curves(datadir, diameter, contrast, cutoff_val=None, ax=None):
 
 
 def main(datadir=None, output_fname=None, processed=False):
-    datadir = datadir or '/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/CTP404/monochromatic/'
+    datadir = datadir or '/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/CTP404/fbp/'
     datadir = Path(datadir)
     patient_dirs = sorted(list(datadir.glob('diameter*')))
 

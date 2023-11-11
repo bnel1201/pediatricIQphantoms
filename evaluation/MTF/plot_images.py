@@ -112,7 +112,7 @@ def image_comparison_with_profile(fbp_fname, proc_fname, outdir=None, ylim=None)
 
 
 def main(datadir=None, outdir=None):
-    datadir = datadir or '/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/CTP404/monochromatic/'
+    datadir = datadir or '/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/CTP404/fbp/'
     patient_dirs = sorted(list(Path(datadir).glob('diameter*')))
 
     sns.set_style("darkgrid")

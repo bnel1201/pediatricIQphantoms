@@ -224,28 +224,29 @@ def compare_NPS_noiselevel_and_ROI_measure(datadir, outdir):
 
 
 def main(datadir=None, outdir=None):
-    datadir = datadir or '/home/brandon.nelson/Data/temp/CCT189/monochromatic'
+    datadir = datadir or '/home/brandon.nelson/Data/temp/CCT189/fbp'
     datadir = Path(datadir)
     
     output_fname = f'{outdir}/plots/1D_nps.png'
     
-    with plt.style.context('seaborn'):
+    # with plt.style.context('seaborn'):
    
-        plot_1D_nps_all_diams(datadir, output_fname, sharex=True, sharey=True)
-        print(output_fname)
+    compare_NPS_noiselevel_and_ROI_measure(datadir, outdir)
+    plot_1D_nps_all_diams(datadir, output_fname, sharex=True, sharey=True)
+    print(output_fname)
 
-        output_fname = f'{outdir}/diameter_summary.csv'
-        csv_fname = write_results_to_csv(datadir, output_fname, DOSELEVEL)
-        print(csv_fname)
-        fbp_summary_df, proc_summary_df = load_csv(csv_fname)
+    output_fname = f'{outdir}/diameter_summary.csv'
+    csv_fname = write_results_to_csv(datadir, output_fname, DOSELEVEL)
+    print(csv_fname)
+    fbp_summary_df, proc_summary_df = load_csv(csv_fname)
 
-        output_fname = f'{outdir}/plots/CT_number_noise_v_diameter.png'
-        plot_CT_number_noise_v_diameter(fbp_summary_df, proc_summary_df, output_fname)
-        print(output_fname)
+    output_fname = f'{outdir}/plots/CT_number_noise_v_diameter.png'
+    plot_CT_number_noise_v_diameter(fbp_summary_df, proc_summary_df, output_fname)
+    print(output_fname)
 
-        output_fname = f'{outdir}/plots/relative_noise_vs_diameter.png'
-        _, rel_denoise_ax = plot_relative_denoising(fbp_summary_df, proc_summary_df)
-        print(output_fname)
+    output_fname = f'{outdir}/plots/relative_noise_vs_diameter.png'
+    _, rel_denoise_ax = plot_relative_denoising(fbp_summary_df, proc_summary_df)
+    print(output_fname)
 
     output_fname = f'{outdir}/plots/noise_reduction_vs_diameter.png'
     _, noise_redux_ax = plot_noise_reduction(csv_fname, output_fname)
@@ -259,7 +260,6 @@ def main(datadir=None, outdir=None):
     output_fname = f'{outdir}/plots/bias_v_noise_reduction.png'
     plot_CT_bias_v_noise_reduction(csv_fname, output_fname)
 
-    compare_NPS_noiselevel_and_ROI_measure(datadir, outdir)
 
 
 if __name__ == '__main__':

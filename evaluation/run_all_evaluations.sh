@@ -14,7 +14,7 @@ else
 echo $cmd
     $cmd
 fi
-bash MTF/_2_generate_MTF_plots.sh $OUTPUT_DIR/geometric/CTP404/monochromatic/ $RESULTS_DIR/MTF
+bash MTF/_2_generate_MTF_plots.sh $OUTPUT_DIR/geometric/CTP404/fbp/ $RESULTS_DIR/MTF
 
 # NPS
 cmd="bash NPS/_1_run_NPS_analysis.sh ${OUTPUT_DIR}/geometric"
@@ -23,7 +23,7 @@ if [ $(hostname) == openhpc ]; then
 else
     $cmd
 fi
-bash NPS/_2_generate_NPS_plots.sh $OUTPUT_DIR/geometric/CCT189/monochromatic/ $RESULTS_DIR/NPS
+bash NPS/_2_generate_NPS_plots.sh $OUTPUT_DIR/geometric/CCT189/fbp/ $RESULTS_DIR/NPS
 
 # Objective Image Quality Summary
 
@@ -36,7 +36,7 @@ if [ $(hostname) == openhpc ]; then
 else
     $cmd
 fi
-bash LCD/_2_generate_LCD_plots.sh $OUTPUT_DIR/geometric/CCT189/monochromatic $RESULTS_DIR/LCD
+bash LCD/_2_generate_LCD_plots.sh $OUTPUT_DIR/geometric/CCT189/fbp $RESULTS_DIR/LCD
 
 # Anthropomorphic phantoms
 

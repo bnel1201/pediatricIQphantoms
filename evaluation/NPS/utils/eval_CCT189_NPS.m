@@ -1,14 +1,7 @@
 
 % Purpose: calculate NPS from water phantom scans
 
-% clear all;
-% addpath('utils')
 addpath([dirname(fileparts(mfilename('fullpath')), 2) '/utils'])
-% addpath('../../make_phantoms/utils/mirt-main')
-
-% if ~exist('folder_path', 'var')
-%     folder_path = '/home/brandon.nelson/Data/temp/CCT189/monochromatic/';
-% end
 
 dir_contents = dir(datadir);
 diams = dir_contents(3:end);
@@ -116,10 +109,8 @@ for diam_idx = 1:length(diams)
             parts = regexp(parentfolder, '/', 'split');
 
             nps_raw_fname = string(fullfile(results_path, sprintf('%d_2D_nps_float32_%d.raw', dose_level, nx_roi)));
-            % my_write_rawfile(nps_raw_fname, single(nps), 'single');
-            spacing = repmat(1, [1 ndims(single(nps))])
+            spacing = repmat(1, [1 ndims(single(nps))]);
             writemha(nps_raw_fname, single(nps), 0, spacing, 'float', 'brick');
-            %check mean HU variations in the set of images
             tiny_roi = round(nx/10/2);
             t=(img(nx/2+[-tiny_roi:tiny_roi],nx/2+[-tiny_roi:tiny_roi],:));
             diam = parts(end);

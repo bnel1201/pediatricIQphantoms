@@ -8,7 +8,7 @@ from utils.img_io import imshow_disk_comparison
 
 
 def main(h5file, datadir=None, output_fname=None, diams=[112, 292], n_avg=20):
-    datadir = datadir or '/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/CCT189/monochromatic'
+    datadir = datadir or '/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/CCT189/fbp'
     datadir = Path(datadir)
     diams = diams or [112, 292]
     f, axs = plt.subplots(len(diams), 2, gridspec_kw=dict(wspace=0, hspace=0), figsize=(4, 2*len(diams)))

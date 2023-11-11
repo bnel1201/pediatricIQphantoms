@@ -29,14 +29,14 @@ def get_water_equivalent_diameter(ct_img, nx):
 def load_patient(simulations_dir, patient_name):
     simulations_dir = Path(simulations_dir)
     diameter = get_patient_diameter(simulations_dir, patient_name)
-    diameter_dir = simulations_dir / patient_name / f'monochromatic' / diameter
+    diameter_dir = simulations_dir / patient_name / f'fbp' / diameter
     dose_levels = sorted(get_dose_levels(diameter_dir))
     eff_diameter = int(diameter.split('diameter')[1].split('mm')[0])
     fbp_stack = []
     cnn_stack = []
     fbp_filenames = []
     cnn_filenames = []
-    diameter_dir = simulations_dir / patient_name / f'monochromatic' / diameter
+    diameter_dir = simulations_dir / patient_name / f'fbp' / diameter
     for dose_level in dose_levels:
         fbp_dir = diameter_dir / f'I0_{dose_level:07.0f}/fbp_sharp/'
         cnn_dir = diameter_dir / f'I0_{dose_level:07.0f}_processed/fbp_sharp/'

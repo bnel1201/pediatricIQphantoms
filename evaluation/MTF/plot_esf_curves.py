@@ -7,7 +7,7 @@ from utils.esf_plot import plot_patient_diameter_esf, load_esf_dataframe
 
 
 def main(datadir=None, output_fname=None):
-    datadir = datadir or '/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/CTP404/monochromatic/'
+    datadir = datadir or '/gpfs_projects/brandon.nelson/DLIR_Ped_Generalizability/geometric_phantom_studies/CTP404/fbp/'
     patient_dirs = sorted(list(Path(datadir).glob('diameter*')))
 
     sns.set_style("darkgrid")
