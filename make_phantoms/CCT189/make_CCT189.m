@@ -11,9 +11,12 @@
 % Date: July 23, 2018
 
 % Run path setup
-run('../configs/SiemensSomatomDefinitionAS.m')
 
-run('../utils/CT_setup.m') % need to double check that this isn't overwriting anything from the base config
+fbp_kernel
+
+parts = strsplit(mfilename('fullpath'), filesep);
+run(fullfile(strjoin(parts(1:end-2), filesep), 'utils', 'CT_setup.m'))
+run(fullfile(strjoin(parts(1:end-2), filesep), 'configs', 'SiemensSomatomDefinitionAS.m'))
 
 sg = sino_geom('fan', 'units', 'mm', ...
     'nb', nb, 'na', na, 'ds', ds, ...
@@ -24,7 +27,8 @@ sampleFolder = fullfile(basedataFolder, 'CCT189/')
 if ~exist(sampleFolder, 'dir')
     mkdir(sampleFolder)
 end
-physics_type_folder = [sampleFolder 'fbp/'];
+kernel_string = ['fbp_' erase(erase(fbp_kernel, ','), '.')];
+physics_type_folder = fullfile(sampleFolder, kernel_string);
 if ~exist(physics_type_folder, 'dir')
     mkdir(physics_type_folder)
 end
@@ -86,7 +90,10 @@ for diam_idx=1:ndiams
         bkg_true = ellipse_im(ig, bkg_ell, 'oversample', 4, 'rot', 0);
         bkg_true_hu = 1000*(bkg_true - mu_water)/mu_water + offset;
 
-        filename = string(fullfile(patient_folder, 'true_disk.raw'));
+        filename = fullfile(patient_folder, 'true_disk.raw');
+        if ~is_octave
+            filename = string(filename);
+        end
         write_phantom_info([patient_folder filesep 'phantom_info_mm.csv'], disk_ell);
         write_phantom_info([patient_folder filesep 'phantom_info_pix_idx.csv'], ellipse_mm_to_pix(disk_ell, fov, nx));
         image_info.offset = offset;
@@ -97,7 +104,11 @@ for diam_idx=1:ndiams
         spacing = repmat(dx, [1 ndims(disk_true_hu)]);
         writemha(filename, disk_true_hu,offset,spacing, 'short', 'slice');
 
-        filename = string(fullfile(patient_folder, 'true_bkg.raw'));
+        filename = fullfile(patient_folder, 'true_bkg.raw');
+        if ~is_octave
+            filename = string(filename);
+        end
+
         writemha(filename, bkg_true_hu, offset, spacing, 'short', 'slice');
 
         disk_sino = ellipse_sino(sg, disk_ell, 'oversample', 4);
@@ -145,7 +156,7 @@ for diam_idx=1:ndiams
 
             disk_sino_log = -log(disk_proj ./ I0_afterbowtie);            % noisy fan-beam sinogram
             bkg_sino_log = -log(bkg_proj ./ I0_afterbowtie);            % noisy fan-beam sinogram
-
+            fbp_kernel
             disk_fbp = fbp2(disk_sino_log, fg, 'window', fbp_kernel);
             disk_fbp_hu = 1000*(disk_fbp - mu_water)/mu_water + offset;
             sp_vol(:,:,sim_idx) = disk_fbp_hu;

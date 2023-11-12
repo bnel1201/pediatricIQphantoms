@@ -24,7 +24,8 @@ sampleFolder = fullfile(basedataFolder, 'CTP404/');
 if ~exist(sampleFolder, 'dir')
     mkdir(sampleFolder)
 end
-physics_type_folder = [sampleFolder 'fbp/'];
+kernel_string = ['fbp_' erase(erase(fbp_kernel, ','), '.')];
+physics_type_folder = fullfile(sampleFolder, kernel_string);
 if ~exist(physics_type_folder, 'dir')
     mkdir(physics_type_folder)
 end
@@ -78,7 +79,10 @@ for diam_idx=1:ndiams
         ell = CTP404(patient_diameter, mu_water, relative_lesion_diameter, relative_lesion_location);
         x_true = ellipse_im(ig, ell, 'oversample', 4, 'rot', 0);
         x_true_hu = 1000*(x_true - mu_water)/mu_water + offset;
-        filename = string(fullfile(patient_folder, 'true.raw'));
+        filename = fullfile(patient_folder, 'true.raw');
+        if ~is_octave
+            filename = string(filename);
+        end
         write_phantom_info([patient_folder filesep 'phantom_info_mm.csv'], ell);
         write_phantom_info([patient_folder filesep 'phantom_info_pix_idx.csv'], ellipse_mm_to_pix(ell, fov, nx));
         image_info.offset = offset;
@@ -110,7 +114,10 @@ for diam_idx=1:ndiams
         ny = nx;
         vol = zeros(nx, ny, nsims);
         spacing = repmat(dx, [1 ndims(vol)]);
-        filename_fbp = string(fullfile(files_sharp, 'fbp_sharp.raw'));
+        filename_fbp = fullfile(files_sharp, 'fbp_sharp.raw');
+        if ~is_octave
+            filename_fbp = string(filename_fbp);
+        end
         for sim_idx = batch
             total_idx = sim_idx+(diam_idx-1)*nsims;
             disp(sprintf('%s, diameter: %dmm (FOV: %dmm) [%d/%d], simulation: [%d/%d], Total: %3.2f%% [%d/%d]', mfilename, patient_diameter, round(fov), diam_idx, ndiams, sim_idx, nsims, total_idx/total_sim*100, total_idx, total_sim))
@@ -127,10 +134,6 @@ for diam_idx=1:ndiams
             x_fbp_sharp = fbp2(sino_log, fg, 'window', fbp_kernel);
             x_fbp_sharp_hu = 1000*(x_fbp_sharp - mu_water)/mu_water + offset;
             vol(:,:,sim_idx) = x_fbp_sharp_hu;
-            % file_prefix = [files_sharp 'fbp_sharp_'];
-            % file_num = sim_idx;
-            % filename_fbp_sharp = [file_prefix 'v' sprintf('%03d', file_num) '.raw'];
-            % my_write_rawfile(filename_fbp_sharp, x_fbp_sharp_hu, 'int16');
         end
         writemha(filename_fbp, vol, offset, spacing, 'short', 'slice');
     end

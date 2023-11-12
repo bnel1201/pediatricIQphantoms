@@ -2,8 +2,9 @@
 
 ## Need to have
 
-- [ ] get phantom creation and editing CT params working on all devices (demo 1)
+- [X] get phantom creation and editing CT params working on all devices (demo 1)
 
 ## Nice to have
 
 - [ ] get some sample evaluation scripts going
+- [ ] convert filetype from mhd to dicom https://wiki.octave.org/Dicom_package

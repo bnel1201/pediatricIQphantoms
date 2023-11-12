@@ -50,7 +50,7 @@ function fn_list = write_slices(fn, A, type)
     for s=1:nslices
        slice_fname = fullfile(fpath, sprintf("%s_%04d%s", fname, s, ext));
        write_volume(slice_fname, A(:,:,s), type)
-       fn_list = [fn_list, slice_fname];
+       fn_list = [fn_list; slice_fname];
     end
 end
 
@@ -77,17 +77,31 @@ fclose(fp);
 end
 
 function write_header(fn, Asz, offset, spacing, type)
+    if is_octave
+        fn = cellstr(fn);
+    end
     if length(fn) > 1
         for i = 2:length(fn)
-            [fpath, fname, ext] = fileparts(fn(i));
+            fn_temp = fn(i);
+            if is_octave
+                fn_temp = char(fn_temp);
+            end
+            [fpath, fname, ext] = fileparts(fn_temp);
             fn(i) = strcat(fname, ext);
         end
-        [fpath, fname, ext] = fileparts(fn(1));
+        fn_temp = fn(1);
+        if is_octave
+           fn_temp = char(fn_temp);
+        end
+        [fpath, fname, ext] = fileparts(fn_temp);
     else
+        if is_octave
+            fn = char(fn);
+        end
         [fpath, fname, ext] = fileparts(fn);
         fn = strcat(fname, ".raw");
     end
-    header_filename = fullfile(fpath, strcat(fname, ".mhd")); 
+    header_filename = fullfile(fpath, strcat(fname, ".mhd"))
 
     fh = fopen(header_filename,'w');
     if (fh == -1)
@@ -129,7 +143,11 @@ function write_header(fn, Asz, offset, spacing, type)
     
     if length(fn) > 1
         fprintf (fh, 'ElementDataFile = LIST\n');
-        fprintf (fh, '%s\n', fn(2:end));
+        fn_temp = fn(2:end);
+        if is_octave
+          fn_temp = char(fn_temp);
+        end
+        fprintf (fh, '%s\n', fn_temp);
     else
         fprintf (fh,'ElementDataFile = %s\n', fn);
     end

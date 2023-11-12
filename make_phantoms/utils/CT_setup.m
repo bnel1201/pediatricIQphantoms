@@ -4,7 +4,12 @@ addpath(fileparts(mfilename('fullpath')))
 if ~exist('mirt-main', 'dir')
     unzip('https://github.com/JeffFessler/mirt/archive/refs/heads/main.zip', '.');
 end
-irtdir = 'mirt-main';
+
+
+
+parts = strsplit(mfilename('fullpath'), filesep);
+irtdir = fullfile(strjoin(parts(1:end-1), filesep), 'mirt-main');
+
 addpath(irtdir)
 if(exist('setup.m'))
     setup
@@ -20,19 +25,26 @@ if exist('patient_diameters', 'var') == false
     patient_diameters = [112, 131, 151, 185, 216, 292]; %newborn, 8 yr-old, 18 year old
 end
 
-if exist('nsims', 'var') == false
+if ~exist('nsims', 'var')
     nsims = 2
 end
 
-if exist('aec_on', 'var') == false
+if ~exist('aec_on', 'var')
     aec_on = true;
 end
 
-if exist('add_noise', 'var') == false
+if ~exist('fbp_kernel', 'var')
+    fbp_kernel = 'hanning,2.05'; % 'hanning,xxx', xxx = the cutoff frequency, see fbp2_window.m in MIRT for details.
+    %'hanning,2.05' approximate a sharp kernel D45 in Siemens Force.
+    %'hanning, 0.85' approximate a smooth kernel B30 in
+    %Siemens Force.
+end
+
+if ~exist('add_noise', 'var')
     add_noise = true;
 end
 
-if exist('offset', 'var') == false
+if ~exist('offset', 'var')
     offset = 0
 end
 
@@ -40,7 +52,7 @@ batch = 1:nsims;
 rand('state', batch(end));
 % Set save folder
 if exist('basedataFolder', 'var') == false
-    basedataFolder = '/home/brandon.nelson/Data/temp/'; %temporary until /gpfs_projects gets fixed then switch back to above^^^ 
+    basedataFolder = 'test'; %temporary until /gpfs_projects gets fixed then switch back to above^^^ 
 end
 
 % overwrite defaults with config file
@@ -52,7 +64,7 @@ if exist('nangles', 'var')
     na = nangles;
 end
 
-fbp_kernel = 'hanning,2.05'; % 'hanning,xxx', xxx = the cutoff frequency, see fbp2_window.m in MIRT for details.
+% fbp_kernel = 'hanning,2.05'; % 'hanning,xxx', xxx = the cutoff frequency, see fbp2_window.m in MIRT for details.
                         %'hanning,2.05' approximate a sharp kernel D45 in Siemens Force.
                         %'hanning, 0.85' approximate a smooth kernel B30 in
                         %Siemens Force.

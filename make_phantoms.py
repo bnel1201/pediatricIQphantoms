@@ -28,6 +28,7 @@ def main(config):
         patient_diameters={config['phantoms']['diameter']};\
         aec_on={str(config['acquisition']['aec_on']).lower()};\
         add_noise={str(config['acquisition']['add_noise']).lower()};\
+        fbp_kernel='{config['reconstruction']['fbp_kernel']}';\
         reference_dose_level={dose_level};\
         reference_diameter={config['phantoms']['reference_diameter']};\
         reference_fov={config['reconstruction']['fov']};\
