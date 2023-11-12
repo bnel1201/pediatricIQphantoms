@@ -156,7 +156,6 @@ for diam_idx=1:ndiams
 
             disk_sino_log = -log(disk_proj ./ I0_afterbowtie);            % noisy fan-beam sinogram
             bkg_sino_log = -log(bkg_proj ./ I0_afterbowtie);            % noisy fan-beam sinogram
-            fbp_kernel
             disk_fbp = fbp2(disk_sino_log, fg, 'window', fbp_kernel);
             disk_fbp_hu = 1000*(disk_fbp - mu_water)/mu_water + offset;
             sp_vol(:,:,sim_idx) = disk_fbp_hu;

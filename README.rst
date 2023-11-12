@@ -26,6 +26,14 @@ In addition, this repo contains examples of measurements using these digital ima
 3. `sharpness measurements <demo_03_sharpness_measurements.sh>`_
 4. `low contrast detectability measurements <demo_04_low_contrast_measurements.sh>`_ using https://github.com/DIDSR/LCD_CT
 
+Install
+-------
+
+1. Octave
+conda create --name octave
+conda activate octave
+conda install 
+
 Contribute
 ----------
 

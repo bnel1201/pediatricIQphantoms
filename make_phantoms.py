@@ -11,17 +11,23 @@ def main(config):
     image_directory = os.path.abspath(config['directories']['image_directory'])
 
     phantoms = config['phantoms']['model']
-    diameters = config['phantoms']['diameter']
 
     dose_level = config['acquisition']['full_dose'] * np.array(config['acquisition']['dose_level'])
+
+    matlab_error_status = os.system("matlab -batch version")
+
+    if matlab_error_status:
+        print('matlab not install, using Octave')
+        interpreter = 'octave --eval'
+    else:
+        interpreter = 'matlab -batch -noFigureWindows -nosplash' #https://www.mathworks.com/help/matlab/ref/matlabwindows.html
+
 
     for phantom_idx, phantom in enumerate(phantoms):
         print(f'{phantom} Simulation series {phantom_idx}/{len(phantoms)}')
 
-        # interpretor = 'matlab -batch -noFigureWindows -nosplash' #https://www.mathworks.com/help/matlab/ref/matlabwindows.html
-        interpretor = 'octave --eval'
         cmd = f"""
-        {interpretor} "basedataFolder='{image_directory}';\
+        {interpreter} "basedataFolder='{image_directory}';\
         nsims={config['acquisition']['nsims']};\
         image_matrix_size={config['reconstruction']['image_matrix_size']};\
         nangles={config['acquisition']['nangles']};\
