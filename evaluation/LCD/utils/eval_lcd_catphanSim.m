@@ -84,14 +84,14 @@ for diam_idx=1:n_diameters
             recon_option = all_recon_type{k};
 
             % I0_string = ['I0_' sprintf('%07d', I0) ];
-            I0_string = I0_dirs(iI).name
-            folder_sp = fullfile(data_folder, I0_string, 'disk')
-            folder_sa = fullfile(data_folder, I0_string, 'bkg')
+            I0_string = I0_dirs(iI).name;
+            folder_sp = fullfile(data_folder, I0_string, 'disk');
+            folder_sa = fullfile(data_folder, I0_string, 'bkg');
 
             if(strfind(recon_option, 'dl'))
                 I0_string = [I0_string '_processed'];
-                folder_sp = fullfile(data_folder, I0_string, 'disk')
-                folder_sa = fullfile(data_folder, I0_string, 'bkg')
+                folder_sp = fullfile(data_folder, I0_string, 'disk');
+                folder_sa = fullfile(data_folder, I0_string, 'bkg');
             end
             n_spfile = length(dir(folder_sp)) - 2; % number signal present file
             n_safile = length(dir(folder_sa)) - 2; % number signal absent file

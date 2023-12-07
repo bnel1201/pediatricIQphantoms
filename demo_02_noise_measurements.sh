@@ -1,10 +1,1 @@
-EXPERIMENT=experiments/test
-
-# Do Not Edit Below
-source $EXPERIMENT/protocol
-mkdir -p $RESULTS_DIR
-
-# NPS
-bash evaluation/NPS/_1_run_NPS_analysis.sh $EXPERIMENT
-
-bash evaluation/NPS/_2_generate_NPS_plots.sh $OUTPUT_DIR/CCT189/fbp/ $RESULTS_DIR/NPS
+python evaluation/denoise.py /home/brandon.nelson/Dev/Regulatory_Science_Tools/pediatricIQphantoms/main/images/CCT189/fbp_hanning205

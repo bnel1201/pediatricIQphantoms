@@ -12,7 +12,10 @@
 
 % Run path setup
 
-fbp_kernel
+if ~exist('fbp_kernel', 'var')
+    warning('No fbp kernel specified, using default')
+    fbp_kernel='hanning,2.05'
+end
 
 parts = strsplit(mfilename('fullpath'), filesep);
 run(fullfile(strjoin(parts(1:end-2), filesep), 'utils', 'CT_setup.m'))
@@ -68,8 +71,8 @@ for diam_idx=1:ndiams
     saveas(gca, fullfile(patient_folder, 'image_geometry.png'))
 
     for I0=I0_vector
-        I0_string = ['I0_' sprintf('%07d', I0)]
-        I0_string
+        I0_string = ['I0_' sprintf('%07d', I0)];
+        I0_string;
         files_disk = [patient_folder I0_string '/disk/'];
         if(~exist(files_disk,'dir'))
             mkdir(files_disk);

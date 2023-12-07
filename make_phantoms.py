@@ -8,11 +8,11 @@ import os
 
 def main(config):
 
-    image_directory = os.path.abspath(config['directories']['image_directory'])
+    image_directory = os.path.abspath(config['image_directory'])
 
-    phantoms = config['phantoms']['model']
+    phantoms = config['model']
 
-    dose_level = config['acquisition']['full_dose'] * np.array(config['acquisition']['dose_level'])
+    dose_level = config['full_dose'] * np.array(config['dose_level'])
 
     matlab_error_status = os.system("matlab -batch version")
 
@@ -20,28 +20,25 @@ def main(config):
         print('matlab not install, using Octave')
         interpreter = 'octave --eval'
     else:
-        interpreter = 'matlab -batch -noFigureWindows -nosplash' #https://www.mathworks.com/help/matlab/ref/matlabwindows.html
-
-
+        interpreter = 'matlab -batch' #https://www.mathworks.com/help/matlab/ref/matlabwindows.html
+        # -batch doesnt work for matlab here so revert to old -r flag
     for phantom_idx, phantom in enumerate(phantoms):
         print(f'{phantom} Simulation series {phantom_idx}/{len(phantoms)}')
 
         cmd = f"""
-        {interpreter} "basedataFolder='{image_directory}';\
-        nsims={config['acquisition']['nsims']};\
-        image_matrix_size={config['reconstruction']['image_matrix_size']};\
-        nangles={config['acquisition']['nangles']};\
-        patient_diameters={config['phantoms']['diameter']};\
-        aec_on={str(config['acquisition']['aec_on']).lower()};\
-        add_noise={str(config['acquisition']['add_noise']).lower()};\
-        fbp_kernel='{config['reconstruction']['fbp_kernel']}';\
-        reference_dose_level={dose_level};\
-        reference_diameter={config['phantoms']['reference_diameter']};\
-        reference_fov={config['reconstruction']['fov']};\
-        offset={config['reconstruction']['offset']};\
-        run('make_phantoms/{phantom}/make_{phantom}.m');\
-        exit;"
-        """
+               {interpreter} "basedataFolder='{image_directory}';\
+               nsims={config['nsims']};\
+               image_matrix_size={config['image_matrix_size']};\
+               nangles={config['nangles']};\
+               patient_diameters={config['diameter']};\
+               aec_on={str(config['aec_on']).lower()};\
+               add_noise={str(config['add_noise']).lower()};\
+               fbp_kernel='{config['fbp_kernel']}';\
+               reference_dose_level={dose_level};\
+               reference_diameter={config['reference_diameter']};\
+               reference_fov={config['fov']};\
+               offset={config['offset']};run('make_phantoms/{phantom}/make_{phantom}.m');exit;"\
+               """
         os.system(cmd)
 # %%
 if __name__ == '__main__':
@@ -57,4 +54,8 @@ if __name__ == '__main__':
     else:
         with open("configs/defaults.toml", mode="rb") as fp:
             config = tomli.load(fp)
-    main(config)
+    
+    sim = dict()
+    for c in config['simulation']:
+        sim.update(c)
+        main(sim)

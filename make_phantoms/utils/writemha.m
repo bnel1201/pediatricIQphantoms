@@ -35,10 +35,10 @@ Asz = size(A);
 if strcmpi(savefmt, "slice")
     fn = write_slices(fn, A, type);
 else
-    write_volume(fn, A, type)
+    write_volume(fn, A, type);
 end
 
-write_header(fn, Asz, offset, spacing, type)
+write_header(fn, Asz, offset, spacing, type);
 
 end
 
@@ -49,7 +49,7 @@ function fn_list = write_slices(fn, A, type)
     fn_list = [fn];
     for s=1:nslices
        slice_fname = fullfile(fpath, sprintf("%s_%04d%s", fname, s, ext));
-       write_volume(slice_fname, A(:,:,s), type)
+       write_volume(slice_fname, A(:,:,s), type);
        fn_list = [fn_list; slice_fname];
     end
 end
@@ -101,7 +101,7 @@ function write_header(fn, Asz, offset, spacing, type)
         [fpath, fname, ext] = fileparts(fn);
         fn = strcat(fname, ".raw");
     end
-    header_filename = fullfile(fpath, strcat(fname, ".mhd"))
+    header_filename = fullfile(fpath, strcat(fname, ".mhd"));
 
     fh = fopen(header_filename,'w');
     if (fh == -1)

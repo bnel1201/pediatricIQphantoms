@@ -35,10 +35,10 @@ Asz = size(A);
 if strcmpi(savefmt, "slice")
     fn = write_slices(fn, A, type);
 else
-    write_volume(fn, A, type)
+    write_volume(fn, A, type);
 end
 
-write_header(fn, Asz, offset, spacing, type)
+write_header(fn, Asz, offset, spacing, type);
 
 end
 
