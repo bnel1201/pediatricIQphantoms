@@ -20,8 +20,6 @@ pediatricIQphantoms
 Features
 --------
 
-The phantoms incude:
-
 - The CTP404 contrast module phantom for assessing CT number accuracy and contrast-dependent spatial resolution
 - CCT189 the MITA LCD phantom for assessing low contrast detectability
 - Uniform water phantoms for assessing noise and noise texture
