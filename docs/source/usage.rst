@@ -19,7 +19,7 @@ The LCD performance obtained using the LCD-CT tools can help the assessment of i
 Examples
 --------
 
-- **example_01_multiple_recon_kernels.sh**
+- `example_01_multiple_recon_kernels.sh <https://github.com/bnel1201/pediatricIQphantoms/blob/main/demo_01_phantom_creation.sh>`_
 
 .. code-block:: shell
 
