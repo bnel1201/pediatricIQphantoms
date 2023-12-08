@@ -181,7 +181,7 @@ Finally by the fourth we repeat the previous simulation but with the second kern
      'offset': 0,
      **'fbp_kernel': 'hanning,0.85'**}
 
-This is done in 
+This is done in parsing the config files using the python `dict update method <https://docs.python.org/3/library/stdtypes.html?highlight=dict%20update#dict.update>`_ https://github.com/bnel1201/pediatricIQphantoms/blob/62a45930053502e8e9982af4b521fdd4eee314ed/make_phantoms.py#L56
 
 [1] Nelson B, Kc P, Badal-Soler A, Jiang L, Masters S, Zeng R. Pediatric-Specific Evaluations for Deep Learning CT Denoising. Published online July 3, 2023. doi:10.5281/zenodo.8111530
 [2] Zeng R, Lin CY, Li Q, et al. Performance of a deep learning-based CT image denoising method: Generalizability over dose, reconstruction kernel, and slice thickness. Med Phys. 2022;49(2):836-853. doi:10.1002/mp.15430
