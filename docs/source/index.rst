@@ -1,5 +1,5 @@
 Welcome to pediatricIphantom documentation!
-==============================================
+===========================================
 
 This documentation provides information regarding how to download, install, and use the LCD for CT Toolbox which is designed to low contrast detectactability in CT images.
 
