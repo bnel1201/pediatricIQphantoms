@@ -1,7 +1,7 @@
 pediatricIQphantoms
 ===================
 
-|zenodo|
+|zenodo| |docs|
 
 **Digital Pediatric Image Quality Phantoms for Evaluating CT Denoising Methods** are a set of digital phantoms and simulation methods for generating CT images of standard image quality (IQ) phantoms designed to match the effective diameter of pediatric patients ranging from newborns to teenagers. This repository has `tools <make_phantoms.py>`_ for generating `MITA-LCD phantom <https://www.phantomlab.com/catphan-mita>`_ and a multi-contrast sensitometry module similar to the CTP404 module of the `Catphan 600 phantom <link here>`_. Functions are also provided to simulate different acquisition parameters and CT scanner models.
 
@@ -16,6 +16,11 @@ pediatricIQphantoms
     :alt: Zenodo Data Access
     :scale: 100%
     :target: https://doi.org/10.5281/zenodo.10064036
+
+.. |docs| image:: https://readthedocs.org/projects/docs/badge/?version=latest
+    :alt: Documentation Status
+    :scale: 100%
+    :target: https://pediatriciqphantoms.readthedocs.io/en/latest/
 
 Features
 --------
