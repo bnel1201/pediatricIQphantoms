@@ -21,11 +21,13 @@ Examples
 
 - `example_01_multiple_recon_kernels.sh <https://github.com/bnel1201/pediatricIQphantoms/blob/main/demo_01_phantom_creation.sh>`_
 
+The purpose of this example is to illustrate how to batch several simulations into a single config .toml file and how to update parameters while keeping everything else the same. This example is available in the `examples folder <https://github.com/bnel1201/pediatricIQphantoms/tree/main/examples>`_ or alternatively can be run using the following terminal command:
+
 .. code-block:: shell
 
     python make_phantoms.py configs/multiple_recon_kernels.toml
 
-The key difference here is in the config file
+The key difference in this config file compared to the `default <https://github.com/bnel1201/pediatricIQphantoms/blob/main/configs/defaults.toml>`_ or `test <https://github.com/bnel1201/pediatricIQphantoms/blob/main/configs/test.toml>`_ configs is that multiple simulations are batched in a single config file by repeating the **[[simulation]]** toml header for each new simulation to add to the batch. Note in toml this is referred to as a `nested table <https://toml.io/en/v1.0.0#array-of-tables>`_.
 
 .. code-block:: toml
 
@@ -53,7 +55,7 @@ The key difference here is in the config file
     fbp_kernel = 'hanning,0.85'
    ...
 
-Here multiple simulations are run, note the repeated header blocks `[[simulation]]` indicate the start of a new experiment. Any parameters set in the first simulation, (the first `[[simulation]]` above), override the `default parameters <defaults.toml>`_. In each subsequent `[[simulation]]` an new provided settings will update the scan settings, otherwise all other parameters will carry over from the previous simulation.
+Here multiple simulations are run, note the repeated header blocks **[[simulation]]** indicate the start of a new experiment. Any parameters set in the first simulation, (the first **[[simulation]]** above), override the `default parameters <defaults.toml>`_. In each subsequent **[[simulation]]** an new provided settings will update the scan settings, otherwise all other parameters will carry over from the previous simulation.
 
 For example:
 
