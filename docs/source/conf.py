@@ -29,7 +29,7 @@ templates_path = ['_templates']
 exclude_patterns = []
 
 this_dir = os.path.dirname(os.path.abspath(__file__))
-matlab_src_dir = os.path.abspath(os.path.join(this_dir, '../../src'))
+matlab_src_dir = os.path.abspath(os.path.join(this_dir, '../..'))
 primary_domain = 'mat'
 
 # -- Options for HTML output -------------------------------------------------
