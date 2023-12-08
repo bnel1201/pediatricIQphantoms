@@ -25,7 +25,7 @@ Examples
 
     python make_phantoms.py configs/multiple_recon_kernels.toml
 
-The key difference here is in the config :file
+The key difference here is in the config file
 
 .. code-block:: toml
 
@@ -61,7 +61,8 @@ For example:
 
     {'image_directory': 'results/multiple_recon_kernels',
     'model': ['CCT189'],
-    'diameter': [112, 131, 151, 185, 200, 292, 350], 'reference_diameter': 200,
+    'diameter': [112, 131, 151, 185, 200, 292, 350],
+    'reference_diameter': 200,
     'framework': 'MIRT',
     'nsims': 200,
     'nangles': 1160,
@@ -80,13 +81,23 @@ For example:
     'offset': 0,
     'fbp_kernel': 'hanning,2.05'}
 
-Then by second simulation the config becomes
+In the second simulation in the config file only the `fbp_kernel` is updated 
+
+.. code-block:: toml
+
+    [[simulation]]
+
+    fbp_kernel = 'hanning,0.85'
+
+This results in only updating the `fbp_kernel` element leaving all other elements the same from the previous simulation.
 
 .. code-block:: python
 
     {'image_directory': 'results/multiple_recon_kernels',
      'model': ['CCT189'],
-     'diameter': [112, 131, 151, 185, 200, 292, 350], 'reference_diameter': 200, 'framework': 'MIRT',
+     'diameter': [112, 131, 151, 185, 200, 292, 350],
+     'reference_diameter': 200,
+     'framework': 'MIRT',
      'nsims': 200,
      'nangles': 1160,
      'aec_on': True,
@@ -104,13 +115,23 @@ Then by second simulation the config becomes
      'offset': 0,
      **'fbp_kernel': 'hanning,0.85'**}
 
-Then by third simulation the config becomes
+Then by third simulation a new phantom is introduced, CTP404, and we wish to only image it at full dose and with the first of the two kernels being investigated (sharp and smooth):
+
+.. code-block:: toml
+
+    [[simulation]]
+
+    model = ['CTP404']
+    dose_level = [1.0]
+    fbp_kernel = 'hanning,2.05'
 
 .. code-block:: python
 
     {'image_directory': 'results/multiple_recon_kernels',
      **'model': ['CTP404']**,
-     'diameter': [112, 131, 151, 185, 200, 292, 350], 'reference_diameter': 200, 'framework': 'MIRT',
+     'diameter': [112, 131, 151, 185, 200, 292, 350],
+     'reference_diameter': 200,
+     'framework': 'MIRT',
      'nsims': 10,
      'nangles': 1160,
      'aec_on': True,
@@ -128,13 +149,21 @@ Then by third simulation the config becomes
      'offset': 0,
      'fbp_kernel': 'hanning,2.05'}
 
-and the fourth
+Finally by the fourth we repeat the previous simulation but with the second kernel, the smooth kernel
+
+.. code-block:: toml
+
+    [[simulation]]
+
+    fbp_kernel = 'hanning,0.85'
 
 .. code-block:: python
 
     {'image_directory': 'results/multiple_recon_kernels',
      **'model': ['CTP404']**,
-     'diameter': [112, 131, 151, 185, 200, 292, 350], 'reference_diameter': 200, 'framework': 'MIRT',
+     'diameter': [112, 131, 151, 185, 200, 292, 350],
+     'reference_diameter': 200,
+     'framework': 'MIRT',
      'nsims': 10,
      'nangles': 1160,
      'aec_on': True,
@@ -151,6 +180,8 @@ and the fourth
      'image_matrix_size': 512,
      'offset': 0,
      **'fbp_kernel': 'hanning,0.85'**}
+
+This is done in 
 
 [1] Nelson B, Kc P, Badal-Soler A, Jiang L, Masters S, Zeng R. Pediatric-Specific Evaluations for Deep Learning CT Denoising. Published online July 3, 2023. doi:10.5281/zenodo.8111530
 [2] Zeng R, Lin CY, Li Q, et al. Performance of a deep learning-based CT image denoising method: Generalizability over dose, reconstruction kernel, and slice thickness. Med Phys. 2022;49(2):836-853. doi:10.1002/mp.15430
