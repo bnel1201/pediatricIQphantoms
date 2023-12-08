@@ -4,7 +4,7 @@ Usage
 Intended Purpose
 ----------------
 
-The LCD-CT software tool is intended for quantitatively evaluating the Low contrast detectability (LCD) performance of advanced nonlinear CT image reconstruction and denoising products using the MITA-LCD phantom images.
+The pediatricIQphantom phantom generation and CT simulation tool is intended for evaluating the patient size dependence of nonlinear, data-driven image denoising and processing algorithms by providing digital versions of standard image quality phantoms, the `MITA-LCD phantom <https://www.phantomlab.com/catphan-mita>`_ and CTP404 module of the `Catphan 600 phantom <https://www.phantomlab.com/catphan-600>`_. Evaluating the patient size dependence of denoising algorithms is important when considering the performance of these devices in pediatric populations[1]. This is due to the smaller fields of view (FOV) associated with pediatric protocols which alters the image texture, an important factor when training and testing data-drive denoising methods.
 
 Intended users are CT device developers and  image denoising and processing software developers. Advanced nonlinear CT image reconstruction and denoising methods (products code JAK_, QIH_, LLZ_ among others) includes statistically iterative, model-based iterative and deep learning-based image reconstruction and denoising methods.
 
@@ -16,9 +16,9 @@ Intended users are CT device developers and  image denoising and processing soft
 
 The LCD performance obtained using the LCD-CT tools can help the assessment of image quality imprvoment and quantitative dose reduction potential of advanced nonlinear CT image reconstruction and denoising methods with respect to a reference reconstruction option such as the FBP method. 
 
-Demos
------
-These demos are intended to be run linearly and demonstrate the use of the LCD-CT tool and how it can be used in more sophisticated loops to understand LCD relationships with different imaging conditions, lesions, and model observer types.
+[1] Nelson B, Kc P, Badal-Soler A, Jiang L, Masters S, Zeng R. Pediatric-Specific Evaluations for Deep Learning CT Denoising. Published online July 3, 2023. doi:10.5281/zenodo.8111530
+[2] Zeng R, Lin CY, Li Q, et al. Performance of a deep learning-based CT image denoising method: Generalizability over dose, reconstruction kernel, and slice thickness. Med Phys. 2022;49(2):836-853. doi:10.1002/mp.15430
+
 
 .. autoscript:: demo_01_singlerecon_LCD.m
 

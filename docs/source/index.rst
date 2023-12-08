@@ -1,7 +1,7 @@
 Welcome to pediatricIphantom documentation!
 ===========================================
 
-This documentation provides information regarding how to download, install, and use the LCD for CT Toolbox which is designed to low contrast detectactability in CT images.
+This documentation provides information regarding how to download, install, and use the pediatricIQphantoms tools which are designed sim.
 
 Introduction
 ------------
@@ -10,7 +10,7 @@ Introduction
 
 Size is one of the most important patient factors influencing CT performance as it determines the overall x-ray attenuation and noise properties. New deep learning-based denoisers have shown potential to improve image quality for a fixed radiation dose or maintain image quality while reducing dose <cite>.  Performance Assessment consists of analytical quality assurance phantom models and interfaces to CT simulation frameworks to generate simulated CT images representing different diameters of each phantom.
 
-.. image:: diagram.png
+.. image:: ped_dl_eval_tool.png
         :width: 800
         :align: center
 
@@ -31,8 +31,8 @@ If required versions of Matlab or Octave are not available on your system (see h
 
 .. code-block:: shell
 
-    git clone https://github.com/DIDSR/LCD_CT
-    cd LCD_CT
+    git clone https://github.com/bnel1201/pediatricIQphantoms
+    cd pediatricIQphantoms
 
 2. *If neither Matlab or Octave are installed or do not meet the **version requirements**, you can source `install.sh` to prepare a `conda <https://conda.io/projects/conda/en/latest/user-guide/install/index.html>`_ environment. Or run the following lines in your command prompt:
 
@@ -40,34 +40,16 @@ If required versions of Matlab or Octave are not available on your system (see h
 
    conda create --name octave -y && conda activate octave
    conda install -c conda-forge octave -y
-   conda install -c conda-forge cxx-compiler -y
-   octave --eval 'pkg install -forge image; pkg install https://github.com/apjanke/octave-tablicious/releases/download/v0.3.7/tablicious-0.3.7.tar.gz; pkg load image tablicious'
 
 Note: this can take about 10-30 minutes to complete.
 
-3. Test the installation
+1. Test the installation
 
 - From the bash command line:
 
-.. tabs::
+.. code-block:: shell
 
-   .. tab:: Octave
-
-      .. code-block:: shell
-
-         $ octave test.m
-
-   .. tab:: Matlab
-
-      .. code-block:: shell
-
-         $ matlab -batch test.m
-
-- From the Matlab or Octave interactive prompt:
-
-.. code-block:: octave
-
-        >> test
+   $ bash test.sh
 
 Users
 -----
