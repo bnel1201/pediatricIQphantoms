@@ -31,6 +31,10 @@ In addition, this repo contains examples of measurements using these digital ima
 - `phantom creation and simulation<demo_01_phantom_creation.sh>`_, including different scanner configurations and acquisition protocols
 - `noise and noise texture measurements <demo_02_noise_measurements.sh>`_ 
 
+.. image:: dose_size_dependence.png
+        :width: 600
+        :align: center
+
 Start Here
 ----------
 
@@ -64,7 +68,9 @@ If required versions of Matlab or Octave are not available on your system (see h
 
 3. Test the installation
 
-...
+.. code-block:: shell
+
+        source test.sh
 
 How to Use this repo and the Pediatric IQ Phantoms
 --------------------------------------------------

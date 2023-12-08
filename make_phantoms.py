@@ -1,6 +1,3 @@
-# %%
-# https://realpython.com/python-toml/
-# %%
 import argparse
 import tomli
 import numpy as np
@@ -45,7 +42,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Make Pediatric IQ Phantoms')
     parser.add_argument('config', nargs='?', default=None,
                         help="configuration toml file containing simulation parameters")
-#  TODO add overrides to override anything from the config file by adding keywords to the command line
     args = parser.parse_args()
 
     if args.config:

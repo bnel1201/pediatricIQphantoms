@@ -1,9 +1,9 @@
-# main.toml
+# multiple_recon_kernels.toml
 
 [[simulation]]
 
 # directories
-image_directory = "results/main"
+image_directory = "results/multiple_recon_kernels"
 
 # phantoms
 model = ['CCT189'] # <-- current options include [CCT189, CTP404]

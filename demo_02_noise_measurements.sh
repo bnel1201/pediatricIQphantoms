@@ -1,3 +1,6 @@
-python evaluation/denoise.py /home/brandon.nelson/Dev/Regulatory_Science_Tools/pediatricIQphantoms/main/images/CCT189/fbp_hanning205
+IMAGE_DIR=results/test/CCT189
 
-python evaluation/evaluate_noise.py
+python evaluation/denoise.py ${IMAGE_DIR}/fbp_hanning205 \
+                             --output ${IMAGE_DIR}/fbp_hanning205_denoised
+
+python evaluation/evaluate_noise.py results/test/CCT189/ -o dose_size_dependence.png

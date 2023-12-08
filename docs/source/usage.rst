@@ -19,12 +19,3 @@ The LCD performance obtained using the LCD-CT tools can help the assessment of i
 [1] Nelson B, Kc P, Badal-Soler A, Jiang L, Masters S, Zeng R. Pediatric-Specific Evaluations for Deep Learning CT Denoising. Published online July 3, 2023. doi:10.5281/zenodo.8111530
 [2] Zeng R, Lin CY, Li Q, et al. Performance of a deep learning-based CT image denoising method: Generalizability over dose, reconstruction kernel, and slice thickness. Med Phys. 2022;49(2):836-853. doi:10.1002/mp.15430
 
-
-.. autoscript:: demo_01_singlerecon_LCD.m
-
-.. autoscript:: demo_02_tworecon_LCD.m
-
-.. autoscript:: demo_03_tworecon_dosecurve_LCD.m
-
-.. image:: https://sandbox.zenodo.org/badge/DOI/10.5072/zenodo.1150650.svg
-   :target: https://sandbox.zenodo.org/record/1150650

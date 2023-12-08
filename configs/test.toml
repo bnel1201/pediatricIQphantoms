@@ -37,5 +37,5 @@ image_matrix_size = 256 # <-- reconstructed matrix size in pixels (square, equal
 offset = 0  # <-- CT number of water. Note: some DLIR models were trained with offset=0 or 1000, so this parameter should match the model training conditions
 fbp_kernel = 'hanning,2.05' # 'hanning,xxx', xxx = the cutoff frequency, see fbp2_window.m in MIRT for details.
                         #'hanning,2.05' approximate a sharp kernel D45 in Siemens Force.
-                        #'hanning, 0.85' approximate a smooth kernel B30 in
+                        #'hanning,0.85' approximate a smooth kernel B30 in
                         #Siemens Force.
