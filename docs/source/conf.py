@@ -6,9 +6,9 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'LCD for CT Toolbox'
-copyright = '2023, Brandon Nelson, Rongping Zeng, Prabhat Kc'
-author = 'Brandon Nelson, Rongping Zeng, Prabhat Kc'
+project = 'pediatricIQphantoms'
+copyright = '2023, Brandon Nelson, Rongping Zeng'
+author = 'Brandon Nelson, Rongping Zeng'
 release = '0.0.1'
 
 # -- General configuration ---------------------------------------------------
