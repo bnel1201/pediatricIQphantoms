@@ -47,17 +47,9 @@ fbp_kernel = 'hanning,0.85'
 
 # phantoms
 model = ['CTP404'] # <-- current options include [CCT189, CTP404]
-diameter = [112, 131, 151, 185, 200, 292, 350] # <-- units in mm
-reference_diameter = 200 # <-- diameter in mm of the real physcial phantom for comparison
 
 # acquisition
-framework = "MIRT"
-nsims = 10 # <-- number of simulations to perform with different noise instantiations
-nangles = 1160 # <-- number of views in a rotation (na=1160 based on ZengEtAl2015-IEEE-NuclearScience-v62n5:"A Simple Low-Dose X-Ray CT Simulation From High-Dose Scan")
-aec_on = true # (aec built in to ped xcat) <-- 'aec' = automatic exposure control, when `true`, it ensures constant noise levels for all `patient_diameters` (see `reference_dose_level` for more info)
-add_noise = true # <-- if true adds Poisson noise, noise magnitude set by `reference_dose_level`, noise texture set by reconstructed field of view (cuttently fov = 110# patient_diameter) 
-full_dose = 3e6 # <-- units of photons per pixel
-dose_level = [1.00] # <-- units of photons, this expression is evaluated by matlab, so keep in this format '[xx, yy, zz]'
+fbp_kernel = 'hanning,2.05'
 
 [[simulation]]
 

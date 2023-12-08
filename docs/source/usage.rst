@@ -16,6 +16,142 @@ Intended users are CT device developers and  image denoising and processing soft
 
 The LCD performance obtained using the LCD-CT tools can help the assessment of image quality imprvoment and quantitative dose reduction potential of advanced nonlinear CT image reconstruction and denoising methods with respect to a reference reconstruction option such as the FBP method. 
 
+Examples
+--------
+
+- **example_01_multiple_recon_kernels.sh**
+
+.. code-block:: shell
+
+    python make_phantoms.py configs/multiple_recon_kernels.toml
+
+The key difference here is in the config :file
+
+.. code-block:: toml
+
+    [[simulation]]
+
+    model = ['CCT189'] 
+    diameter = [112, 131, 151, 185, 200, 292, 350] 
+
+    ...
+
+    fbp_kernel = 'hanning,2.05'
+
+    [[simulation]]
+
+    fbp_kernel = 'hanning,0.85'
+
+    [[simulation]]
+
+    model = ['CTP404']
+    dose_level = [1.0]
+    fbp_kernel = 'hanning,2.05'
+
+    [[simulation]]
+
+    fbp_kernel = 'hanning,0.85'
+   ...
+
+Here multiple simulations are run, note the repeated header blocks `[[simulation]]` indicate the start of a new experiment. Any parameters set in the first simulation, (the first `[[simulation]]` above), override the `default parameters <defaults.toml>`_. In each subsequent `[[simulation]]` an new provided settings will update the scan settings, otherwise all other parameters will carry over from the previous simulation.
+
+For example:
+
+.. code-block:: python
+
+    {'image_directory': 'results/multiple_recon_kernels',
+    'model': ['CCT189'],
+    'diameter': [112, 131, 151, 185, 200, 292, 350], 'reference_diameter': 200,
+    'framework': 'MIRT',
+    'nsims': 200,
+    'nangles': 1160,
+    'aec_on': True,
+    'add_noise': True,
+    'full_dose': 300000.0,
+    'dose_level': [0.1, 0.25, 1.0],
+    'sid': 595,
+    'sdd': 1085.6,
+    'nb': 880,
+    'na': 1160,
+    'ds': 1,
+    'offset_s': 1.25,
+    'fov': 340,
+    'image_matrix_size': 512,
+    'offset': 0,
+    'fbp_kernel': 'hanning,2.05'}
+
+Then by second simulation the config becomes
+
+.. code-block:: python
+
+    {'image_directory': 'results/multiple_recon_kernels',
+     'model': ['CCT189'],
+     'diameter': [112, 131, 151, 185, 200, 292, 350], 'reference_diameter': 200, 'framework': 'MIRT',
+     'nsims': 200,
+     'nangles': 1160,
+     'aec_on': True,
+     'add_noise': True,
+     'full_dose': 300000.0, 
+     'dose_level': [0.1, 0.25, 1.0],
+     'sid': 595,
+     'sdd': 1085.6,
+     'nb': 880,
+     'na': 1160,
+     'ds': 1,
+     'offset_s': 1.25,
+     'fov': 340,
+     'image_matrix_size': 512,
+     'offset': 0,
+     **'fbp_kernel': 'hanning,0.85'**}
+
+Then by third simulation the config becomes
+
+.. code-block:: python
+
+    {'image_directory': 'results/multiple_recon_kernels',
+     **'model': ['CTP404']**,
+     'diameter': [112, 131, 151, 185, 200, 292, 350], 'reference_diameter': 200, 'framework': 'MIRT',
+     'nsims': 10,
+     'nangles': 1160,
+     'aec_on': True,
+     'add_noise': True,
+     'full_dose': 3000000.0,
+     **'dose_level': [1.0]**,
+     'sid': 595,
+     'sdd': 1085.6,
+     'nb': 880,
+     'na': 1160,
+     'ds': 1,
+     'offset_s': 1.25,
+     'fov': 340,
+     'image_matrix_size': 512,
+     'offset': 0,
+     'fbp_kernel': 'hanning,2.05'}
+
+and the fourth
+
+.. code-block:: python
+
+    {'image_directory': 'results/multiple_recon_kernels',
+     **'model': ['CTP404']**,
+     'diameter': [112, 131, 151, 185, 200, 292, 350], 'reference_diameter': 200, 'framework': 'MIRT',
+     'nsims': 10,
+     'nangles': 1160,
+     'aec_on': True,
+     'add_noise': True,
+     'full_dose': 3000000.0,
+     'dose_level': [1.0],
+     'sid': 595,
+     'sdd': 1085.6,
+     'nb': 880,
+     'na': 1160,
+     'ds': 1,
+     'offset_s': 1.25,
+     'fov': 340,
+     'image_matrix_size': 512,
+     'offset': 0,
+     **'fbp_kernel': 'hanning,0.85'**}
+
 [1] Nelson B, Kc P, Badal-Soler A, Jiang L, Masters S, Zeng R. Pediatric-Specific Evaluations for Deep Learning CT Denoising. Published online July 3, 2023. doi:10.5281/zenodo.8111530
 [2] Zeng R, Lin CY, Li Q, et al. Performance of a deep learning-based CT image denoising method: Generalizability over dose, reconstruction kernel, and slice thickness. Med Phys. 2022;49(2):836-853. doi:10.1002/mp.15430
 
