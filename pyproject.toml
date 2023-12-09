@@ -1,0 +1,28 @@
+[project]
+name = "pediatricIQphantoms"
+version = "0.0.1"
+authors = [
+  { name="Brandon Nelson", email="brandon.nelson@fda.hhs.gov" },
+]
+description = "Digital Pediatric Image Quality Phantoms for Evaluating CT Denoising Methods"
+readme = "README.rst"
+requires-python = ">=3.8"
+dependencies = [
+  "pandas",
+  "seaborn",
+  "tomli",
+  "numpy",
+  "matplotlib"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/bnel1201/pediatricIQphantoms"
+Issues = "https://github.com/bnel1201/pediatricIQphantoms/issues"
+
+[project.scripts]
+make_phantoms = "pediatricIQphantoms:run_batch_sim"

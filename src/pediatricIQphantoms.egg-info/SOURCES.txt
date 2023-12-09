@@ -1,0 +1,12 @@
+README.rst
+pyproject.toml
+src/pediatricIQphantoms/__init__.py
+src/pediatricIQphantoms/make_CCT189.py
+src/pediatricIQphantoms/make_phantoms.py
+src/pediatricIQphantoms.egg-info/PKG-INFO
+src/pediatricIQphantoms.egg-info/SOURCES.txt
+src/pediatricIQphantoms.egg-info/dependency_links.txt
+src/pediatricIQphantoms.egg-info/entry_points.txt
+src/pediatricIQphantoms.egg-info/requires.txt
+src/pediatricIQphantoms.egg-info/top_level.txt
+src/pediatricIQphantoms/tests/test_recon.py
