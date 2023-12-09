@@ -13,7 +13,8 @@ dependencies = [
   "tomli",
   "numpy",
   "matplotlib",
-  "oct2py"
+  "oct2py",
+  "SimpleITK"
 ]
 classifiers = [
     "Programming Language :: Python :: 3",

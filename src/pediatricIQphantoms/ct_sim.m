@@ -1,6 +1,9 @@
 function res = ct_sim(phantom, patient_diameter, reference_diameter, relative_lesion_diameter, I0, nb, na, ds, sdd, sid, offset_s, down, has_bowtie, add_noise, aec_on, nx, fov, fbp_kernel, nsims)
 
     warning('off', 'all');
+    if ~exist('mirt-main', 'dir')
+        unzip('https://github.com/JeffFessler/mirt/archive/refs/heads/main.zip', '.');
+    end
     run('mirt-main/setup.m')
 
     dod = sdd - sid;

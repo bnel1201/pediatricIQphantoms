@@ -18,6 +18,7 @@ def mirt_sim(phantom='CCT189', patient_diameter=200, reference_diameter=200, ref
         fov = 1.1*patient_diameter
     curdir = os.path.dirname(os.path.realpath(__file__))
     octave.cd(curdir)
+    print(octave.pwd())
     return octave.ct_sim(phantom, patient_diameter, reference_diameter,    relative_lesion_diameter, I0, nb, na, ds, sdd, sid, offset_s, down, has_bowtie, add_noise, aec_on, nx, fov, fbp_kernel, nsims)
 
 

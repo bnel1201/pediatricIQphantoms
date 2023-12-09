@@ -1,7 +1,6 @@
 README.rst
 pyproject.toml
 src/pediatricIQphantoms/__init__.py
-src/pediatricIQphantoms/make_CCT189.py
 src/pediatricIQphantoms/make_phantoms.py
 src/pediatricIQphantoms.egg-info/PKG-INFO
 src/pediatricIQphantoms.egg-info/SOURCES.txt
