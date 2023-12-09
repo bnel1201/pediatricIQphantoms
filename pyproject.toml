@@ -12,7 +12,8 @@ dependencies = [
   "seaborn",
   "tomli",
   "numpy",
-  "matplotlib"
+  "matplotlib",
+  "oct2py"
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
