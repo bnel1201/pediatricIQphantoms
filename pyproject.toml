@@ -14,7 +14,8 @@ dependencies = [
   "numpy",
   "matplotlib",
   "oct2py",
-  "SimpleITK"
+  "SimpleITK",
+  "pytest"
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -27,4 +28,4 @@ Homepage = "https://github.com/bnel1201/pediatricIQphantoms"
 Issues = "https://github.com/bnel1201/pediatricIQphantoms/issues"
 
 [project.scripts]
-make_phantoms = "pediatricIQphantoms:run_batch_sim"
+make_phantoms = "pediatricIQphantoms.make_phantoms:main"

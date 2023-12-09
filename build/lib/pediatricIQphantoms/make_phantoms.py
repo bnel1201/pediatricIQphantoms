@@ -6,9 +6,23 @@ import os
 
 from oct2py import octave
 import SimpleITK as sitk
-from make_CCT189 import mita_lcd
 
-def main(image_directory: str, model=['CCT189'], diameter=[200], reference_diameter=200, framework='MIRT',
+
+def mirt_sim(phantom='CCT189', patient_diameter=200, reference_diameter=200, reference_fov=340, I0=3e5, nb=900, na=580, ds=1, sid=595, sdd=1085.6, offset_s=1.25, down=1, has_bowtie=False, add_noise=True, aec_on=True, nx=512, fov=340, fbp_kernel='hanning,2.05', nsims=1, relative_lesion_diameter=False):
+    """
+    Python wrapper for calling Michigan Image Reconstruction Toolbox (MIRT) Octave function 
+    """
+    if patient_diameter == reference_diameter:
+        fov = reference_fov
+    else:
+        fov = 1.1*patient_diameter
+    curdir = os.path.dirname(os.path.realpath(__file__))
+    octave.cd(curdir)
+    print(octave.pwd())
+    return octave.ct_sim(phantom, patient_diameter, reference_diameter,    relative_lesion_diameter, I0, nb, na, ds, sdd, sid, offset_s, down, has_bowtie, add_noise, aec_on, nx, fov, fbp_kernel, nsims)
+
+
+def run_batch_sim(image_directory: str, model=['CCT189'], diameter=[200], reference_diameter=200, framework='MIRT',
          nsims=1, nangles=580, aec_on=True, add_noise=True, full_dose=3e5,
          dose_level=[1.0], sid=595, sdd=1085.6, nb=880,
          ds=1, offset_s=1.25, fov=340, image_matrix_size=512, fbp_kernel='hanning,2.05', has_bowtie=True):
@@ -33,7 +47,7 @@ def main(image_directory: str, model=['CCT189'], diameter=[200], reference_diame
         print(f'{phantom} Simulation series {phantom_idx}/{len(phantoms)}')
         for patient_diameter in diameter:
             for dose in dose_level:
-                vol = mita_lcd(patient_diameter=patient_diameter, reference_diameter=reference_diameter, reference_fov=reference_fov, I0=dose, nb=nb, na=nangles, ds=ds, sid=sid, sdd=sdd, offset_s=offset_s, down=1, has_bowtie=has_bowtie, add_noise=add_noise, aec_on=aec_on, nx=image_matrix_size, fov=fov, fbp_kernel=fbp_kernel, nsims=nsims)
+                vol = mirt_sim(patient_diameter=patient_diameter, reference_diameter=reference_diameter, reference_fov=reference_fov, I0=dose, nb=nb, na=nangles, ds=ds, sid=sid, sdd=sdd, offset_s=offset_s, down=1, has_bowtie=has_bowtie, add_noise=add_noise, aec_on=aec_on, nx=image_matrix_size, fov=fov, fbp_kernel=fbp_kernel, nsims=nsims)
 
                 savedir = image_directory / phantom / f'diameter{patient_diameter}mm' / f'I0_{int(dose):07d}' / 'disk'
                 savedir.mkdir(exist_ok=True, parents=True)
@@ -54,8 +68,8 @@ def main(image_directory: str, model=['CCT189'], diameter=[200], reference_diame
                 sitk.WriteImage(img, fname)
                 print(f'saving: {fname}')
 
-# %%
-if __name__ == '__main__':
+
+def main():
     parser = argparse.ArgumentParser(description='Make Pediatric IQ Phantoms')
     parser.add_argument('config', nargs='?', default=None,
                         help="configuration toml file containing simulation parameters")
@@ -71,4 +85,6 @@ if __name__ == '__main__':
     sim = dict()
     for c in config['simulation']:
         sim.update(c)
-        main(**sim)
+        run_batch_sim(**sim)
+
+if __name__ == '__main__': main()

@@ -1,2 +1,2 @@
 [console_scripts]
-make_phantoms = pediatricIQphantoms:run_batch_sim
+make_phantoms = pediatricIQphantoms.make_phantoms:main
