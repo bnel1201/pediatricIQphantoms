@@ -42,7 +42,7 @@ Start Here
 
 **Requirements** (Confirm if needed)
 
-- `conda <https://conda.io/projects/conda/en/latest/user-guide/install/index.html>`_ is required to install `Octave <https://octave.org/download>`_ using the `installation`_ instructions.
+- `conda <https://docs.anaconda.com/free/miniconda/>`_ is required to install `Octave <https://octave.org/download>`_ using the `installation`_ instructions.
 
 .. _installation:
 
