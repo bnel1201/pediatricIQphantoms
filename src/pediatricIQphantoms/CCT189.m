@@ -33,9 +33,9 @@ function ell = CCT189(patient_diameter, attenuation_coefficient, relative_lesion
 
     p = patient_diameter;
     ell = [0 0 p/2 p/2 0 attenuation_coefficient;                                  % water
-    d*cosd(45)  d*sind(45)   r(1)  r(1) 0 14/1000*attenuation_coefficient;     % 3mm, 14 HU
-   -d*cosd(45)  d*sind(45)   r(2)  r(2) 0 7/1000*attenuation_coefficient;     % 5 mm, 7 HU
-   -d*cosd(45) -d*sind(45)   r(3)  r(3) 0 5/1000*attenuation_coefficient;     % 7 mm, 5 HU
-    d*cosd(45) -d*sind(45)   r(4)  r(4) 0 3/1000*attenuation_coefficient;     % 10 mm, 3 HU
+    d*cosd(45)  d*sind(45)   r(1)  r(1) 0 14/1000*attenuation_coefficient     % 3mm, 14 HU
+   -d*cosd(45)  d*sind(45)   r(2)  r(2) 0 7/1000*attenuation_coefficient     % 5 mm, 7 HU
+   -d*cosd(45) -d*sind(45)   r(3)  r(3) 0 5/1000*attenuation_coefficient     % 7 mm, 5 HU
+    d*cosd(45) -d*sind(45)   r(4)  r(4) 0 3/1000*attenuation_coefficient     % 10 mm, 3 HU
     ];
 end

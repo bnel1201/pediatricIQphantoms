@@ -1,7 +1,13 @@
+MANIFEST.in
 README.rst
 pyproject.toml
+src/pediatricIQphantoms/CCT189.m
+src/pediatricIQphantoms/CTP404.m
 src/pediatricIQphantoms/__init__.py
+src/pediatricIQphantoms/apply_bowtie_filter.m
+src/pediatricIQphantoms/ct_sim.m
 src/pediatricIQphantoms/make_phantoms.py
+src/pediatricIQphantoms/replace_zeros.m
 src/pediatricIQphantoms.egg-info/PKG-INFO
 src/pediatricIQphantoms.egg-info/SOURCES.txt
 src/pediatricIQphantoms.egg-info/dependency_links.txt

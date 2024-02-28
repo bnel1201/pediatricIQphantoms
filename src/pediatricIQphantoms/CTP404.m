@@ -28,14 +28,14 @@ function ell = CTP404(patient_diameter, attenuation_coefficient, relative_lesion
     % Set location of ellipses with format:
     % [x_center y_center x_radius y_radius angle_degrees mu(60 keV)]
     ell = [0 0 p/2 p/2 0 attenuation_coefficient;                              % water
-           0           d           r r 0 (15/1000 + 1)*attenuation_coefficient;       % custom insert of 15 HU
-           d*cosd(45)  d*sind(45)  r r 0 (-35/1000 + 1)*attenuation_coefficient;      % polystyrene (-35 HU)
-           d           0           r r 0 (-100/1000 + 1)*attenuation_coefficient;     % LDPE, -100 HU
-           d*cosd(45)  -d*sind(45) r r 0 (-200/1000 + 1)*attenuation_coefficient;     % PMP, -200 HU
-           0           -d          r r 0 0;                            % air
-           -d*cosd(45) -d*sind(45) r r 0 (990/1000 + 1)*attenuation_coefficient;      % teflon, 990 HU
-           -d          0           r r 0 (340/1000 + 1)*attenuation_coefficient;      % Delrin, 340 HU
-           -d*cosd(45) d*sind(45)  r r 0 (120/1000 + 1)*attenuation_coefficient;      % Acrylic, 120 HU
+           0           d           r r 0 (15/1000 + 1)*attenuation_coefficient       % custom insert of 15 HU
+           d*cosd(45)  d*sind(45)  r r 0 (-35/1000 + 1)*attenuation_coefficient      % polystyrene (-35 HU)
+           d           0           r r 0 (-100/1000 + 1)*attenuation_coefficient     % LDPE, -100 HU
+           d*cosd(45)  -d*sind(45) r r 0 (-200/1000 + 1)*attenuation_coefficient     % PMP, -200 HU
+           0           -d          r r 0 0                            % air
+           -d*cosd(45) -d*sind(45) r r 0 (990/1000 + 1)*attenuation_coefficient      % teflon, 990 HU
+           -d          0           r r 0 (340/1000 + 1)*attenuation_coefficient      % Delrin, 340 HU
+           -d*cosd(45) d*sind(45)  r r 0 (120/1000 + 1)*attenuation_coefficient      % Acrylic, 120 HU
            0 0 0.25 0.25 0 (6000/1000 + 1)*attenuation_coefficient                    % 0.5mm bead, 1200 HU
           ];
     mu_desired = ell(:,6);
