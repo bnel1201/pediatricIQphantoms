@@ -1,0 +1,8 @@
+name: octave
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - octave
