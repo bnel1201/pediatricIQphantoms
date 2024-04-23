@@ -6,3 +6,11 @@ channels:
 
 dependencies:
   - octave
+  - pandas
+  - seaborn
+  - tomli
+  - numpy
+  - matplotlib
+  - oct2py
+  - SimpleITK
+  - pytest
