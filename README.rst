@@ -68,7 +68,7 @@ How to Use this repo and the Pediatric IQ Phantoms
 --------------------------------------------------
 
 **pediatricIQphantoms** provides examples for how to use the pediatric IQ phantoms, (available to download and use directly from `Zenodo <https://doi.org/10.5281/zenodo.10064036>`_) or generate new phantom instances using the provided `phantom generation functions <src/pediatricIQphantoms/make_phantoms.py>`_. Several examples are provided on how to use these functions are provided to make single simulation instances (see `tests <tests/test_recon.py>`_ for script examples or the `simulations example notebook <examples/running_simulations.ipynb>`_) as well as batch mode examples to which make use of `toml <https://toml.io/en/>`_ `configuration files <configs/test.toml>`_ to create whole datasets, see `demo 01 <demo_01_phantom_creation.sh>`_
-de
+
 Contribute
 ----------
 
