@@ -20,7 +20,7 @@ def denoise(input_dir, output_dir=None, model=None, batch_size=10):
         output = Path(str(series).replace(input_dir, output_dir))
 
         output.parent.mkdir(parents=True, exist_ok=True)
-        x, y, z = input_image.GetWidth(), input_image.GetHeight(), input_image.GetDepth()
+        z, x, y, z = input_image.GetWidth(), input_image.GetHeight(), input_image.GetDepth()
         input_array = sitk.GetArrayViewFromImage(input_image).reshape(z, x, y, 1).astype('float32')
         sp_denoised = denoiser.predict(input_array, batch_size=batch_size)
 
