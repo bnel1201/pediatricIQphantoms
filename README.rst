@@ -9,10 +9,10 @@ pediatricIQphantoms
         :width: 800
         :align: center
 
-.. |zenodo| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.11252730.svg
+.. |zenodo| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.10064035.svg
     :alt: Zenodo Data Access
     :scale: 100%
-    :target: https://doi.org/10.5281/zenodo.11252730
+    :target: https://zenodo.org/doi/10.5281/zenodo.10064035
 
 .. |docs| image:: https://readthedocs.org/projects/docs/badge/?version=latest
     :alt: Documentation Status
