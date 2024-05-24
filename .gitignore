@@ -19,4 +19,4 @@ build
 src/pediatricIQphantoms/.ipynb_checkpoints/
 src/pediatricIQphantoms.egg-info/
 .ipynb_checkpoints
-examples/data
+notebooks/data
