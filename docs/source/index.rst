@@ -52,13 +52,10 @@ Installation
 
 The code block above does the following in 4 lines:
 
-1.) Git clones the `pediatricIQphantoms <https://github.com/bnel1201/pediatricIQphantoms>`_ repository
-
-2.) Changes the active directory to the repo
-
-3.) Creates a new conda environment called "pediatricIQphantoms"
-
-4.) Activates the conda environment. This makes the phantom creation library `pediatricIQphantoms` accessible in scripts (see `examples <examples/running_simulations.ipynb>`_) and via command line calls (see `demos <demo_01_phantom_creation.sh>`_).
+1. Git clones the `pediatricIQphantoms <https://github.com/bnel1201/pediatricIQphantoms>`_ repository
+2. Changes the active directory to the repo
+3. Creates a new conda environment called "pediatricIQphantoms"
+4. Activates the conda environment. This makes the phantom creation library `pediatricIQphantoms` accessible in scripts (see `examples <examples/running_simulations.ipynb>`_) and via command line calls (see `demos <demo_01_phantom_creation.sh>`_).
 
 **Test the Installation**
 
@@ -71,8 +68,12 @@ This runs the [unit tests](https://github.com/bnel1201/pediatricIQphantoms/tree/
 Users
 -----
 
-Check out the :doc:`usage` section for further information.
-
+- Check out the :doc:`usage` section for detailed information on customizing dataset running_simulations
+- `Computational notebooks <https://github.com/bnel1201/pediatricIQphantoms/tree/main/notebooks>`_ have also been provided to demonstrate how to use `pediatricIQphantoms dataset <https://zenodo.org/doi/10.5281/zenodo.10064035>`_ including:
+  - `options for viewing the dataset images <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/view_images.ipynb>`_
+  - `running CT simulations <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/running_simulations.ipynb>`_
+  - `using the dataset to assess denoising performance in pediatric subgroups <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/uniform%20-%20denoising%20efficiency.ipynb>`_
+  
 Developers
 ----------
 
