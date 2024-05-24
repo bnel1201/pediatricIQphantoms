@@ -68,8 +68,9 @@ This runs the [unit tests](https://github.com/bnel1201/pediatricIQphantoms/tree/
 Users
 -----
 
-- Check out the :doc:`usage` section for detailed information on customizing dataset running_simulations
-- `Computational notebooks <https://github.com/bnel1201/pediatricIQphantoms/tree/main/notebooks>`_ have also been provided to demonstrate how to use `pediatricIQphantoms dataset <https://zenodo.org/doi/10.5281/zenodo.10064035>`_ including:
+Check out the :doc:`usage` section for detailed information on customizing dataset running_simulations.
+
+Computational notebooks <https://github.com/bnel1201/pediatricIQphantoms/tree/main/notebooks>`_ have also been provided to demonstrate how to use `pediatricIQphantoms dataset <https://zenodo.org/doi/10.5281/zenodo.10064035>`_ including:
   - `options for viewing the dataset images <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/view_images.ipynb>`_
   - `running CT simulations <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/running_simulations.ipynb>`_
   - `using the dataset to assess denoising performance in pediatric subgroups <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/uniform%20-%20denoising%20efficiency.ipynb>`_

@@ -85,7 +85,17 @@ This runs the [unit tests](https://github.com/bnel1201/pediatricIQphantoms/tree/
 How to Use this repo and the Pediatric IQ Phantoms
 --------------------------------------------------
 
-**pediatricIQphantoms** provides examples for how to use the pediatric IQ phantoms, (available to download and use directly from `Zenodo <https://doi.org/10.5281/zenodo.10064036>`_) or generate new phantom instances using the provided `phantom generation functions <src/pediatricIQphantoms/make_phantoms.py>`_. Several examples are provided on how to use these functions are provided to make single simulation instances (see `tests <tests/test_recon.py>`_ for script examples or the `simulations example notebook <examples/running_simulations.ipynb>`_) as well as batch mode examples to which make use of `toml <https://toml.io/en/>`_ `configuration files <configs/test.toml>`_ to create whole datasets, see `demo 01 <demo_01_phantom_creation.sh>`_
+**pediatricIQphantoms** provides examples for how to use the pediatric IQ phantoms, (available to download and use directly from `Zenodo <https://zenodo.org/doi/10.5281/zenodo.10064035>`_) or generate new phantom instances using the provided `phantom generation functions <src/pediatricIQphantoms/make_phantoms.py>`_.
+
+Several examples are provided on how to use these functions:
+
+- Check out the :doc:`usage` section for detailed information on customizing dataset running_simulations.
+- See the `tests directory <tests>`_ for simple script examples
+- `Computational notebooks <https://github.com/bnel1201/pediatricIQphantoms/tree/main/notebooks>`_ have also been provided to demonstrate how to use `pediatricIQphantoms dataset <https://zenodo.org/doi/10.5281/zenodo.10064035>`_ including:
+
+  - `options for viewing the dataset images <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/view_images.ipynb>`_
+  - `running CT simulations <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/running_simulations.ipynb>`_
+  - `using the dataset to assess denoising performance in pediatric subgroups <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/uniform%20-%20denoising%20efficiency.ipynb>`_
 
 Contribute
 ----------
