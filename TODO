@@ -6,5 +6,5 @@
 
 ## Nice to have
 
-- [ ] get some sample evaluation scripts going
-- [ ] convert filetype from mhd to dicom https://wiki.octave.org/Dicom_package
+- [X] get some sample evaluation scripts going
+- [X] convert filetype from mhd to dicom https://wiki.octave.org/Dicom_package
