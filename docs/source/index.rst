@@ -31,39 +31,42 @@ Size is one of the most important patient factors influencing CT performance as 
 Installation
 ------------
 
+*Installation is only required to generate new datasets*, a pregenerated dataset can be downloaded from `Zenodo <https://zenodo.org/doi/10.5281/zenodo.10064035>`_, only proceed if you want to generate new simulated datasets.
+
 .. _version requirements:
 
 **Requirements**
 
-- Matlab (**version > R2016a**) *or* Octave (**version > 4.4**)
-- If the above Matlab or Octave requirements are not met, then `conda <https://conda.io/projects/conda/en/latest/user-guide/install/index.html>`_ is required to install Octave (See step 2 below).
+- `Conda <https://docs.conda.io/projects/conda/en/stable/user-guide/getting-started.html>`_ package manager e.g. `Miniconda <https://docs.anaconda.com/free/miniconda/>`_
 
-If required versions of Matlab or Octave are not available on your system (see how to get `matlab version <https://www.mathworks.com/help/matlab/ref/version.html>`_ or `octave version <https://docs.octave.org/v4.4.0/System-Information.html#XREFversion>`_) then see `installation`_ for how to setup an Octave environment to run LCD-CT.
+- Mac, Linux, or `Windows Subsystem for Linux (WSL) <https://learn.microsoft.com/en-us/windows/wsl/install>`_ operating systems described on the `Octave Conda Forge page <https://anaconda.org/conda-forge/octave>`_. This package currently uses the Octave-based `Michigan Image Reconstruction Toolbox (MIRT) <https://github.com/JeffFessler/mirt>`_
 
-
-1. Git clone the LCD-CT Toolbox repository:
+**Installation**
 
 .. code-block:: shell
 
-    git clone https://github.com/bnel1201/pediatricIQphantoms
-    cd pediatricIQphantoms
+        git clone https://github.com/bnel1201/pediatricIQphantoms
+        cd pediatricIQphantoms
+        conda env create --file environment.yml
+        conda activate pediatricIQphantoms
 
-2. *If neither Matlab or Octave are installed or do not meet the **version requirements**, you can source `install.sh` to prepare a `conda <https://conda.io/projects/conda/en/latest/user-guide/install/index.html>`_ environment. Or run the following lines in your command prompt:
+The code block above does the following in 4 lines:
+
+1.) Git clones the `pediatricIQphantoms <https://github.com/bnel1201/pediatricIQphantoms>`_ repository
+
+2.) Changes the active directory to the repo
+
+3.) Creates a new conda environment called "pediatricIQphantoms"
+
+4.) Activates the conda environment. This makes the phantom creation library `pediatricIQphantoms` accessible in scripts (see `examples <examples/running_simulations.ipynb>`_) and via command line calls (see `demos <demo_01_phantom_creation.sh>`_).
+
+**Test the Installation**
 
 .. code-block:: shell
 
-   conda create --name octave -y && conda activate octave
-   conda install -c conda-forge octave -y
+        pytest
 
-Note: this can take about 10-30 minutes to complete.
-
-1. Test the installation
-
-- From the bash command line:
-
-.. code-block:: shell
-
-   $ bash test.sh
+This runs the [unit tests](https://github.com/bnel1201/pediatricIQphantoms/tree/main/tests) to verify that installation was successful.
 
 Users
 -----
