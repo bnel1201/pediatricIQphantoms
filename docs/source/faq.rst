@@ -1,7 +1,7 @@
 Frequently Asked Questions
 ==========================
 
-
+The MITA-LCD phantom images included in this dataset and repository can be used for low contrast detectability testing using the `Low Contrast Detectability for CT (LCD-CT) Toolbox <https://github.com/DIDSR/LCD_CT>`_. Below are some frequent questions or issues that have come up as both tools using Octave for simulations and LCD measurements.
 
 1. errors when running with Octave for the first time
 -----------------------------------------------------
