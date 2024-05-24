@@ -82,7 +82,7 @@ The code block above does the following in 4 lines:
 
 This runs the [unit tests](https://github.com/bnel1201/pediatricIQphantoms/tree/main/tests) to verify that installation was successful.
 
-How to Use this repo and the Pediatric IQ Phantoms
+How to use this repo and the Pediatric IQ Phantoms
 --------------------------------------------------
 
 **pediatricIQphantoms** provides examples for how to use the pediatric IQ phantoms, (available to download and use directly from `Zenodo <https://zenodo.org/doi/10.5281/zenodo.10064035>`_) or generate new phantom instances using the provided `phantom generation functions <src/pediatricIQphantoms/make_phantoms.py>`_.
