@@ -52,8 +52,6 @@ Start Here
 
 **Installation**
 
-- The following code block 1.) Git clones the `pediatricIQphantoms <https://github.com/bnel1201/pediatricIQphantoms>`_ repository, 2.) makes it the active directory and then 3.) runs the `install <install.sh>`_ script. The `install <install.sh>`_ script creates a new conda environment called "octave", activates it, installs Octave, and pip installs the local pediatricIQphantoms repo making the library accessible in scripts (see `examples <examples/running_simulations.ipynb>`_) and via command line calls (see `demos <demo_01_phantom_creation.sh>`_).
-
 .. code-block:: shell
 
         git clone https://github.com/bnel1201/pediatricIQphantoms
@@ -61,13 +59,23 @@ Start Here
         conda env create --file environment.yml
         conda activate pediatricIQphantoms
 
-*Expected run time: 10 min*
+The code block above does the following in 4 lines:
 
-1. Test the installation
+1.) Git clones the `pediatricIQphantoms <https://github.com/bnel1201/pediatricIQphantoms>`_ repository
+
+2.) Changes the active directory to the repo
+
+3.) Creates a new conda environment called "pediatricIQphantoms"
+
+4.) Activates the conda environment. This makes the phantom creation library `pediatricIQphantoms` accessible in scripts (see `examples <examples/running_simulations.ipynb>`_) and via command line calls (see `demos <demo_01_phantom_creation.sh>`_).
+
+**Test the Installation**
 
 .. code-block:: shell
 
         pytest
+
+This runs the [unit tests](https://github.com/bnel1201/pediatricIQphantoms/tree/main/tests) to verify that installation was successful.
 
 How to Use this repo and the Pediatric IQ Phantoms
 --------------------------------------------------
