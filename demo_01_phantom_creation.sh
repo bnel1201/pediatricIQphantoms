@@ -1,3 +1,3 @@
-config='configs/test.toml'
+config='configs/defaults.toml'
 
 make_phantoms $config

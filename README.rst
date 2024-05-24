@@ -42,11 +42,14 @@ In addition, this repo contains examples of measurements using these digital ima
 Start Here
 ----------
 
+*Installation is only required to generate new datasets*, a pregenerated dataset can be downloaded from `Zenodo <https://zenodo.org/doi/10.5281/zenodo.10064035>`_, only proceed if you want to generate new simulated datasets.
+
 .. _version requirements:
 
 **Requirements** (Confirm if needed)
 
-- `conda <https://docs.anaconda.com/free/miniconda/>`_ is required to install `Octave <https://octave.org/download>`_ using the `installation`_ instructions.
+- `Conda <https://docs.conda.io/projects/conda/en/stable/user-guide/getting-started.html>`_ package manager e.g. `Miniconda <https://docs.anaconda.com/free/miniconda/>`_
+- Mac, Linux, or `Windows Subsystem for Linux (WSL) <https://learn.microsoft.com/en-us/windows/wsl/install>`_ operating systems described on the `Octave Conda Forge page <https://anaconda.org/conda-forge/octave>`_. This package currently uses the Octave-based `Michigan Image Reconstruction Toolbox (MIRT) <https://github.com/JeffFessler/mirt>`_
 
 .. _installation:
 
@@ -61,13 +64,13 @@ Start Here
 
 The code block above does the following in 4 lines:
 
-1.) Git clones the `pediatricIQphantoms <https://github.com/bnel1201/pediatricIQphantoms>`_ repository
+1. Git clones the `pediatricIQphantoms <https://github.com/bnel1201/pediatricIQphantoms>`_ repository
 
-2.) Changes the active directory to the repo
+2. Changes the active directory to the repo
 
-3.) Creates a new conda environment called "pediatricIQphantoms"
+3. Creates a new conda environment called "pediatricIQphantoms"
 
-4.) Activates the conda environment. This makes the phantom creation library `pediatricIQphantoms` accessible in scripts (see `examples <examples/running_simulations.ipynb>`_) and via command line calls (see `demos <demo_01_phantom_creation.sh>`_).
+4. Activates the conda environment. This makes the phantom creation library `pediatricIQphantoms` accessible in scripts (see `examples <examples/running_simulations.ipynb>`_) and via command line calls (see `demos <demo_01_phantom_creation.sh>`_).
 
 **Test the Installation**
 
