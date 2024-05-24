@@ -58,15 +58,16 @@ Start Here
 
         git clone https://github.com/bnel1201/pediatricIQphantoms
         cd pediatricIQphantoms
-        source install.sh
+        conda env create --file environment.yml
+        conda activate pediatricIQphantoms
 
 *Expected run time: 10 min*
 
-3. Test the installation
+1. Test the installation
 
 .. code-block:: shell
 
-        source test.sh
+        pytest
 
 How to Use this repo and the Pediatric IQ Phantoms
 --------------------------------------------------

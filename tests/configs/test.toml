@@ -3,7 +3,7 @@
 
 # directories
 image_directory = "results/test"
-
+filetype = '.mhd' # mhd for metaheader or dcm for dicom
 # phantoms
 model = ['CCT189', 'CTP404'] # <-- current options include [CCT189, CTP404]
 diameter = [112, 292] # <-- units in mm

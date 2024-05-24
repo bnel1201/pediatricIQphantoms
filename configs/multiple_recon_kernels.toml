@@ -4,7 +4,7 @@
 
 # directories
 image_directory = "results/multiple_recon_kernels"
-
+filetype = '.mhd' # mhd for metaheader or dcm for dicom
 # phantoms
 model = ['CCT189'] # <-- current options include [CCT189, CTP404]
 diameter = [112, 131, 151, 185, 200, 292, 350] # <-- units in mm
