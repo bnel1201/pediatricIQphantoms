@@ -5,32 +5,32 @@ Reference page for individual observer functions_, observer classes_, helper_ fu
 
 .. _functions:
 
-observer functions
-------------------
+.. observer functions
+.. ------------------
 
-Functional versions of model observers.
+.. Functional versions of model observers.
 
-.. automodule:: LCD.functions
-    :imported-members:
-    :members:
+.. .. automodule:: LCD.functions
+..     :imported-members:
+..     :members:
 
-.. _classes:
+.. .. _classes:
 
-observer classes
-----------------
+.. observer classes
+.. ----------------
 
-Observer functions wrapped in classes for more consistent and convenient use.
+.. Observer functions wrapped in classes for more consistent and convenient use.
 
-.. automodule:: LCD.classes
-    :imported-members:
-    :members:
+.. .. automodule:: LCD.classes
+..     :imported-members:
+..     :members:
 
-.. _helper:
+.. .. _helper:
 
-helper functions
-----------------
+.. helper functions
+.. ----------------
 
-.. automodule:: LCD
-    :imported-members:
-    :members:
+.. .. automodule:: LCD
+..     :imported-members:
+..     :members:
 

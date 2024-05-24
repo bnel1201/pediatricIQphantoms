@@ -8,3 +8,6 @@
 
 - [X] get some sample evaluation scripts going
 - [X] convert filetype from mhd to dicom https://wiki.octave.org/Dicom_package
+- [ ] add more tests
+- [ ] add more documentation to examples
+- [ ] add docker file

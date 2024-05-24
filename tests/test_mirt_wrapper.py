@@ -1,4 +1,7 @@
 # %%
+"""
+This file tests the functionality of the MIRT python wrapper included in the `pediatricIQphantoms` package
+"""
 from pediatricIQphantoms.make_phantoms import mirt_sim
 
 # %% test recon
