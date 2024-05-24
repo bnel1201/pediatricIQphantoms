@@ -1,6 +1,8 @@
 Contributing Guide
 ==================
 
+`Issue Tracker <https://github.com/bnel1201/pediatricIQphantoms/issues>`_ | `Source Code <https://github.com/bnel1201/pediatricIQphantoms>`_ | 
+
 One of the best ways to contribute is by improving our documentation. This project uses sphinx <https://www.sphinx-doc.org/en/master/tutorial/narrative-documentation.html> as a documentor, and specific details for the Matlab Domain are given here: <https://github.com/sphinx-contrib/matlabdomain>
 
 More resources on documentation: https://www.writethedocs.org/guide/
