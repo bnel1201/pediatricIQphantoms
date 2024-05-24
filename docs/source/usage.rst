@@ -185,6 +185,19 @@ Finally by the fourth we repeat the previous simulation but with the second kern
 
 This is done in parsing the config files using the python `dict update method <https://docs.python.org/3/library/stdtypes.html?highlight=dict%20update#dict.update>`_ https://github.com/bnel1201/pediatricIQphantoms/blob/62a45930053502e8e9982af4b521fdd4eee314ed/make_phantoms.py#L56
 
+- Reproducing the `pediatricIQphantoms dataset <https://zenodo.org/doi/10.5281/zenodo.10064035>`_
+
+**warning:** this may take several hours to complete, but is recommended if you want to reproduce the `pediatricIQphantoms dataset <https://zenodo.org/doi/10.5281/zenodo.10064035>`_ with different scanner or phantom characteristics using the config file editing processes described in the previous example.
+
+.. code-block:: shell
+
+    make_phantoms configs/pediatricIQphantoms.toml
+
+Note that this example of the executable `make_phantoms` that is installed and added to your python after installing the `pediatricIQphantoms <https://github.com/bnel1201/pediatricIQphantoms>`_ python package (see `install instructions <https://pediatriciqphantoms.readthedocs.io/en/latest/index.html>`_ for details)
+
+References
+----------
+
 [1] Nelson B, Kc P, Badal-Soler A, Jiang L, Masters S, Zeng R. Pediatric-Specific Evaluations for Deep Learning CT Denoising. Published online July 3, 2023. doi:10.5281/zenodo.8111530
 [2] Zeng R, Lin CY, Li Q, et al. Performance of a deep learning-based CT image denoising method: Generalizability over dose, reconstruction kernel, and slice thickness. Med Phys. 2022;49(2):836-853. doi:10.1002/mp.15430
 
