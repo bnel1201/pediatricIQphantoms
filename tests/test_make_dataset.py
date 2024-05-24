@@ -3,7 +3,7 @@ from shutil import rmtree
 import tomli
 from subprocess import run
 
-config_file = Path('.').absolute().parent  / 'configs/test.toml'
+config_file = 'configs/test.toml'
 
 with open(config_file, mode="rb") as fp: config = tomli.load(fp)
 
