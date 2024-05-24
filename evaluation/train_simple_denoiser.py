@@ -128,10 +128,6 @@ def train(augment_training=False, model=None, epochs=15):
   'providing `model` as an argument skips model building and compiling and allows fine-tuning with a pretrained model'
   train_ds = (
       train_dataset
-      .map(f, num_parallel_calls=AUTOTUNE)
-      .prefetch(AUTOTUNE)
-  ) if augment_training else (
-      train_dataset
       .prefetch(AUTOTUNE)
   )
   if model is None:
