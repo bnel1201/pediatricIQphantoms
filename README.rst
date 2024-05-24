@@ -32,8 +32,8 @@ Features
 
 In addition, this repo contains examples of measurements using these digital image quality phantoms
 
-- `phantom creation and simulation<demo_01_phantom_creation.sh>`_, including different scanner configurations and acquisition protocols
-- `noise and noise texture measurements <demo_02_noise_measurements.sh>`_ 
+- `phantom creation and simulation <demo_01_phantom_creation.sh>`_, including different scanner configurations and acquisition protocols
+- examples of how to view the dataset and evaluate pediatric generalizability of denoisers are shown in the notebooks directory
 
 .. image:: dose_size_dependence.png
         :width: 600
