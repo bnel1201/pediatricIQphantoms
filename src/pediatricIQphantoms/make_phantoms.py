@@ -11,7 +11,12 @@ import SimpleITK as sitk
 
 class CTobj():
     """
-    A class to hold CT simulation data
+    A class to hold CT simulation data and run simulations
+
+    :param phantom: phantom object to be scanned, options include ['CCT189', 'CTP404']
+    :param patient_diameter: Optional, effective diameter in mm. See AAPM TG220 for more details <https://www.aapm.org/pubs/reports/detail.asp?docid=146>
+    :param reference_diameter: Optional, reference effective diameter in mm for computing automatic exposure control (aec) noise index. For example if a 200 mm reference phantom has a noise level of 24 HU at I0=3e5, smaller phantoms will scale I0 to match that noise level. Note this only applies if `aec_on`=True.
+
     """
     def __init__(self, phantom='CCT189', patient_diameter=200, reference_diameter=200,
                  reference_fov=340, I0=3e5, nb=900, na=580, ds=1, sid=595, sdd=1085.6,
@@ -39,15 +44,25 @@ class CTobj():
         self.nsims=nsims
         self.relative_lesion_diameter=relative_lesion_diameter
         self.age=age
-        self.patientname=patientname
+        self.patientname=patientname or f'{patient_diameter/10} cm {phantom}'
         self.patientid=patientid
-        self.studyname=studyname
+        self.studyname=studyname or self.patientname
         self.studyid=studyid
-        self.seriesname=seriesname
+        self.seriesname=seriesname or f'{self.patientname} I0: {I0}'
         self.seriesid=seriesid
         self.recon=None
         self.projections=None
         self.groundtruth=None
+
+    def __repr__(self) -> str:
+        repr = f'{self.__class__} {self.seriesname}'
+        if self.recon is None:
+            return repr
+        repr += f'\nRecon: {self.recon.shape} {self.fov/10} cm FOV'
+        if self.projections is None:
+            return repr
+        repr += f'\nProjections: {self.projections.shape}'
+        return repr
 
     def run(self):
         phantom=self.phantom
@@ -79,7 +94,13 @@ class CTobj():
         self.groundtruth = resdict['ground_truth']
         return self
     
-    def write_to_dicom(self, fname, groundtruth=False):
+    def write_to_dicom(self, fname:str|Path, groundtruth=False):
+        """
+        write ct data to DICOM file
+
+        :param fname: filename to save image to (preferably with `.dcm` or related extension)
+        :param groundtruth: Optional, whether to save the ground truth phantom image (no noise, blurring, or other artifacts). If True, `self.groundtruth` is saved, if False (default) `self.recon` which contains blurring (and noise if `add_noise`True)
+        """
         fpath = pydicom.data.get_testdata_file("CT_small.dcm")
         ds = pydicom.dcmread(fpath)
         # update meta info
@@ -180,7 +201,9 @@ def run_batch_sim(image_directory: str, model=['CCT189'], diameter=[200], refere
          dose_level=[1.0], sid=595, sdd=1085.6, nb=880,
          ds=1, offset_s=1.25, fov=340, image_matrix_size=512, fbp_kernel='hanning,2.05', has_bowtie=True):
     """
-    Return a list of random ingredients as strings.
+    Running simulations in batch mode
+
+    `run_batch_sim` takes lists of parameters (phantoms, diameters, and dose levels) and iterates through all combinations
 
     :param image_directory: Directory to save simulated outputs
     :type image_directory: str
@@ -196,6 +219,7 @@ def run_batch_sim(image_directory: str, model=['CCT189'], diameter=[200], refere
     dose_level = full_dose * np.array(dose_level)
     recon = 'fbp'
     reference_fov = 340
+    fnames = []
     for phantom_idx, phantom in enumerate(phantoms):
         print(f'{phantom} Simulation series {phantom_idx}/{len(phantoms)}')
         for patientid, patient_diameter in enumerate(diameter):
@@ -218,13 +242,14 @@ def run_batch_sim(image_directory: str, model=['CCT189'], diameter=[200], refere
             ct.write_to_dicom(fname)
             # add ground truth
             fname = image_directory / phantom / f'diameter{patient_diameter}mm' / f'{ct.patientname}_groundtruth.dcm'
-            ct.write_to_dicom(fname, groundtruth=True)
+            fnames += ct.write_to_dicom(fname, groundtruth=True)
+    return fnames
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Make Pediatric IQ Phantoms')
+    parser = argparse.ArgumentParser(description='Make Pediatric IQ Phantoms: command line interface')
     parser.add_argument('config', nargs='?', default=None,
-                        help="configuration toml file containing simulation parameters")
+                        help="""input is a configuration .toml file containing simulation parameters (see configs/defaults.toml as an example)""")
     args = parser.parse_args()
 
     if args.config:

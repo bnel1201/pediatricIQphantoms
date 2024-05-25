@@ -81,12 +81,14 @@ Developers
 If you'd like to contribute to the code or documentation of this project, please check out our :doc:`contributing` page.
 
 .. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
    usage
+   notebooks
    api
    contributing
    faq
-   :maxdepth: 2
-   :caption: Contents:
 
 Indices and tables
 ==================

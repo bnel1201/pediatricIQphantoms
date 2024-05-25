@@ -7,9 +7,9 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'pediatricIQphantoms'
-copyright = '2023, Brandon Nelson, Rongping Zeng'
+copyright = '2024, Brandon Nelson, Rongping Zeng'
 author = 'Brandon Nelson, Rongping Zeng'
-release = '0.0.1'
+release = '0.0.2'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -23,7 +23,8 @@ extensions = ['sphinxcontrib.matlab',
               'sphinx.ext.duration',
               'sphinx.ext.doctest',
               'sphinx.ext.autosummary',
-              'sphinx_tabs.tabs']
+              'sphinx_tabs.tabs',
+              'nbsphinx'] #https://docs.readthedocs.io/en/stable/guides/jupyter.html
 
 templates_path = ['_templates']
 exclude_patterns = []

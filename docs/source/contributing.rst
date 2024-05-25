@@ -13,7 +13,24 @@ More resources on documentation: https://www.writethedocs.org/guide/
 docstrings
 ----------
 
-The easiest and most effective way to start contributing to the user manual and documentation of the project is by helping improve our `docstrings <https://www.mathworks.com/help/matlab/matlab_prog/add-help-for-your-program.html>`_, these are the comments just below the function signature in Matlab before the function content. Here is a simple example in matlab:
+The easiest and most effective way to start contributing to the user manual and documentation of the project is by helping improve our `docstrings <https://sphinx-doc.org/en/master/tutorial/automatic-doc-generation.html>`_docstrings, the comments just below the function signature. Here is a python formatting example:
+
+.. code-block:: python
+
+  def get_random_ingredients(kind=None):
+    """
+    Return a list of random ingredients as strings.
+
+    :param kind: Optional "kind" of ingredients.
+    :type kind: list[str] or None
+    :raise lumache.InvalidKindError: If the kind is invalid.
+    :return: The ingredients list.
+    :rtype: list[str]
+
+    """
+    return ["shells", "gorgonzola", "parsley"]
+
+And here is a `Matlab docstrings <https://www.mathworks.com/help/matlab/matlab_prog/add-help-for-your-program.html>`_ example:
 
 .. code-block:: matlab
 
