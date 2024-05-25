@@ -208,7 +208,7 @@ def run_batch_sim(image_directory: str, model=['CCT189'], diameter=[200], refere
                            add_noise=add_noise, aec_on=aec_on, nx=image_matrix_size, fov=fov, fbp_kernel=fbp_kernel, nsims=nsims,
                            patientname=patientname, patientid=patientid, studyname=studyname, studyid=studyid, seriesname=f'{patientname} {studyname}')
                 ct.run()
-                fname = image_directory / phantom / f'diameter{patient_diameter}mm' / f'dose_{int(rel_dose):03d}' / f'{recon} {fbp_kernel.replace(',','').replace('.','')}' / f'{ct.patientname}.dcm'
+                fname = image_directory / phantom / f'diameter{patient_diameter}mm' / f'dose_{int(rel_dose):03d}' / f"{recon} {fbp_kernel.replace(',','').replace('.','')}" / f'{ct.patientname}.dcm'
                 ct.write_to_dicom(fname)
             # add noise free
             ct.nsims=1
