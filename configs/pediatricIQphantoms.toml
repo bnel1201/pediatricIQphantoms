@@ -3,7 +3,7 @@
 [[simulation]]
 
 # directories
-image_directory = "results/multiple_recon_kernels"
+image_directory = "results/pediatricIQphantoms"
 # filetype = '.mhd' # mhd for metaheader or dcm for dicom
 # phantoms
 model = ['CCT189'] # <-- current options include [CCT189, CTP404]
@@ -40,3 +40,4 @@ fbp_kernel = 'hanning,2.05' # 'hanning,xxx', xxx = the cutoff frequency, see fbp
 # phantoms
 model = ['CTP404'] # <-- current options include [CCT189, CTP404]
 nsims = 20
+nangles=2320
