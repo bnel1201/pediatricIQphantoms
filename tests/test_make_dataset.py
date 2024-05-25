@@ -21,10 +21,11 @@ def test_make_dataset_from_toml():
 
     run(['make_phantoms', config_file])
 
-    simulation_results = list(results_dir.rglob('*.mhd'))
+    simulation_results = list(results_dir.rglob('*.dcm'))
 
     nphantoms = len(config['simulation'][0]['model'])
     ndiameters = len(config['simulation'][0]['diameter'])
-    ndose_levels = len(config['simulation'][0]['dose_level'])
+    nsims = config['simulation'][0]['nsims']
+    ndose_levels = len(config['simulation'][0]['dose_level']) + 1 # a ground truth file is added which is like another dose level
 
-    assert(len(simulation_results) == nphantoms*ndiameters*(ndose_levels+1)) # a ground truth file is added which is like another dose level
+    assert(len(simulation_results) == nphantoms*ndiameters*ndose_levels*nsims) 

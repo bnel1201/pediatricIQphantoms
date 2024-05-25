@@ -17,12 +17,13 @@ Requires-Dist: numpy
 Requires-Dist: matplotlib
 Requires-Dist: oct2py
 Requires-Dist: SimpleITK
+Requires-Dist: pydicom
 Requires-Dist: pytest
 
 pediatricIQphantoms
 ===================
 
-|zenodo| |docs|
+|zenodo| |docs| |tests|
 
 **Digital Pediatric Image Quality Phantoms for Evaluating CT Denoising Methods** are a set of digital phantoms and simulation methods for generating CT images of standard image quality (IQ) phantoms designed to match the effective diameter of pediatric patients ranging from newborns to teenagers. This repository has `tools <make_phantoms.py>`_ for generating `MITA-LCD phantom <https://www.phantomlab.com/catphan-mita>`_ and a multi-contrast sensitometry module similar to the CTP404 module of the `Catphan 600 phantom <https://www.phantomlab.com/catphan-600>`_. Functions are also provided to simulate different acquisition parameters and CT scanner models.
 
@@ -39,6 +40,10 @@ pediatricIQphantoms
     :alt: Documentation Status
     :scale: 100%
     :target: https://pediatriciqphantoms.readthedocs.io/en/latest/
+.. |tests| image:: https://github.com/bnel1201/pediatricIQphantoms/actions/workflows/python-package-conda.yml/badge.svg?branch=main
+    :alt: Package Build and Testing Status
+    :scale: 100%
+    :target: https://github.com/bnel1201/pediatricIQphantoms/actions/workflows/python-package-conda.yml
 
 Features
 --------
@@ -49,46 +54,70 @@ Features
 
 In addition, this repo contains examples of measurements using these digital image quality phantoms
 
-- `phantom creation and simulation<demo_01_phantom_creation.sh>`_, including different scanner configurations and acquisition protocols
-- `noise and noise texture measurements <demo_02_noise_measurements.sh>`_ 
+- `phantom creation and simulation <demo_01_phantom_creation.sh>`_, including different scanner configurations and acquisition protocols
+- examples of how to view the dataset and evaluate pediatric generalizability of denoisers are shown in the notebooks directory
 
-.. image:: dose_size_dependence.png
+.. image:: pediatric_subgroup_performance.png
         :width: 600
         :align: center
+
+Example from the `uniform phantom denoising performance assessment notebook <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/uniform%20-%20denoising%20efficiency.ipynb>`_ demonstrating the pediatric subgroup denoising performance of a `RED-CNN <https://ieeexplore.ieee.org/document/7947200/>`_ image-based deep learning denoiser using the `pediatricIQphantoms dataset <https://zenodo.org/doi/10.5281/zenodo.10064035>`_ 
 
 Start Here
 ----------
 
+*Installation is only required to generate new datasets*, a pregenerated dataset can be downloaded from `Zenodo <https://zenodo.org/doi/10.5281/zenodo.10064035>`_, only proceed if you want to generate new simulated datasets.
+
 .. _version requirements:
 
-**Requirements** (Confirm if needed)
+**Requirements** 
 
-- `conda <https://docs.anaconda.com/free/miniconda/>`_ is required to install `Octave <https://octave.org/download>`_ using the `installation`_ instructions.
+- `Conda <https://docs.conda.io/projects/conda/en/stable/user-guide/getting-started.html>`_ package manager e.g. `Miniconda <https://docs.anaconda.com/free/miniconda/>`_
+- Mac, Linux, or `Windows Subsystem for Linux (WSL) <https://learn.microsoft.com/en-us/windows/wsl/install>`_ operating systems described on the `Octave Conda Forge page <https://anaconda.org/conda-forge/octave>`_. This package currently uses the Octave-based `Michigan Image Reconstruction Toolbox (MIRT) <https://github.com/JeffFessler/mirt>`_
 
 .. _installation:
 
 **Installation**
 
-- The following code block 1.) Git clones the `pediatricIQphantoms <https://github.com/bnel1201/pediatricIQphantoms>`_ repository, 2.) makes it the active directory and then 3.) runs the `install <install.sh>`_ script. The `install <install.sh>`_ script creates a new conda environment called "octave", activates it, installs Octave, and pip installs the local pediatricIQphantoms repo making the library accessible in scripts (see `examples <examples/running_simulations.ipynb>`_) and via command line calls (see `demos <demo_01_phantom_creation.sh>`_).
-
 .. code-block:: shell
 
         git clone https://github.com/bnel1201/pediatricIQphantoms
         cd pediatricIQphantoms
-        source install.sh
+        conda env create --file environment.yml
+        conda activate pediatricIQphantoms
 
-*Expected run time: 10 min*
+The code block above does the following in 4 lines:
 
-3. Test the installation
+1. Git clones the `pediatricIQphantoms <https://github.com/bnel1201/pediatricIQphantoms>`_ repository
+
+2. Changes the active directory to the repo
+
+3. Creates a new conda environment called "pediatricIQphantoms"
+
+4. Activates the conda environment. This makes the phantom creation library `pediatricIQphantoms` accessible in scripts (see `examples <examples/running_simulations.ipynb>`_) and via command line calls (see `demos <demo_01_phantom_creation.sh>`_).
+
+**Test the Installation**
 
 .. code-block:: shell
 
-        source test.sh
+        pytest
 
-How to Use this repo and the Pediatric IQ Phantoms
+This runs the [unit tests](https://github.com/bnel1201/pediatricIQphantoms/tree/main/tests) to verify that installation was successful.
+
+How to use this repo and the Pediatric IQ Phantoms
 --------------------------------------------------
 
-**pediatricIQphantoms** provides examples for how to use the pediatric IQ phantoms, (available to download and use directly from `Zenodo <https://doi.org/10.5281/zenodo.10064036>`_) or generate new phantom instances using the provided `phantom generation functions <src/pediatricIQphantoms/make_phantoms.py>`_. Several examples are provided on how to use these functions are provided to make single simulation instances (see `tests <tests/test_recon.py>`_ for script examples or the `simulations example notebook <examples/running_simulations.ipynb>`_) as well as batch mode examples to which make use of `toml <https://toml.io/en/>`_ `configuration files <configs/test.toml>`_ to create whole datasets, see `demo 01 <demo_01_phantom_creation.sh>`_
+**pediatricIQphantoms** provides examples for how to use the pediatric IQ phantoms, (available to download and use directly from `Zenodo <https://zenodo.org/doi/10.5281/zenodo.10064035>`_) or generate new phantom instances using the provided `phantom generation functions <src/pediatricIQphantoms/make_phantoms.py>`_.
+
+Several examples are provided on how to use these functions:
+
+- Check out the :doc:`usage` section for detailed information on customizing dataset running_simulations.
+- See the `tests directory <tests>`_ for simple script examples
+- `Computational notebooks <https://github.com/bnel1201/pediatricIQphantoms/tree/main/notebooks>`_ have also been provided to demonstrate how to use `pediatricIQphantoms dataset <https://zenodo.org/doi/10.5281/zenodo.10064035>`_ including:
+
+  - `options for viewing the dataset images <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/view_images.ipynb>`_
+  - `running CT simulations <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/running_simulations.ipynb>`_
+  - `using the dataset to assess denoising performance in pediatric subgroups <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/uniform%20-%20denoising%20efficiency.ipynb>`_
 
 Contribute
 ----------

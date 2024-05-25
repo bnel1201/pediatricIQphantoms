@@ -15,6 +15,7 @@ dependencies = [
   "matplotlib",
   "oct2py",
   "SimpleITK",
+  "pydicom",
   "pytest"
 ]
 classifiers = [

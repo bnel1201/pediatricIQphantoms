@@ -5,7 +5,23 @@ function res = ct_sim(phantom, patient_diameter, reference_diameter, relative_le
         unzip('https://github.com/JeffFessler/mirt/archive/refs/heads/main.zip', '.');
     end
     run('mirt-main/setup.m')
-
+ 
+    if iscell(reference_diameter)
+        reference_diameter = cell2mat(reference_diameter);
+        relative_lesion_diameter = cell2mat(relative_lesion_diameter);
+        nb = cell2mat(nb);
+        na = cell2mat(na);
+        ds = cell2mat(ds);
+        sdd = cell2mat(sdd);
+        sid = cell2mat(sid);
+        offset_s = cell2mat(offset_s);
+        down = cell2mat(down);
+        has_bowtie = cell2mat(has_bowtie);
+        add_noise = cell2mat(add_noise);
+        aec_on = cell2mat(aec_on);
+        nx = cell2mat(nx);
+        nsims = cell2mat(nsims);
+    end
     dod = sdd - sid;
     sg = sino_geom('fan', 'units', 'mm', ...
     'nb', nb, 'na', na, 'ds', ds, ...

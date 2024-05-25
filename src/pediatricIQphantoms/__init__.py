@@ -1,1 +1,1 @@
-from .make_phantoms import mirt_sim, run_batch_sim
+from .make_phantoms import CTobj, run_batch_sim
