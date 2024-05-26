@@ -13,16 +13,15 @@ release = '0.0.2'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
-import pathlib
-import sys
-import os
+
 
 # sys.path.insert(0, pathlib.Path(__file__).parents[2]/'src/pediatricIQphantoms')
 extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.duration',
               'sphinx.ext.doctest',
               'sphinx.ext.autosummary',
-              'sphinx_tabs.tabs']
+              'sphinx_tabs.tabs',
+              'sphinxcontrib.inkscapeconverter']
  #https://docs.readthedocs.io/en/stable/guides/jupyter.html
 
 templates_path = ['_templates']
