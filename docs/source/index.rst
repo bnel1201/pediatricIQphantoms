@@ -12,11 +12,11 @@ Introduction
         :width: 800
         :align: center
 
-.. |zenodo|
+.. |zenodo| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.10064035.svg
     :alt: Zenodo Data Access
     :target: https://zenodo.org/doi/10.5281/zenodo.10064035
 
-.. |tests|
+.. |tests| image:: https://github.com/bnel1201/pediatricIQphantoms/actions/workflows/python-package-conda.yml/badge.svg?branch=main
     :alt: Package Build and Testing Status
     :target: https://github.com/bnel1201/pediatricIQphantoms
 
