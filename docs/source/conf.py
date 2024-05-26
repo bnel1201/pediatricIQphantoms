@@ -25,7 +25,7 @@ extensions = ['sphinxcontrib.matlab',
               'sphinx.ext.autosummary',
               'sphinx_tabs.tabs',
               'nbsphinx',
-              'sphinxcontrib.inkscapeconverter'],
+              'sphinxcontrib.inkscapeconverter']
  #https://docs.readthedocs.io/en/stable/guides/jupyter.html
 
 templates_path = ['_templates']
