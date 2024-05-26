@@ -81,8 +81,8 @@ If you'd like to contribute to the code or documentation of this project, please
    :caption: Contents:
 
    usage
-   notebooks/00_running_simulations
-   notebooks/01_pediatric_denoising_evaluation
+   `Running Simulations <notebooks/00_running_simulations.html>`_
+   `Evaluating Denoising Efficiency <notebooks/01_pediatric_denoising_evaluation.html>`_
    api
    contributing
    faq
