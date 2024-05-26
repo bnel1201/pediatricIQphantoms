@@ -18,7 +18,7 @@ class CTobj():
 
     :param phantom: phantom object to be scanned, options include ['CCT189', 'CTP404']
     :param patient_diameter: Optional, effective diameter in mm. See AAPM TG220 for more details <https://www.aapm.org/pubs/reports/detail.asp?docid=146>
-    :param reference_diameter: Optional, reference effective diameter in mm for computing automatic exposure control (aec) noise index. For example if a 200 mm reference phantom has a noise level of 24 HU at I0=3e5, smaller phantoms will scale I0 to match that noise level. Note this only applies if `aec_on`=True.
+    :param reference_diameter: Optional, reference effective diameter in mm for computing automatic exposure control (aec) noise index. For example if a 200 mm reference phantom has a noise level of 24 HU at I0=3e5, smaller phantoms will scale I0 to match that noise level. Note this only applies if 'aec_on`=True.
 
     """
     def __init__(self, phantom='CCT189', patient_diameter=200, reference_diameter=200,
@@ -101,8 +101,8 @@ class CTobj():
         """
         write ct data to DICOM file
 
-        :param fname: filename to save image to (preferably with `.dcm` or related extension)
-        :param groundtruth: Optional, whether to save the ground truth phantom image (no noise, blurring, or other artifacts). If True, `self.groundtruth` is saved, if False (default) `self.recon` which contains blurring (and noise if `add_noise`True)
+        :param fname: filename to save image to (preferably with '.dcm` or related extension)
+        :param groundtruth: Optional, whether to save the ground truth phantom image (no noise, blurring, or other artifacts). If True, 'self.groundtruth` is saved, if False (default) `self.recon` which contains blurring (and noise if 'add_noise`True)
         """
         fpath = pydicom.data.get_testdata_file("CT_small.dcm")
         ds = pydicom.dcmread(fpath)

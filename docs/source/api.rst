@@ -1,16 +1,11 @@
 API
 ===
 
-Reference page for individual observer functions_, observer classes_, helper_ functions and and scripts.
+Reference page
 
-.. autosummary::
- :toctree: generated
+.. automodule:: pediatricIQphantoms.make_phantoms
 
- pediatricIQphantoms
+.. autofunction:: pediatricIQphantoms.run_batch_sim
 
-
-.. Functional versions of model observers.
-
-.. .. automodule:: ct_sim
-..      :imported-members:
-..      :members:
+.. autoclass:: pediatricIQphantoms.CTobj
+    :members:

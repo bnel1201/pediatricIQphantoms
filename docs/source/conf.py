@@ -17,9 +17,8 @@ import pathlib
 import sys
 import os
 
-sys.path.insert(0, pathlib.Path(__file__).parents[2].resolve().as_posix())
-extensions = ['sphinxcontrib.matlab',
-              'sphinx.ext.autodoc',
+# sys.path.insert(0, pathlib.Path(__file__).parents[2]/'src/pediatricIQphantoms')
+extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.duration',
               'sphinx.ext.doctest',
               'sphinx.ext.autosummary',
@@ -28,10 +27,6 @@ extensions = ['sphinxcontrib.matlab',
 
 templates_path = ['_templates']
 exclude_patterns = []
-
-this_dir = os.path.dirname(os.path.abspath(__file__))
-matlab_src_dir = os.path.abspath(os.path.join(this_dir, '../..'))
-primary_domain = 'mat'
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
