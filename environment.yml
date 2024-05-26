@@ -14,6 +14,7 @@ dependencies:
   - oct2py
   - SimpleITK
   - pytest
+  - sphinx-tabs
   - pip
   - pip:
     - "git+https://github.com/bnel1201/pediatricIQphantoms"
