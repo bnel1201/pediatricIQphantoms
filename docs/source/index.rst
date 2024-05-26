@@ -80,6 +80,8 @@ If you'd like to contribute to the code or documentation of this project, please
    :caption: Contents:
 
    usage
+   notebooks/00_running_simulations
+   notebooks/01_pediatric_denoising_evaluation
    api
    contributing
    faq
