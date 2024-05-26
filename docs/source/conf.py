@@ -24,7 +24,9 @@ extensions = ['sphinxcontrib.matlab',
               'sphinx.ext.doctest',
               'sphinx.ext.autosummary',
               'sphinx_tabs.tabs',
-              'nbsphinx'] #https://docs.readthedocs.io/en/stable/guides/jupyter.html
+              'nbsphinx',
+              'sphinxcontrib.inkscapeconverter'],
+ #https://docs.readthedocs.io/en/stable/guides/jupyter.html
 
 templates_path = ['_templates']
 exclude_patterns = []

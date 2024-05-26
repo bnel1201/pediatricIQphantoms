@@ -2,3 +2,4 @@ sphinxcontrib-matlabdomain
 sphinx-tabs
 ipykernel
 nbsphinx
+sphinxcontrib-svg2pdfconverter
