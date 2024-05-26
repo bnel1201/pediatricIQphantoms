@@ -12,21 +12,17 @@ Introduction
         :width: 800
         :align: center
 
-.. |zenodo| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.10064035.svg
+.. |zenodo|
     :alt: Zenodo Data Access
     :target: https://zenodo.org/doi/10.5281/zenodo.10064035
 
-.. |tests| image:: https://github.com/bnel1201/pediatricIQphantoms/actions/workflows/python-package-conda.yml/badge.svg?branch=main
+.. |tests|
     :alt: Package Build and Testing Status
     :target: https://github.com/bnel1201/pediatricIQphantoms
 
 **Digital Pediatric Image Quality Phantoms for Evaluating CT Denoising Methods** are a set of digital phantoms and simulation methods for generating CT images of standard image quality (IQ) phantoms designed to match the effective diameter of pediatric patients ranging from newborns to teenagers. This repository has `tools <make_phantoms.py>`_ for generating `MITA-LCD phantom <https://www.phantomlab.com/catphan-mita>`_ and a multi-contrast sensitometry module similar to the CTP404 module of the `Catphan 600 phantom <link here>`_. Functions are also provided to simulate different acquisition parameters and CT scanner models.
 
 Size is one of the most important patient factors influencing CT performance as it determines the overall x-ray attenuation and noise properties. New deep learning-based denoisers have shown potential to improve image quality for a fixed radiation dose or maintain image quality while reducing dose <cite>.  Performance Assessment consists of analytical quality assurance phantom models and interfaces to CT simulation frameworks to generate simulated CT images representing different diameters of each phantom.
-
-.. image:: ped_dl_eval_tool.png
-        :width: 800
-        :align: center
 
 Installation
 ------------
