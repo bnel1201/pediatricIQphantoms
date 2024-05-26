@@ -6,6 +6,8 @@ Reference page for individual observer functions_, observer classes_, helper_ fu
 .. autosummary::
  :toctree: generated
 
+ pediatricIQphantoms
+
 
 .. Functional versions of model observers.
 
