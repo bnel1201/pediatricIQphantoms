@@ -123,26 +123,8 @@ def make_montage(meta_df:pd.DataFrame, dose:int=25, fovs:list=[25.0, 15.0], reco
     plt.title(' | '.join(recons))
     plt.ylabel(' cm |'.join(map(lambda o: str(round(o)), fovs[::-1])) + ' cm')
 
-def age_to_eff_diameter(age):
-    # https://www.aapm.org/pubs/reports/rpt_204.pdf
-    x = age
-    a = 18.788598
-    b = 0.19486455
-    c = -1.060056
-    d = -7.6244784
-    y = a + b*x**1.5 + c *x**0.5 + d*np.exp(-x)
-    eff_diam = y
-    return eff_diam
 
-adult_waist_circumferences_cm = {
-    # 20: 90.7,
-    30: 99.9,
-    40: 102.8,
-    # 50: 103.3,
-    60: 106.2,
-    70: 106.6,
-    80: 104.1
-}
+
 
 def diameter_range_from_subgroup(subgroup):
     if subgroup == 'newborn': return (0, age_to_eff_diameter(1/12))
@@ -151,24 +133,7 @@ def diameter_range_from_subgroup(subgroup):
     elif subgroup == 'adolescent': return (age_to_eff_diameter(12), age_to_eff_diameter(22))
     else: return (age_to_eff_diameter(22), 100)
 
-def pediatric_subgroup(diameter):
-    if diameter < age_to_eff_diameter(1):
-        return 'newborn'
-    elif (diameter >= age_to_eff_diameter(1)) & (diameter < age_to_eff_diameter(5)):
-        return 'infant'
-    elif (diameter >= age_to_eff_diameter(5)) & (diameter < age_to_eff_diameter(12)):
-        return 'child'
-    elif (diameter >= age_to_eff_diameter(12)) & (diameter < age_to_eff_diameter(22)):
-        return 'adolescent'
-    else:
-        return 'adult'
-    
-def subgroup_to_age(group):
-    if group == 'newborn': return 1/12
-    if group == 'infant': return 2
-    if group == 'child': return 12
-    if group == 'adolescent': return 21
-    if group == 'adult': return 39
+
 save_dir = Path('/gpfs_projects/brandon.nelson/RSTs/pediatricIQphantoms')
 
 def browse_studies(metadata, phantom='CTP404', fov=12.3, dose=100, recon='fbp', kernel='D45', repeat=0, display='soft tissues'):

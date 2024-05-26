@@ -5,9 +5,12 @@ import numpy as np
 import os
 
 from oct2py import octave
+import pandas as pd
 import pydicom
 from datetime import datetime
 import SimpleITK as sitk
+
+URL = 'https://zenodo.org/records/11267694/files/pediatricIQphantoms.zip'
 
 class CTobj():
     """
@@ -121,7 +124,7 @@ class CTobj():
         del(ds.PatientWeight)
         del(ds.ContrastBolusRoute)
         del(ds.ContrastBolusAgent)
-        ds.ImageComments = f"effctive diameter [cm]: {self.patient_diameter}"
+        ds.ImageComments = f"effctive diameter [cm]: {self.patient_diameter/10}"
         ds.ScanOptions = 'AXIAL MODE'
         ds.ReconstructionDiameter = self.fov
         ds.ConvolutionKernel ='fbp D45'
@@ -195,11 +198,85 @@ def mirt_sim(phantom='CCT189', patient_diameter=200, reference_diameter=200, ref
     octave.cd(curdir)
     return octave.ct_sim(phantom, patient_diameter, reference_diameter,    relative_lesion_diameter, I0, nb, na, ds, sdd, sid, offset_s, down, has_bowtie, add_noise, aec_on, nx, fov, fbp_kernel, nsims)
 
+adult_waist_circumferences_cm = {
+    # 20: 90.7,
+    30: 99.9,
+    40: 102.8,
+    # 50: 103.3,
+    60: 106.2,
+    70: 106.6,
+    80: 104.1
+}
+
+
+def round_to_decile(age): return age - age % 10
+
+
+def age_to_eff_diameter(age):
+    # https://www.aapm.org/pubs/reports/rpt_204.pdf
+    if age > 22:
+        return adult_waist_circumferences_cm[round_to_decile(age)]
+    x = age
+    a = 18.788598
+    b = 0.19486455
+    c = -1.060056
+    d = -7.6244784
+    y = a + b*x**1.5 + c *x**0.5 + d*np.exp(-x)
+    eff_diam = y
+    return eff_diam
+
+
+def pediatric_subgroup(diameter):
+    if diameter < age_to_eff_diameter(1):
+        return 'newborn'
+    elif (diameter >= age_to_eff_diameter(1)) & (diameter < age_to_eff_diameter(5)):
+        return 'infant'
+    elif (diameter >= age_to_eff_diameter(5)) & (diameter < age_to_eff_diameter(12)):
+        return 'child'
+    elif (diameter >= age_to_eff_diameter(12)) & (diameter < age_to_eff_diameter(22)):
+        return 'adolescent'
+    else:
+        return 'adult'
+    
+def subgroup_to_age(group):
+    if group == 'newborn': return 1/12
+    if group == 'infant': return 2
+    if group == 'child': return 12
+    if group == 'adolescent': return 21
+    if group == 'adult': return 39
+
+
+def dicom_meta_to_dataframe(fname:str|Path) -> pd.DataFrame:
+    """
+    Takes dicom header information and exports to pandas Dataframe
+    """
+    fname = Path(fname)
+    dcm = pydicom.read_file(fname)
+    subgroup = pediatric_subgroup(18.2)
+    age_est = subgroup_to_age(subgroup)
+    subgroup, age_est
+    phantom = str(dcm.PatientName).split('cm')[1].strip()
+    diameter = float(dcm.ImageComments.split(':')[1])
+    dose = None
+    repeat = 0
+    if fname.stem.endswith('noisefree'):
+        series = 'noise free'
+    elif fname.stem.endswith('groundtruth'):
+        series = 'ground truth'
+    else:
+        series = 'simulation'
+        dose = int(str(fname).split('dose_')[1].split('/')[0])
+        repeat = int(fname.stem.split('_')[1]) if len(fname.stem.split('_')) > 1 else 0
+
+    return pd.DataFrame({'Name': [str(dcm.PatientName)], 'Patient ID': [dcm.PatientID], 'Study Name': [dcm.StudyDescription], 'Study ID': [dcm.StudyID], 'series': [series], 'effective diameter [cm]': [diameter], 'age [year]': [age_est], 'pediatric subgroup': subgroup,
+     'phantom': [phantom], 'scanner': [dcm.Manufacturer.split('(simulated)')[0] + dcm.ManufacturerModelName], 'Dose [%]': [dose],
+     'recon': ['fbp'], 'kernel': [dcm.ConvolutionKernel], 'FOV [cm]': [dcm.PixelSpacing[0]*dcm.Rows/10], 'repeat':[repeat], 'file': [fname]})
+
 
 def run_batch_sim(image_directory: str, model=['CCT189'], diameter=[200], reference_diameter=200, framework='MIRT',
          nsims=1, nangles=580, aec_on=True, add_noise=True, full_dose=3e5,
          dose_level=[1.0], sid=595, sdd=1085.6, nb=880,
-         ds=1, offset_s=1.25, fov=340, image_matrix_size=512, fbp_kernel='hanning,2.05', has_bowtie=True):
+         ds=1, offset_s=1.25, fov=340, image_matrix_size=512, fbp_kernel='hanning,2.05', has_bowtie=True) -> pd.DataFrame:
     """
     Running simulations in batch mode
 
@@ -243,7 +320,9 @@ def run_batch_sim(image_directory: str, model=['CCT189'], diameter=[200], refere
             # add ground truth
             fname = image_directory / phantom / f'diameter{patient_diameter}mm' / f'{ct.patientname}_groundtruth.dcm'
             fnames += ct.write_to_dicom(fname, groundtruth=True)
-    return fnames
+    metadata = pd.concat(list(map(dicom_meta_to_dataframe, fnames)), ignore_index=True)
+    metadata.to_csv(image_directory / 'metadata.csv', index=False)
+    return metadata
 
 
 def main():
