@@ -18,3 +18,4 @@ dependencies:
   - pip
   - pip:
     - "git+https://github.com/bnel1201/pediatricIQphantoms"
+    - sphinxcontrib-svg2pdfconverter
