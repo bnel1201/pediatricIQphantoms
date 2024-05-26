@@ -15,7 +15,7 @@ dependencies:
   - SimpleITK
   - pytest
   - sphinx-tabs
-  - sphinxcontrib.inkscapeconverter
   - pip
   - pip:
     - "git+https://github.com/bnel1201/pediatricIQphantoms"
+    - sphinxcontrib.inkscapeconverter
