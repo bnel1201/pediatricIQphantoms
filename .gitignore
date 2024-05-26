@@ -16,6 +16,7 @@ main
 .venv
 octave-workspace
 build
+docs/build
 src/pediatricIQphantoms/.ipynb_checkpoints/
 src/pediatricIQphantoms.egg-info/
 .ipynb_checkpoints
