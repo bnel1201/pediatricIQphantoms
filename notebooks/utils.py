@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from ipywidgets import interact
 
+from pediatricIQphantoms.make_phantoms import age_to_eff_diameter
+
 # https://radiopaedia.org/articles/windowing-ct?lang=us
 display_settings = {
     'brain': (80, 40),
@@ -122,8 +124,6 @@ def make_montage(meta_df:pd.DataFrame, dose:int=25, fovs:list=[25.0, 15.0], reco
                          (ny//2 + ny*ridx, nx//2 + nx*didx), fontsize=6, bbox=dict(boxstyle='square,pad=0.3', fc="lightblue", ec="steelblue"))
     plt.title(' | '.join(recons))
     plt.ylabel(' cm |'.join(map(lambda o: str(round(o)), fovs[::-1])) + ' cm')
-
-
 
 
 def diameter_range_from_subgroup(subgroup):
