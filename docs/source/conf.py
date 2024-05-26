@@ -23,8 +23,7 @@ extensions = ['sphinxcontrib.matlab',
               'sphinx.ext.duration',
               'sphinx.ext.doctest',
               'sphinx.ext.autosummary',
-              'sphinx_tabs.tabs',
-              'nbsphinx']
+              'sphinx_tabs.tabs']
  #https://docs.readthedocs.io/en/stable/guides/jupyter.html
 
 templates_path = ['_templates']

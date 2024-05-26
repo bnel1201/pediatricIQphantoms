@@ -1,4 +1,2 @@
 sphinxcontrib-matlabdomain
 sphinx-tabs
-ipykernel
-nbsphinx
