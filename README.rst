@@ -33,13 +33,13 @@ Features
 In addition, this repo contains examples of measurements using these digital image quality phantoms
 
 - `phantom creation and simulation <demo_01_phantom_creation.sh>`_, including different scanner configurations and acquisition protocols
-- examples of how to view the dataset and evaluate pediatric generalizability of denoisers are shown in the notebooks directory
+- examples of how to `view the dataset <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/01_viewing_images.ipynb>`_ and `evaluate pediatric generalizability of denoisers <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/02_pediatric_denoising_evaluation.ipynb>`_ are shown in the notebooks directory
 
 .. image:: pediatric_subgroup_performance.png
         :width: 600
         :align: center
 
-Example from the `uniform phantom denoising performance assessment notebook <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/uniform%20-%20denoising%20efficiency.ipynb>`_ demonstrating the pediatric subgroup denoising performance of a `RED-CNN <https://ieeexplore.ieee.org/document/7947200/>`_ image-based deep learning denoiser using the `pediatricIQphantoms dataset <https://zenodo.org/doi/10.5281/zenodo.10064035>`_ 
+Example from the `uniform phantom denoising performance assessment notebook <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/02_pediatric_denoising_evaluation.ipynb>`_ demonstrating the pediatric subgroup denoising performance of a `RED-CNN <https://ieeexplore.ieee.org/document/7947200/>`_ image-based deep learning denoiser using the `pediatricIQphantoms dataset <https://zenodo.org/doi/10.5281/zenodo.10064035>`_ 
 
 Start Here
 ----------
