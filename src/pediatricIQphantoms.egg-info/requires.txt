@@ -1,9 +1,0 @@
-pandas
-seaborn
-tomli
-numpy
-matplotlib
-oct2py
-SimpleITK
-pydicom
-pytest
