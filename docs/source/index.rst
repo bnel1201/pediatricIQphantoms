@@ -1,7 +1,7 @@
-Welcome to pediatricIphantom documentation!
-===========================================
+Welcome to pediatricIQphantom documentation!
+============================================
 
-This documentation provides information regarding how to download, install, and use the pediatricIQphantoms tools which are designed to simulate computed tomography (CT) image characteristics in a range of pediatric sizes - from newborn through adolescence.
+This documentation provides information regarding how to download, install, and use the pediatricIQphantoms tools which are designed to simulate computed tomography (CT) image characteristics in a range of pediatric sizes ranging from newborn through adolescence.
 
 Introduction
 ------------
