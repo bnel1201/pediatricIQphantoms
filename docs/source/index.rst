@@ -51,7 +51,7 @@ The code block above does the following in 4 lines:
 1. Git clones the `pediatricIQphantoms <https://github.com/bnel1201/pediatricIQphantoms>`_ repository
 2. Changes the active directory to the repo
 3. Creates a new conda environment called "pediatricIQphantoms"
-4. Activates the conda environment. This makes the phantom creation library `pediatricIQphantoms` accessible in scripts (see `examples <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/00_running_simulations.ipynb>`_) and via command line calls (see `demos <demo_01_phantom_creation.sh>`_).
+4. Activates the conda environment. This makes the phantom creation library `pediatricIQphantoms` accessible in scripts (see `examples <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/00_running_simulations.ipynb>`_) and via command line calls (see `demo 01 <https://github.com/bnel1201/pediatricIQphantoms/blob/main/demo_01_phantom_creation.sh>`_ and `demo 02 <https://github.com/bnel1201/pediatricIQphantoms/blob/main/demo_02_multiple_recon_kernels.sh>`_).
 
 **Test the Installation**
 
