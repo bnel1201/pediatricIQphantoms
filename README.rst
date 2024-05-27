@@ -83,6 +83,14 @@ The code block above does the following in 4 lines:
 
 This runs the `unit tests <https://github.com/bnel1201/pediatricIQphantoms/tree/main/tests>`_ to verify that installation was successful.
 
+**Running Notebooks*
+
+To run the `computational notebooks <https://github.com/bnel1201/pediatricIQphantoms/tree/main/notebooks>`_ you will need to have `jupyter <https://jupyter.org/>`_ installed
+
+.. code-block:: shell
+
+        conda install jupyterlab -y
+
 How to use this repo and the Pediatric IQ Phantoms
 --------------------------------------------------
 
@@ -101,13 +109,13 @@ Several examples are provided on how to use these functions:
 Contribute
 ----------
 
-`Issue Tracker <https://github.com/bnel1201/pediatricIQphantoms/issues>`_ | `Source Code <https://github.com/bnel1201/pediatricIQphantoms>`_ | 
+`Issue Tracker <https://github.com/bnel1201/pediatricIQphantoms/issues>`_ | `Source Code <https://github.com/bnel1201/pediatricIQphantoms>`_ | `Contributing Guide <https://pediatriciqphantoms.readthedocs.io/en/latest/contributing.html>`_
 
 Support
 -------
 
 If you are having issues, please let us know.
-brandon.nelson@fda.hhs.gov; rongping.zeng@fda.hhs.gov
+`brandon.nelson@fda.hhs.gov <mailto:brandon.nelson@fda.hhs.gov>`_; `rongping.zeng@fda.hhs.gov <rongping.zeng@fda.hhs.gov>`_
 
 Disclaimer
 ----------
