@@ -18,14 +18,30 @@ class CTobj():
     :param phantom: phantom object to be scanned, options include ['CCT189', 'CTP404']
     :param patient_diameter: Optional, effective diameter in mm. See AAPM TG220 for more details <https://www.aapm.org/pubs/reports/detail.asp?docid=146>
     :param reference_diameter: Optional, reference effective diameter in mm for computing automatic exposure control (aec) noise index. For example if a 200 mm reference phantom has a noise level of 24 HU at I0=3e5, smaller phantoms will scale I0 to match that noise level. Note this only applies if 'aec_on`=True.
-
+    :param I0: Optional float, fluence at the detector in the projection data for determining quantum noise default 3e5 units of photons.
+    :param ndetectors: Optional int, number of detector columns
+    :param nangles: Optional int, number of views in a rotation (na=1160 based on `Zeng et al 2015 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4629802/>`_)
+    :param detector_size: Optional float, detector column size in mm
+    :param sid: Optional float, source-to-isocenter distance in mm
+    :param sdd: Optional float, source-to-detector distance in mm
+    :param detector_offset: Optional float, lateral shift of detector (1.25 = quarter pixel offset)
+    :param has_bowtie: Optional bool, whether to add a patient fitting bowtie (TODO add different bowtie sizes.)
+    :param add_noise: Optional bool, if true adds Poisson noise, noise magnitude set by `reference_dose_level`, noise texture set by reconstructed field of view (currently fov = 110% patient_diameter)
+    :param aec_on: Optional bool, 'aec' = automatic exposure control, when `true`, it ensures constant noise levels for all `patient_diameters` (see `reference_dose_level` for more info)
+    :param matrix_size Optional int, reconstructed matrix size in pixels (square, equal on both sides)
+    :param fov: Optional float, reconstructed field of view (FOV) units mm
+    :param fbp_kernel: Optional str, `hanning,xxx`, xxx = the cutoff frequency, see `fbp2_window.m in MIRT <https://github.com/JeffFessler/mirt/blob/main/fbp/fbp2_window.m>`_ for details. E.g. 'hanning,2.05' approximates a sharp kernel D45 in Siemens Force and 'hanning, 0.85' approximates a smooth kernel B30.
+    :param nsims: Optional int, number of simulations to perform with different noise instantiations
+    :param lesion_diameter: Optional bool | list | float | int, if False lesions scale with phantom size, if model=='CTP404' lesion_diameter > 1 interpret as absolute diameter in mm, if lesion_diameter < 1 interpret as scale relative to phantom diameter. If model=='CCT189' a list of 4 diameters must be provided for the four inserts in contrast order 14, 7, 5, 3 HU.  (only applies for CCCT189 MITA and CTP404 phantoms)
+    :param framework: Optional, CT simulation framework options include ['MIRT'] <https://github.com/JeffFessler/mirt>
     """
     def __init__(self, phantom='CCT189', patient_diameter=200, reference_diameter=200,
-                 reference_fov=340, I0=3e5, nb=900, na=580, ds=1, sid=595, sdd=1085.6,
-                 offset_s=1.25, down=1, has_bowtie=False, add_noise=True, aec_on=True,
-                 nx=512, fov=340, fbp_kernel='hanning,2.05', nsims=1, relative_lesion_diameter=False, age=0,
-                 patientname="", patientid=0, studyname="", studyid=0, seriesname="", seriesid=0) -> None:
-        
+                 reference_fov=340, I0=3e5, ndetectors=900, nangles=580, detector_size=1, sid=595, sdd=1085.6,
+                 detector_offset=1.25, down_sampling=1, has_bowtie=False, add_noise=True, aec_on=True,
+                 matrix_size=512, fov=340, fbp_kernel='hanning,2.05', nsims=1, lesion_diameter=False, age=0,
+                 patientname="", patientid=0, studyname="", studyid=0, seriesname="", seriesid=0, framework='MIRT') -> None:
+        """Constructor method
+        """
         if phantom in ['MITA-LCD', 'MITA', 'MITALCD', 'LCD']: phantom = 'CCT189'
         options = ['CTP404', 'CCT189', 'UNIFORM']
         if phantom.upper() not in options:
@@ -35,21 +51,21 @@ class CTobj():
         self.reference_diameter=reference_diameter
         self.reference_fov=reference_fov
         self.I0=I0
-        self.ndetectors=nb
-        self.nangles=na
-        self.detector_size_mm=ds
+        self.ndetectors=ndetectors
+        self.nangles=nangles
+        self.detector_size=detector_size
         self.sid=sid
         self.sdd=sdd
-        self.detector_offset=offset_s
-        self.down_sampling=down
+        self.detector_offset=detector_offset
+        self.down_sampling=down_sampling
         self.has_bowtie=has_bowtie
         self.add_noise=add_noise
         self.aec=aec_on
-        self.matrix_size=nx
+        self.matrix_size=matrix_size
         self.fov=fov
         self.kernel=fbp_kernel
         self.nsims=nsims
-        self.relative_lesion_diameter=relative_lesion_diameter
+        self.lesion_diameter=lesion_diameter
         self.age=age
         self.patientname=patientname or f'{patient_diameter/10} cm {phantom}'
         self.patientid=patientid
@@ -57,6 +73,7 @@ class CTobj():
         self.studyid=studyid
         self.seriesname=seriesname or f'{self.patientname} I0: {I0}'
         self.seriesid=seriesid
+        self.framework=framework
         self.recon=None
         self.projections=None
         self.groundtruth=None
@@ -81,11 +98,11 @@ class CTobj():
         patient_diameter=self.patient_diameter
         reference_diameter=self.reference_diameter
         reference_fov=self.reference_fov
-        relative_lesion_diameter=self.relative_lesion_diameter
+        lesion_diameter=self.lesion_diameter
         I0=self.I0
         nb=self.ndetectors
         na=self.nangles
-        ds=self.detector_size_mm
+        ds=self.detector_size
         sdd=self.sdd
         sid=self.sid
         offset_s=self.detector_offset
@@ -100,7 +117,7 @@ class CTobj():
 
         resdict = mirt_sim(phantom=phantom, patient_diameter=patient_diameter, reference_diameter=reference_diameter, reference_fov=reference_fov,
                            I0=I0, nb=nb, na=na, ds=ds, sid=sid, sdd=sdd, offset_s=offset_s, down=down, has_bowtie=has_bowtie,
-                           add_noise=add_noise, aec_on=aec_on, nx=nx, fov=fov, fbp_kernel=fbp_kernel, nsims=nsims, relative_lesion_diameter=relative_lesion_diameter, verbose=verbose)
+                           add_noise=add_noise, aec_on=aec_on, nx=nx, fov=fov, fbp_kernel=fbp_kernel, nsims=nsims, lesion_diameter=lesion_diameter, verbose=verbose)
         self.recon = resdict['recon']
         self.projections = resdict['sinogram_noiseless']
         self.groundtruth = resdict['ground_truth']
@@ -195,7 +212,7 @@ class CTobj():
 
 def mirt_sim(phantom='CCT189', patient_diameter=200, reference_diameter=200, reference_fov=340,
              I0=3e5, nb=900, na=580, ds=1, sid=595, sdd=1085.6, offset_s=1.25, down=1, has_bowtie=False,
-             add_noise=True, aec_on=True, nx=512, fov=340, fbp_kernel='hanning,2.05', nsims=1, relative_lesion_diameter=False, verbose=True):
+             add_noise=True, aec_on=True, nx=512, fov=340, fbp_kernel='hanning,2.05', nsims=1, lesion_diameter=False, verbose=True):
     """
     Python wrapper for calling Michigan Image Reconstruction Toolbox (MIRT) Octave function 
     """
@@ -205,11 +222,17 @@ def mirt_sim(phantom='CCT189', patient_diameter=200, reference_diameter=200, ref
         fov = reference_fov
     else:
         fov = 1.1*patient_diameter
+    if isinstance(lesion_diameter, np.ndarray): lesion_diameter = list(lesion_diameter)
+    if lesion_diameter:
+        if (phantom.upper() == 'CTP404') & (~isinstance(lesion_diameter, int | float)):
+            raise ValueError(f'CTP lesion diameter must be length 1 int or float, entered: {lesion_diameter}')
+        if (phantom == 'CCT189') & (len(lesion_diameter) != 4):
+            raise ValueError(f'CCT189 phantom expects a length 4 list of ints or floats, but {len(lesion_diameter)} != 4, found: {lesion_diameter}')
     curdir = os.path.dirname(os.path.realpath(__file__))
     octave.cd(curdir)
     if verbose:
-        return octave.ct_sim(phantom, patient_diameter, reference_diameter,    relative_lesion_diameter, I0, nb, na, ds, sdd, sid, offset_s, down, has_bowtie, add_noise, aec_on, nx, fov, fbp_kernel, nsims)
-    return octave.ct_sim_quiet(phantom, patient_diameter, reference_diameter,    relative_lesion_diameter, I0, nb, na, ds, sdd, sid, offset_s, down, has_bowtie, add_noise, aec_on, nx, fov, fbp_kernel, nsims)
+        return octave.ct_sim(phantom, patient_diameter, reference_diameter,    lesion_diameter, I0, nb, na, ds, sdd, sid, offset_s, down, has_bowtie, add_noise, aec_on, nx, fov, fbp_kernel, nsims)
+    return octave.ct_sim_quiet(phantom, patient_diameter, reference_diameter,    lesion_diameter, I0, nb, na, ds, sdd, sid, offset_s, down, has_bowtie, add_noise, aec_on, nx, fov, fbp_kernel, nsims)
 
 adult_waist_circumferences_cm = {
     # 20: 90.7,
@@ -226,15 +249,18 @@ def round_to_decile(age): return age - age % 10
 
 
 def age_to_eff_diameter(age):
-    # https://www.aapm.org/pubs/reports/rpt_204.pdf
+    """
+    Equation A-3 from TG204 <https://www.aapm.org/pubs/reports/rpt_204.pdf>
+    """
     if age > 22:
         return adult_waist_circumferences_cm[round_to_decile(age)]
+
     x = age
     a = 18.788598
     b = 0.19486455
     c = -1.060056
     d = -7.6244784
-    y = a + b*x**1.5 + c *x**0.5 + d*np.exp(-x)
+    y = a + b*x**1.5 + c *x**0.5 + d*np.exp(-x) 
     eff_diam = y
     return eff_diam
 
@@ -286,10 +312,7 @@ def dicom_meta_to_dataframe(fname:str|Path) -> pd.DataFrame:
      'recon': ['fbp'], 'kernel': [dcm.ConvolutionKernel], 'FOV [cm]': [dcm.PixelSpacing[0]*dcm.Rows/10], 'repeat':[repeat], 'file': [fname]})
 
 
-def run_batch_sim(image_directory: str, model=['MITA-LCD'], diameter=[200], reference_diameter=200, framework='MIRT',
-         nsims=1, nangles=580, aec_on=True, add_noise=True, full_dose=3e5,
-         dose_level=[1.0], sid=595, sdd=1085.6, nb=880,
-         ds=1, offset_s=1.25, fov=340, image_matrix_size=512, fbp_kernel='hanning,2.05', has_bowtie=True, verbose=False) -> pd.DataFrame:
+def run_batch_sim(image_directory: str, model=['MITA-LCD'], diameter=[200], full_dose=3e5, dose_level=[1.0], fbp_kernel='fbp', verbose=True,  **kwargs) -> pd.DataFrame:
     """
     Running simulations in batch mode
 
@@ -297,11 +320,15 @@ def run_batch_sim(image_directory: str, model=['MITA-LCD'], diameter=[200], refe
 
     :param image_directory: Directory to save simulated outputs
     :type image_directory: str
-    :param model: Optional, select phantom model to simulate current options include ['CTP404', 'Uniform', 'MITA-LCD']
+    :param model: Optional list, list of phantom models to simulate (can be length 1) options include ['CTP404', 'Uniform', 'MITA-LCD']
     :type model: list[str]
-    :param diameter: Optional, simulated phantom diameter in mm
-    """
+    :param diameter: Optional list, list of simulated phantom diameters in mm (can be length 1)
+    :param full_dose: Optional int, units of photons per pixel, multiplied by `dose_level` to determine quantum noise level in projections
+    :param dose_level: Optional list, units of photons
+    :param verbose: Optional bool, whether to print update information
 
+    See `CTobj` for remaining **kwargs keyword arguments
+    """
     image_directory = Path(os.path.abspath(image_directory))
     print(image_directory)
     phantoms = model
@@ -317,10 +344,8 @@ def run_batch_sim(image_directory: str, model=['MITA-LCD'], diameter=[200], refe
             for studyid, dose in enumerate(dose_level):
                 rel_dose = 100*dose/dose_level.max()
                 studyname = f'{int(rel_dose)}% dose'
-                ct = CTobj(patient_diameter=patient_diameter, reference_diameter=reference_diameter, reference_fov=reference_fov,
-                           I0=dose, nb=nb, na=nangles, ds=ds, sid=sid, sdd=sdd, offset_s=offset_s, down=1, has_bowtie=has_bowtie,
-                           add_noise=add_noise, aec_on=aec_on, nx=image_matrix_size, fov=fov, fbp_kernel=fbp_kernel, nsims=nsims,
-                           patientname=patientname, patientid=patientid, studyname=studyname, studyid=studyid, seriesname=f'{patientname} {studyname}')
+                ct = CTobj(patient_diameter=patient_diameter, reference_fov=reference_fov,
+                           I0=dose, down_sampling=1, patientname=patientname, patientid=patientid, studyname=studyname, studyid=studyid, seriesname=f'{patientname} {studyname}', **kwargs)
                 ct.run(verbose=verbose)
                 fname = image_directory / phantom / f'diameter{patient_diameter}mm' / f'dose_{int(rel_dose):03d}' / f"{recon} {fbp_kernel.replace(',','').replace('.','')}" / f'{ct.patientname}.dcm'
                 fnames += ct.write_to_dicom(fname)
