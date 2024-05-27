@@ -3,68 +3,9 @@ Contributing Guide
 
 `Issue Tracker <https://github.com/bnel1201/pediatricIQphantoms/issues>`_ | `Source Code <https://github.com/bnel1201/pediatricIQphantoms>`_ | 
 
-One of the best ways to contribute is by improving our documentation. This project uses sphinx <https://www.sphinx-doc.org/en/master/tutorial/narrative-documentation.html> as a documentor, and specific details for the Matlab Domain are given here: <https://github.com/sphinx-contrib/matlabdomain>
-
-More resources on documentation: https://www.writethedocs.org/guide/
+One of the best ways to contribute is by improving our documentation. This project uses `sphinx <https://www.sphinx-doc.org/en/master/tutorial/narrative-documentation.html>`_ as a documentor with the `Matlab Domain extension <https://github.com/sphinx-contrib/matlabdomain>`_. More resources on documentation can be found at `writethedocs.org <https://www.writethedocs.org/guide/>`_.
 
 docstrings
 ----------
 
-The easiest and most effective way to start contributing to the user manual and documentation of the project is by helping improve our `docstrings <https://sphinx-doc.org/en/master/tutorial/automatic-doc-generation.html>`_ docstrings, the comments just below the function signature. Here is a python formatting example:
-
-.. code-block:: python
-
-  def get_random_ingredients(kind=None):
-    """
-    Return a list of random ingredients as strings.
-
-    :param kind: Optional "kind" of ingredients.
-    :type kind: list[str] or None
-    :raise lumache.InvalidKindError: If the kind is invalid.
-    :return: The ingredients list.
-    :rtype: list[str]
-
-    """
-    return ["shells", "gorgonzola", "parsley"]
-
-And here is a `Matlab docstrings <https://www.mathworks.com/help/matlab/matlab_prog/add-help-for-your-program.html>`_ example:
-
-.. code-block:: matlab
-
-  function [res] = my_sum(a, b)
-  % returns the sum of a and b
-  %
-  % :param a: first argument to sum
-  % :param b: second argument to sum
-  %
-  % :return: res: the result
-  end
-  
-These commented lines will be exported and make up the documentation for the function "my_sum"
-
-Adding new pages to the user manual
------------------------------------
-
-Contributing other pages to the manual requires two steps: 
-
-1. Create a new text file with the file extension ".rst" in the `LCD-CT/docs/source <https://github.com/bnel1201/LCD-CT/tree/main/docs/source>`_ folder. 
-
-2. Add the filename without the extension to `docs/source/index.rst <https://github.com/bnel1201/LCD-CT/blob/main/docs/source/index.rst>`_, specifically adding to the list under "toctree". For example, after creating a new manual page called "my_new_doc_page.rst", the list item under toctree would be the following:
-
-.. code-block:: rst
-
-	.. toctree::
-
-	usage
-	api
-	my_new_doc_page
-
-Writting rst files
-------------------
-
-reStructuredText is mostly plain text with a few special rules for defining headers and cross-references. Like `Markdown <https://en.wikipedia.org/wiki/Markdown>`_, it is a common format for writing technical documentation for software. "rst" stands for `reStructuredText <https://en.wikipedia.org/wiki/ReStructuredText>`_. The content in the docstrings after the comment symbol "%" is also written in rst format.
-
-For examples of how to write rst files, you can use look at the `raw source <https://github.com/bnel1201/LCD-CT/edit/main/docs/source/contributing.rst>`_ of this page. More complete references on writing rst files and code documentation can be found here:
-
-- `basics of restructured text (rst files) <https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html>`_
-- `writing docstrings in rst format <https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html>`_
+The easiest and most effective way to start contributing to the user manual and documentation of the project is by helping improve our `docstrings <https://sphinx-doc.org/en/master/tutorial/automatic-doc-generation.html>`_ docstrings, the comments just below the function signature. See some of the `currently documented functions for examples <https://github.com/bnel1201/pediatricIQphantoms/blob/cdd34a1772a191aff5a10db0a60459cd8b91fd47/src/pediatricIQphantoms/make_phantoms.py#L294>`_.
