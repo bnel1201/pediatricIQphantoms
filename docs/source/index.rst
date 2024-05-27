@@ -70,11 +70,6 @@ Check out the :doc:`usage` section for detailed information on customizing datas
   - `running CT simulations <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/00_running_simulations.ipynb>`_
   - `using the dataset to assess denoising performance in pediatric subgroups <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/01_pediatric_denoising_evaluation.ipynb>`_
   
-Developers
-----------
-
-If you'd like to contribute to the code or documentation of this project, please check out our :doc:`contributing` page.
-
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
@@ -85,6 +80,11 @@ If you'd like to contribute to the code or documentation of this project, please
    api
    contributing
    faq
+
+Developers
+----------
+
+If you'd like to contribute to the code or documentation of this project, please check out our :doc:`contributing` page.
 
 Indices and tables
 ==================
