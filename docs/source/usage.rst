@@ -14,12 +14,10 @@ Intended users are CT device developers and  image denoising and processing soft
 
 .. _LLZ: https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfPCD/classification.cfm?id=5654
 
-The LCD performance obtained using the LCD-CT tools can help the assessment of image quality imprvoment and quantitative dose reduction potential of advanced nonlinear CT image reconstruction and denoising methods with respect to a reference reconstruction option such as the FBP method. 
-
 Examples
 --------
 
-The quickest and simplest way to start generating new datasets with different parameters is using the command line interface tool `make_phantoms`  and modifying the provided configuration toml files. The exampes below illustrate different scenarios that can be experimented with using the command line tool and config files.
+The quickest and simplest way to start generating new datasets with different parameters is using the command line interface tool `make_phantoms`  and modifying the provided configuration toml files. The examples below illustrate different scenarios that can be experimented with using the command line tool and config files.
 
 - `example_01_multiple_recon_kernels.sh <https://github.com/bnel1201/pediatricIQphantoms/blob/main/demo_01_phantom_creation.sh>`_
 
