@@ -189,7 +189,7 @@ This is done in parsing the config files using the python `dict update method <h
 
 - Reproducing the `pediatricIQphantoms dataset <https://zenodo.org/doi/10.5281/zenodo.10064035>`_
 
-**warning:** this may take several hours to complete, but is recommended if you want to reproduce the `pediatricIQphantoms dataset <https://zenodo.org/doi/10.5281/zenodo.10064035>`_ with different scanner or phantom characteristics using the config file editing processes described in the previous example.
+**warning:** this may take several hours to complete (14 hours on my system), but is recommended if you want to reproduce the `pediatricIQphantoms dataset <https://zenodo.org/doi/10.5281/zenodo.10064035>`_ with different scanner or phantom characteristics using the config file editing processes described in the previous example.
 
 .. code-block:: shell
 
