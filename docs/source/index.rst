@@ -59,7 +59,7 @@ The code block above does the following in 4 lines:
 
         pytest
 
-This runs the [unit tests](https://github.com/bnel1201/pediatricIQphantoms/tree/main/tests) to verify that installation was successful.
+This runs the `unit tests <https://github.com/bnel1201/pediatricIQphantoms/tree/main/tests>`_ to verify that installation was successful.
 
 Users
 -----
