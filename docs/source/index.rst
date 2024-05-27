@@ -81,7 +81,6 @@ If you'd like to contribute to the code or documentation of this project, please
 
    usage
    notebooks/00_running_simulations
-   notebooks/01_viewing_images
    notebooks/02_pediatric_denoising_evaluation
    api
    contributing

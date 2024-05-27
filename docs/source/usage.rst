@@ -19,6 +19,8 @@ The LCD performance obtained using the LCD-CT tools can help the assessment of i
 Examples
 --------
 
+The quickest and simplest way to start generating new datasets with different parameters is using the command line interface tool `make_phantoms`  and modifying the provided configuration toml files. The exampes below illustrate different scenarios that can be experimented with using the command line tool and config files.
+
 - `example_01_multiple_recon_kernels.sh <https://github.com/bnel1201/pediatricIQphantoms/blob/main/demo_01_phantom_creation.sh>`_
 
 The purpose of this example is to illustrate how to batch several simulations into a single config .toml file and how to update parameters while keeping everything else the same. This example is available in the `examples folder <https://github.com/bnel1201/pediatricIQphantoms/tree/main/examples>`_ or alternatively can be run using the following terminal command:
@@ -194,6 +196,63 @@ This is done in parsing the config files using the python `dict update method <h
     make_phantoms configs/pediatricIQphantoms.toml
 
 Note that this example of the executable `make_phantoms` that is installed and added to your python after installing the `pediatricIQphantoms <https://github.com/bnel1201/pediatricIQphantoms>`_ python package (see `install instructions <https://pediatriciqphantoms.readthedocs.io/en/latest/index.html>`_ for details)
+
+Viewing images
+--------------
+
+The outputs of the simulation are `DICOM <https://en.wikipedia.org/wiki/DICOM>`_ CT images. The notebook `01_viewing_images.ipynb <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/01_viewing_images.ipynb>`_ discusses ways to view and interact with DICOM images produced in `00_running_simulations.ipynb <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/00_running_simulations.ipynb>`_
+
+`run_batch_sim <https://pediatriciqphantoms.readthedocs.io/en/latest/api.html#pediatricIQphantoms.run_batch_sim>`_ outputs simulated datasets in the following directory structure:
+
+.. code-block:: shell
+
+    $ tree results/test -P *_000.dcm | head -n 15
+
+        results/test
+    ├── CCT189
+    │   ├── diameter112mm
+    │   │   ├── dose_025
+    │   │   │   └── fbp hanning205
+    │   │   │       └── 11.2 cm CCT189_000.dcm
+    │   │   └── dose_100
+    │   │       └── fbp hanning205
+    │   │           └── 11.2 cm CCT189_000.dcm
+    │   └── diameter292mm
+    │       ├── dose_025
+    │       │   └── fbp hanning205
+    │       │       └── 29.2 cm CCT189_000.dcm
+    │       └── dose_100
+    │           └── fbp hanning205
+
+CSV files are output with each batched simulation which include file path and all relevant acquisition parameters, for example:
+
+.. csv-table:: Table Title
+   :file: metadata.csv
+   :header-rows: 1
+
+**Drag and drop the unzipped dataset** into [3D Slicer](https://www.slicer.org/) to automatically load the dataset into [Slicer's DICOM database](https://slicer.readthedocs.io/en/latest/user_guide/modules/dicom.html)
+
+
+.. image:: slicer_dicom_browser.jpg
+        :width: 700
+        :align: center
+
+.. image:: slicer_crosssectional_views.jpg
+        :width: 700
+        :align: center
+
+Examples of other viewers:
+
+1. `Radiant <https://www.radiantviewer.com/>`_` *Note*: this is a [freemium](https://en.wikipedia.org/wiki/Freemium) product
+2. `SNAP ITK <http://www.itksnap.org/pmwiki/pmwiki.php?n=Main.HomePage>`_ Originally developed for 3D medical imaging segmentation
+3. `Fiji/ImageJ <https://imagej.net/software/fiji/>`_ originally developed for 2D biomedical imaging analysis
+
+Conclusions
+-----------
+
+This section introduced several ways to interact with pediatricIQphantom simulation tools and view the DICOM images produced by `run_batch_sim <https://pediatriciqphantoms.readthedocs.io/en/latest/api.html#pediatricIQphantoms.run_batch_sim>`_. 
+
+**Next** see the notebooks for practical examples `00_running_simulations.ipynb <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/00_running_simulations.ipynb>`_
 
 References
 ----------
