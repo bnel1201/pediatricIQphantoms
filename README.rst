@@ -18,6 +18,7 @@ pediatricIQphantoms
     :alt: Documentation Status
     :scale: 100%
     :target: https://pediatriciqphantoms.readthedocs.io/en/latest/
+
 .. |tests| image:: https://github.com/bnel1201/pediatricIQphantoms/actions/workflows/python-package-conda.yml/badge.svg?branch=main
     :alt: Package Build and Testing Status
     :scale: 100%
@@ -80,7 +81,7 @@ The code block above does the following in 4 lines:
 
         pytest
 
-This runs the [unit tests](https://github.com/bnel1201/pediatricIQphantoms/tree/main/tests) to verify that installation was successful.
+This runs the `unit tests <https://github.com/bnel1201/pediatricIQphantoms/tree/main/tests>`_ to verify that installation was successful.
 
 How to use this repo and the Pediatric IQ Phantoms
 --------------------------------------------------
@@ -93,9 +94,9 @@ Several examples are provided on how to use these functions:
 - See the `tests directory <tests>`_ for simple script examples
 - `Computational notebooks <https://github.com/bnel1201/pediatricIQphantoms/tree/main/notebooks>`_ have also been provided to demonstrate how to use `pediatricIQphantoms dataset <https://zenodo.org/doi/10.5281/zenodo.10064035>`_ including:
 
-  - `options for viewing the dataset images <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/view_images.ipynb>`_
-  - `running CT simulations <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/running_simulations.ipynb>`_
-  - `using the dataset to assess denoising performance in pediatric subgroups <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/uniform%20-%20denoising%20efficiency.ipynb>`_
+  - `running CT simulations <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/00_running_simulations.ipynb>`_
+  - `options for viewing the dataset images <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/01_viewing_images.ipynb>`_
+  - `using the dataset to assess denoising performance in pediatric subgroups <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/02_pediatric_denoising_evaluation.ipynb>`_
 
 Contribute
 ----------
