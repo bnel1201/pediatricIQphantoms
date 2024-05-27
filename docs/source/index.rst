@@ -69,7 +69,10 @@ Check out the :doc:`usage` section for detailed information on customizing datas
 `Computational notebooks <https://github.com/bnel1201/pediatricIQphantoms/tree/main/notebooks>`_ have also been provided to demonstrate how to use `pediatricIQphantoms dataset <https://zenodo.org/doi/10.5281/zenodo.10064035>`_ including:
   - `running CT simulations <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/00_running_simulations.ipynb>`_
   - `using the dataset to assess denoising performance in pediatric subgroups <https://github.com/bnel1201/pediatricIQphantoms/blob/main/notebooks/01_pediatric_denoising_evaluation.ipynb>`_
-  
+
+Contents
+--------
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
