@@ -229,6 +229,7 @@ CSV files are output with each batched simulation which include file path and al
 .. csv-table:: Table Title
    :file: metadata.csv
    :header-rows: 1
+   
 
 **Drag and drop the unzipped dataset** into [3D Slicer](https://www.slicer.org/) to automatically load the dataset into [Slicer's DICOM database](https://slicer.readthedocs.io/en/latest/user_guide/modules/dicom.html)
 

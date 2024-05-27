@@ -1,0 +1,5 @@
+Name,series,effective diameter [cm],pediatric subgroup,phantom,scanner,Dose [%],kernel,FOV [cm],file
+11.2 cm CTP404,simulation,11.2,infant,CTP404,Siemens Definition AS+ (simulated),25,fbp D45,34,pediatricIQphantoms/CTP404/diameter112mm/dose_025/fbp hanning205/11.2 cm CTP404_000.dcm
+11.2 cm CTP404,simulation,11.2,infant,CTP404,Siemens Definition AS+ (simulated),25,fbp D45,34,pediatricIQphantoms/results/pediatricIQphantoms/CTP404/diameter112mm/dose_025/fbp hanning205/11.2 cm CTP404_001.dcm
+35.0 cm CTP404,noise free,35,infant,CTP404,Siemens Definition AS+ (simulated),,fbp D45,34,pediatricIQphantoms/CTP404/diameter350mm/35.0 cm CTP404_noisefree.dcm
+35.0 cm CTP404,ground truth,35,infant,CTP404,Siemens Definition AS+ (simulated),,fbp D45,34,pediatricIQphantoms/CTP404/diameter350mm/35.0 cm CTP404_groundtruth.dcm
