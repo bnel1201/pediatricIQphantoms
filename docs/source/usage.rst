@@ -231,7 +231,7 @@ CSV files are output with each batched simulation which include file path and al
    :header-rows: 1
    
 
-**Drag and drop the unzipped dataset** into [3D Slicer](https://www.slicer.org/) to automatically load the dataset into [Slicer's DICOM database](https://slicer.readthedocs.io/en/latest/user_guide/modules/dicom.html)
+**Drag and drop the unzipped dataset** into `3D Slicer <https://www.slicer.org/>`_ to automatically load the dataset into `Slicer's DICOM database <https://slicer.readthedocs.io/en/latest/user_guide/modules/dicom.html>`_
 
 
 .. image:: slicer_dicom_browser.jpg
@@ -244,7 +244,7 @@ CSV files are output with each batched simulation which include file path and al
 
 Examples of other viewers:
 
-1. `Radiant <https://www.radiantviewer.com/>`_` *Note*: this is a [freemium](https://en.wikipedia.org/wiki/Freemium) product
+1. `Radiant <https://www.radiantviewer.com/>`_ *Note*: this is a `freemium <https://en.wikipedia.org/wiki/Freemium>`_ product
 2. `SNAP ITK <http://www.itksnap.org/pmwiki/pmwiki.php?n=Main.HomePage>`_ Originally developed for 3D medical imaging segmentation
 3. `Fiji/ImageJ <https://imagej.net/software/fiji/>`_ originally developed for 2D biomedical imaging analysis
 
@@ -258,6 +258,5 @@ This section introduced several ways to interact with pediatricIQphantom simulat
 References
 ----------
 
-[1] Nelson B, Kc P, Badal-Soler A, Jiang L, Masters S, Zeng R. Pediatric-Specific Evaluations for Deep Learning CT Denoising. Published online July 3, 2023. doi:10.5281/zenodo.8111530
-[2] Zeng R, Lin CY, Li Q, et al. Performance of a deep learning-based CT image denoising method: Generalizability over dose, reconstruction kernel, and slice thickness. Med Phys. 2022;49(2):836-853. doi:10.1002/mp.15430
-
+1. Nelson BJ, Kc P, Badal A, Jiang L, Masters SC, Zeng R. Pediatric evaluations for deep learning CT denoising. Medical Physics. 2024;51(2):978-990. `doi:10.1002/mp.16901 <https://aapm.onlinelibrary.wiley.com/doi/10.1002/mp.16901>`_
+2. Zeng R, Lin CY, Li Q, et al. Performance of a deep learning-based CT image denoising method: Generalizability over dose, reconstruction kernel, and slice thickness. Med Phys. 2022;49(2):836-853. `doi:10.1002/mp.15430 <http://onlinelibrary.wiley.com/doi/abs/10.1002/mp.15430>`_
