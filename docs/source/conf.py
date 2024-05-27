@@ -28,8 +28,22 @@ extensions = ['sphinx.ext.autodoc',
 templates_path = ['_templates']
 exclude_patterns = []
 
+latex_engine = 'lualatex'
+
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = 'alabaster'
 # html_static_path = ['_static']
+
+html_theme_options = {
+    'logo': 'pediatricIQphantoms_logo.png',
+    'logo_name': 'true',
+    'description': 'Digital Pediatric Image Quality Phantoms and Simulations for Evaluating CT Denoising Methods',
+    'font_family': 'Helvetica',
+    'head_font_family': 'Helvetica',
+    'font_size': '12pt',
+    'fixed_sidebar': 'true',
+    'page_width': '1200px',
+    'sidebar_width': '250px'
+}

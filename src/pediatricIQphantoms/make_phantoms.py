@@ -71,9 +71,11 @@ class CTobj():
         repr += f'\nProjections: {self.projections.shape}'
         return repr
 
-    def run(self):
+    def run(self, verbose=False):
         """
         Runs the CT simulation using the stored parameters.
+
+        :param verbose: optional boolean, if True prints out status updates, if False they are suppressed. 
         """
         phantom=self.phantom
         patient_diameter=self.patient_diameter
@@ -98,7 +100,7 @@ class CTobj():
 
         resdict = mirt_sim(phantom=phantom, patient_diameter=patient_diameter, reference_diameter=reference_diameter, reference_fov=reference_fov,
                            I0=I0, nb=nb, na=na, ds=ds, sid=sid, sdd=sdd, offset_s=offset_s, down=down, has_bowtie=has_bowtie,
-                           add_noise=add_noise, aec_on=aec_on, nx=nx, fov=fov, fbp_kernel=fbp_kernel, nsims=nsims, relative_lesion_diameter=relative_lesion_diameter)
+                           add_noise=add_noise, aec_on=aec_on, nx=nx, fov=fov, fbp_kernel=fbp_kernel, nsims=nsims, relative_lesion_diameter=relative_lesion_diameter, verbose=verbose)
         self.recon = resdict['recon']
         self.projections = resdict['sinogram_noiseless']
         self.groundtruth = resdict['ground_truth']
@@ -193,7 +195,7 @@ class CTobj():
 
 def mirt_sim(phantom='CCT189', patient_diameter=200, reference_diameter=200, reference_fov=340,
              I0=3e5, nb=900, na=580, ds=1, sid=595, sdd=1085.6, offset_s=1.25, down=1, has_bowtie=False,
-             add_noise=True, aec_on=True, nx=512, fov=340, fbp_kernel='hanning,2.05', nsims=1, relative_lesion_diameter=False):
+             add_noise=True, aec_on=True, nx=512, fov=340, fbp_kernel='hanning,2.05', nsims=1, relative_lesion_diameter=False, verbose=True):
     """
     Python wrapper for calling Michigan Image Reconstruction Toolbox (MIRT) Octave function 
     """
@@ -205,7 +207,9 @@ def mirt_sim(phantom='CCT189', patient_diameter=200, reference_diameter=200, ref
         fov = 1.1*patient_diameter
     curdir = os.path.dirname(os.path.realpath(__file__))
     octave.cd(curdir)
-    return octave.ct_sim(phantom, patient_diameter, reference_diameter,    relative_lesion_diameter, I0, nb, na, ds, sdd, sid, offset_s, down, has_bowtie, add_noise, aec_on, nx, fov, fbp_kernel, nsims)
+    if verbose:
+        return octave.ct_sim(phantom, patient_diameter, reference_diameter,    relative_lesion_diameter, I0, nb, na, ds, sdd, sid, offset_s, down, has_bowtie, add_noise, aec_on, nx, fov, fbp_kernel, nsims)
+    return octave.ct_sim_quiet(phantom, patient_diameter, reference_diameter,    relative_lesion_diameter, I0, nb, na, ds, sdd, sid, offset_s, down, has_bowtie, add_noise, aec_on, nx, fov, fbp_kernel, nsims)
 
 adult_waist_circumferences_cm = {
     # 20: 90.7,
@@ -285,7 +289,7 @@ def dicom_meta_to_dataframe(fname:str|Path) -> pd.DataFrame:
 def run_batch_sim(image_directory: str, model=['MITA-LCD'], diameter=[200], reference_diameter=200, framework='MIRT',
          nsims=1, nangles=580, aec_on=True, add_noise=True, full_dose=3e5,
          dose_level=[1.0], sid=595, sdd=1085.6, nb=880,
-         ds=1, offset_s=1.25, fov=340, image_matrix_size=512, fbp_kernel='hanning,2.05', has_bowtie=True) -> pd.DataFrame:
+         ds=1, offset_s=1.25, fov=340, image_matrix_size=512, fbp_kernel='hanning,2.05', has_bowtie=True, verbose=False) -> pd.DataFrame:
     """
     Running simulations in batch mode
 
@@ -317,13 +321,13 @@ def run_batch_sim(image_directory: str, model=['MITA-LCD'], diameter=[200], refe
                            I0=dose, nb=nb, na=nangles, ds=ds, sid=sid, sdd=sdd, offset_s=offset_s, down=1, has_bowtie=has_bowtie,
                            add_noise=add_noise, aec_on=aec_on, nx=image_matrix_size, fov=fov, fbp_kernel=fbp_kernel, nsims=nsims,
                            patientname=patientname, patientid=patientid, studyname=studyname, studyid=studyid, seriesname=f'{patientname} {studyname}')
-                ct.run()
+                ct.run(verbose=verbose)
                 fname = image_directory / phantom / f'diameter{patient_diameter}mm' / f'dose_{int(rel_dose):03d}' / f"{recon} {fbp_kernel.replace(',','').replace('.','')}" / f'{ct.patientname}.dcm'
                 fnames += ct.write_to_dicom(fname)
             # add noise free
             ct.nsims=1
             ct.add_noise=False
-            ct.run()
+            ct.run(verbose=verbose)
             fname = image_directory / phantom / f'diameter{patient_diameter}mm' / f'{ct.patientname}_noisefree.dcm'
             fnames += ct.write_to_dicom(fname)
             # add ground truth
