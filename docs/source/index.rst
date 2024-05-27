@@ -61,6 +61,14 @@ The code block above does the following in 4 lines:
 
 This runs the `unit tests <https://github.com/bnel1201/pediatricIQphantoms/tree/main/tests>`_ to verify that installation was successful.
 
+**Running Notebooks*
+
+To run the `computational notebooks <https://github.com/bnel1201/pediatricIQphantoms/tree/main/notebooks>`_ you will need to have `jupyter <https://jupyter.org/>`_ installed
+
+.. code-block:: shell
+
+        conda install jupyterlab -y
+
 Users
 -----
 
