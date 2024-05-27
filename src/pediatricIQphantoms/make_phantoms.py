@@ -8,7 +8,6 @@ from oct2py import octave
 import pandas as pd
 import pydicom
 from datetime import datetime
-import SimpleITK as sitk
 
 URL = 'https://zenodo.org/records/11267694/files/pediatricIQphantoms.zip'
 
@@ -26,6 +25,11 @@ class CTobj():
                  offset_s=1.25, down=1, has_bowtie=False, add_noise=True, aec_on=True,
                  nx=512, fov=340, fbp_kernel='hanning,2.05', nsims=1, relative_lesion_diameter=False, age=0,
                  patientname="", patientid=0, studyname="", studyid=0, seriesname="", seriesid=0) -> None:
+        
+        if phantom in ['MITA-LCD', 'MITA', 'MITALCD', 'LCD']: phantom = 'CCT189'
+        options = ['CTP404', 'CCT189', 'UNIFORM']
+        if phantom.upper() not in options:
+            raise ValueError(f'{phantom} not in available phantoms: {options}')
         self.phantom=phantom
         self.patient_diameter=patient_diameter
         self.reference_diameter=reference_diameter
@@ -68,6 +72,9 @@ class CTobj():
         return repr
 
     def run(self):
+        """
+        Runs the CT simulation using the stored parameters.
+        """
         phantom=self.phantom
         patient_diameter=self.patient_diameter
         reference_diameter=self.reference_diameter
@@ -190,6 +197,8 @@ def mirt_sim(phantom='CCT189', patient_diameter=200, reference_diameter=200, ref
     """
     Python wrapper for calling Michigan Image Reconstruction Toolbox (MIRT) Octave function 
     """
+    if phantom in ['MITA-LCD', 'MITA', 'MITALCD', 'LCD']: phantom = 'CCT189'
+
     if patient_diameter == reference_diameter:
         fov = reference_fov
     else:
@@ -273,7 +282,7 @@ def dicom_meta_to_dataframe(fname:str|Path) -> pd.DataFrame:
      'recon': ['fbp'], 'kernel': [dcm.ConvolutionKernel], 'FOV [cm]': [dcm.PixelSpacing[0]*dcm.Rows/10], 'repeat':[repeat], 'file': [fname]})
 
 
-def run_batch_sim(image_directory: str, model=['CCT189'], diameter=[200], reference_diameter=200, framework='MIRT',
+def run_batch_sim(image_directory: str, model=['MITA-LCD'], diameter=[200], reference_diameter=200, framework='MIRT',
          nsims=1, nangles=580, aec_on=True, add_noise=True, full_dose=3e5,
          dose_level=[1.0], sid=595, sdd=1085.6, nb=880,
          ds=1, offset_s=1.25, fov=340, image_matrix_size=512, fbp_kernel='hanning,2.05', has_bowtie=True) -> pd.DataFrame:
@@ -284,7 +293,7 @@ def run_batch_sim(image_directory: str, model=['CCT189'], diameter=[200], refere
 
     :param image_directory: Directory to save simulated outputs
     :type image_directory: str
-    :param model: Optional, select phantom model to simulate current options include ['CCT189', 'CTP404']
+    :param model: Optional, select phantom model to simulate current options include ['CTP404', 'Uniform', 'MITA-LCD']
     :type model: list[str]
     :param diameter: Optional, simulated phantom diameter in mm
     """

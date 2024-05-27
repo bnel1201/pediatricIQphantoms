@@ -6,7 +6,7 @@
 image_directory = "results/pediatricIQphantoms"
 # filetype = '.mhd' # mhd for metaheader or dcm for dicom
 # phantoms
-model = ['CCT189'] # <-- current options include [CCT189, CTP404]
+model = ['CTP404', 'MITA-LCD', 'Uniform'] # <-- current options include ['CTP404', 'MITA-LCD', 'UNIFORM'] (case insensitive)
 diameter = [112, 131, 151, 185, 200, 292, 350] # <-- units in mm
 reference_diameter = 200 # <-- diameter in mm of the real physcial phantom for comparison
 

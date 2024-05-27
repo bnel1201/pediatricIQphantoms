@@ -6,7 +6,7 @@
 image_directory = "results/main"
 # filetype = '.mhd' # mhd for metaheader or dcm for dicom
 # phantoms
-model = ['CCT189', 'CTP404'] # <-- current options include [CCT189, CTP404]
+model = ['CCT189', 'CTP404'] # <-- current options include ['CTP404', 'MITA-LCD', 'UNIFORM']
 diameter = [112, 185, 292] # <-- units in mm
 reference_diameter = 200 # <-- diameter in mm of the real physcial phantom for comparison
 

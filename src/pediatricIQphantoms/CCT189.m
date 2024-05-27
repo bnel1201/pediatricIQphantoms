@@ -1,6 +1,7 @@
 function ell = CCT189(patient_diameter, attenuation_coefficient, relative_lesion_diameter, relative_lesion_location)
     % creates CATPHAN 600 low contrast detectability module but
     % with options for variable patient diameter and lesion diameter
+    % <https://www.phantomlab.com/catphan-600>
     % ======= 
     % inputs:
     % patient_diameter: diameter of circle in mm
